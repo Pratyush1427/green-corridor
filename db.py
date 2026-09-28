@@ -78,16 +78,35 @@ def latest_per_junction() -> List[dict]:
     return [dict(r) for r in rows]
 
 
+IST_SQL = "datetime(ts_utc, '+5 hours', '+30 minutes')"
+# SQLite's %w is 0 = Sunday; this converts it to Python's 0 = Monday.
+WEEKDAY_SQL = f"(CAST(strftime('%w', {IST_SQL}) AS INTEGER) + 6) % 7"
+
+
+def typical_at_hour(hour: int, weekday: Optional[int] = None) -> List[dict]:
+    """Average congestion per junction at one IST hour (0-23), optionally one weekday."""
+    sql = f"""
+        SELECT junction_id, AVG({CONGESTION_SQL}) AS congestion, COUNT(*) AS samples
+        FROM readings
+        WHERE CAST(strftime('%H', {IST_SQL}) AS INTEGER) = ?
+    """
+    params = [hour]
+    if weekday is not None:
+        sql += f" AND {WEEKDAY_SQL} = ?"
+        params.append(weekday)
+    sql += " GROUP BY junction_id"
+    with connect() as conn:
+        return [dict(r) for r in conn.execute(sql, params).fetchall()]
+
+
 def hourly_pattern(junction_id: str, weekday: Optional[int] = None) -> List[dict]:
     """Average congestion for each IST hour (0-23).
 
     weekday uses Python's convention: 0 = Monday ... 6 = Sunday.
     Hours with no data come back with congestion None.
     """
-    # IST is UTC+5:30. SQLite's %w is 0 = Sunday, so convert to Monday = 0.
-    ist = "datetime(ts_utc, '+5 hours', '+30 minutes')"
     sql = f"""
-        SELECT CAST(strftime('%H', {ist}) AS INTEGER) AS hour,
+        SELECT CAST(strftime('%H', {IST_SQL}) AS INTEGER) AS hour,
                AVG({CONGESTION_SQL}) AS congestion,
                COUNT(*) AS samples
         FROM readings
@@ -95,7 +114,7 @@ def hourly_pattern(junction_id: str, weekday: Optional[int] = None) -> List[dict
     """
     params = [junction_id]
     if weekday is not None:
-        sql += f" AND (CAST(strftime('%w', {ist}) AS INTEGER) + 6) % 7 = ?"
+        sql += f" AND {WEEKDAY_SQL} = ?"
         params.append(weekday)
     sql += " GROUP BY hour ORDER BY hour"
 

@@ -1,0 +1,7681 @@
+[
+ {
+  "name": "A.M. Hospital",
+  "lat": 12.960102,
+  "lon": 77.531556,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "ALDOS Medical Service Pvt LTD",
+  "lat": 12.982667,
+  "lon": 77.638104,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "AMC Multispeciality Hospital",
+  "lat": 12.92967,
+  "lon": 77.576408,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Aarogya Hastha Hospital",
+  "lat": 12.900566,
+  "lon": 77.675787,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Aaroyha Mandir Hospital",
+  "lat": 13.010504,
+  "lon": 77.550245,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Aayug Multi Speciality Hospital",
+  "lat": 12.965159,
+  "lon": 77.715051,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Abhay Hospital",
+  "lat": 12.951748,
+  "lon": 77.493989,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Abhaya Eye Hospital, Super Speciality Eye Care Centre",
+  "lat": 12.927113,
+  "lon": 77.547129,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Abhaya Hospital",
+  "lat": 12.946286,
+  "lon": 77.594777,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Abhilash Hospital And Sara Rehabilitation Centre",
+  "lat": 12.924638,
+  "lon": 77.550924,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Abhinav Hospital",
+  "lat": 12.975749,
+  "lon": 77.553782,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Abhinava Eye Hospital",
+  "lat": 12.955018,
+  "lon": 77.56839,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Abiramm Hospital",
+  "lat": 12.872853,
+  "lon": 77.65157,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Abivrud Cancer Care & Research Centre",
+  "lat": 12.963967,
+  "lon": 77.497305,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Acharya Tulsi Jain Hospital",
+  "lat": 13.021834,
+  "lon": 77.556709,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Acura Speciality Hospital",
+  "lat": 12.935321,
+  "lon": 77.62055,
+  "emergency": false,
+  "phone": "+9180 4110 5151"
+ },
+ {
+  "name": "Adarsh Hospital",
+  "lat": 12.920844,
+  "lon": 77.484789,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Agadi Hospital",
+  "lat": 12.949202,
+  "lon": 77.597794,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Agarahara Government Hospital",
+  "lat": 13.095733,
+  "lon": 77.627307,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Agarwal Eye Hospital",
+  "lat": 12.927342,
+  "lon": 77.62213,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Aikya Healthcare",
+  "lat": 12.882723,
+  "lon": 77.546672,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Al- Habeeb Hospital",
+  "lat": 13.023606,
+  "lon": 77.619614,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Al-Ameen Hospital",
+  "lat": 12.989887,
+  "lon": 77.59426,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Alisa Eye Hospital",
+  "lat": 12.96523,
+  "lon": 77.610433,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Altius Hospital",
+  "lat": 12.984954,
+  "lon": 77.556922,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Altius Hospital",
+  "lat": 13.034464,
+  "lon": 77.629195,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Amar Hospital",
+  "lat": 12.971182,
+  "lon": 77.578123,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Ameena Medical centre",
+  "lat": 12.977708,
+  "lon": 77.632341,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Amma's ENT Clinic",
+  "lat": 13.028161,
+  "lon": 77.579395,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Ammashrees Hospital",
+  "lat": 12.979432,
+  "lon": 77.544164,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Amrik Hospital",
+  "lat": 12.982899,
+  "lon": 77.747813,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Amruth Hospital",
+  "lat": 13.102578,
+  "lon": 77.627895,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Amrutha Healthcare",
+  "lat": 13.004262,
+  "lon": 77.711415,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Amrutha Hospital",
+  "lat": 13.065749,
+  "lon": 77.599265,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Ananya Hospital",
+  "lat": 12.999821,
+  "lon": 77.55045,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Anjani Women's Day Care Hospital",
+  "lat": 13.018812,
+  "lon": 77.647187,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Annasawmy Mudaliar General Hospital",
+  "lat": 12.99998,
+  "lon": 77.614499,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Anugraha Hospital, Vijayanagar",
+  "lat": 12.976565,
+  "lon": 77.545588,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Anugrahaa Hospital",
+  "lat": 12.854895,
+  "lon": 77.668116,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Anupama Hospital",
+  "lat": 12.983876,
+  "lon": 77.478853,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Anupama Hospital",
+  "lat": 12.983181,
+  "lon": 77.478787,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Anupamaa Hospital",
+  "lat": 13.093797,
+  "lon": 77.589367,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Anurag Medical Center",
+  "lat": 12.961283,
+  "lon": 77.527168,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Anurag Medical Centre",
+  "lat": 12.906064,
+  "lon": 77.604978,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Apaara Multi Speciality",
+  "lat": 12.938453,
+  "lon": 77.551329,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Aparna Hospital",
+  "lat": 12.936209,
+  "lon": 77.616947,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Apex Hospital",
+  "lat": 13.115139,
+  "lon": 77.633921,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Apollo Bengaluru Cradle Limited, Jayanagar",
+  "lat": 12.916801,
+  "lon": 77.585188,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Apollo Clinic",
+  "lat": 12.851725,
+  "lon": 77.668147,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Apollo Cradle",
+  "lat": 12.93681,
+  "lon": 77.620634,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Apollo Cradle",
+  "lat": 12.966747,
+  "lon": 77.717278,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Apollo Cradle & Children's Hospital",
+  "lat": 12.869514,
+  "lon": 77.654253,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Apollo Cradle Children's Hospital",
+  "lat": 13.002768,
+  "lon": 77.553629,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Apollo Cradle Maternity & Children's Hospital",
+  "lat": 12.916885,
+  "lon": 77.585258,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Apollo Hospital",
+  "lat": 12.926371,
+  "lon": 77.676546,
+  "emergency": false,
+  "phone": "+91-80-40222555"
+ },
+ {
+  "name": "Apollo Hospital",
+  "lat": 12.896305,
+  "lon": 77.598349,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "Apollo Hospital",
+  "lat": 12.988342,
+  "lon": 77.572698,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Apollo Pharmacy",
+  "lat": 12.926386,
+  "lon": 77.676607,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Apollo Speciality Hospital",
+  "lat": 12.936368,
+  "lon": 77.584316,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Apollo Spectra Hospitals",
+  "lat": 12.933817,
+  "lon": 77.620161,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Apple Hospital",
+  "lat": 13.103924,
+  "lon": 77.583786,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Appllo Diagnostic",
+  "lat": 12.998106,
+  "lon": 77.600813,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Apurva Hospital",
+  "lat": 13.101335,
+  "lon": 77.59858,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Aria",
+  "lat": 12.943391,
+  "lon": 77.747527,
+  "emergency": false,
+  "phone": "+91 90907 86110"
+ },
+ {
+  "name": "Arogya Kendra",
+  "lat": 12.973589,
+  "lon": 77.544328,
+  "emergency": false,
+  "phone": "+918023400463"
+ },
+ {
+  "name": "Arth Ayurveda World",
+  "lat": 12.968528,
+  "lon": 77.645775,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Arunodaya Hospitals",
+  "lat": 13.057066,
+  "lon": 77.508511,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Asha Kiran Children & Women Health Care Centre",
+  "lat": 13.026353,
+  "lon": 77.593393,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Ashirwad Hospital",
+  "lat": 13.028968,
+  "lon": 77.604548,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Ashok Hospital",
+  "lat": 12.994891,
+  "lon": 77.534798,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Ashraya Medinova Pvt Ltd",
+  "lat": 12.988865,
+  "lon": 77.507801,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Ashwini Hospital",
+  "lat": 13.03134,
+  "lon": 77.505599,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Ashwini Hospital",
+  "lat": 13.098848,
+  "lon": 77.597897,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Aspire Hospital",
+  "lat": 12.997168,
+  "lon": 77.614588,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Aster CMI Hospital",
+  "lat": 13.054532,
+  "lon": 77.591871,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Aster RV Hospital",
+  "lat": 12.91142,
+  "lon": 77.585025,
+  "emergency": false,
+  "phone": "08046414641"
+ },
+ {
+  "name": "Aster Whitefield Hospital",
+  "lat": 12.989003,
+  "lon": 77.733837,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Aster Women and Children Hospital",
+  "lat": 12.988344,
+  "lon": 77.733947,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Aswad Hospital",
+  "lat": 12.914787,
+  "lon": 77.624762,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Atharva Ayurdhama Ayurvedic Hospital",
+  "lat": 13.004314,
+  "lon": 77.547749,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Athoz Hospitals",
+  "lat": 12.967343,
+  "lon": 77.6425,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Av Hospital",
+  "lat": 12.938853,
+  "lon": 77.57861,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Aveksha Hospital",
+  "lat": 13.081777,
+  "lon": 77.54091,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Avian Medicare and Research Centre",
+  "lat": 13.026928,
+  "lon": 77.622788,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Axis Hospital",
+  "lat": 13.065863,
+  "lon": 77.604213,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Axon Speciality Hospital",
+  "lat": 12.973892,
+  "lon": 77.64609,
+  "emergency": false,
+  "phone": "080 4334 6333"
+ },
+ {
+  "name": "Ayaans Hospital",
+  "lat": 12.978262,
+  "lon": 77.643589,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Ayur Seva Hospital",
+  "lat": 13.014819,
+  "lon": 77.66537,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Ayur jagruti",
+  "lat": 12.966725,
+  "lon": 77.637829,
+  "emergency": false,
+  "phone": "+9196633 81398"
+ },
+ {
+  "name": "Ayurseva Hospital",
+  "lat": 13.013925,
+  "lon": 77.664078,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Ayurvaid Hospital",
+  "lat": 12.95527,
+  "lon": 77.642851,
+  "emergency": false,
+  "phone": "080 4092 5555"
+ },
+ {
+  "name": "Ayurveda Prathisthana Hospital",
+  "lat": 12.926794,
+  "lon": 77.577297,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Ayushman Ayurvedic therapy centre",
+  "lat": 12.994616,
+  "lon": 77.602387,
+  "emergency": false,
+  "phone": "+91 95356 68668"
+ },
+ {
+  "name": "Azad Nagar Maternity Home",
+  "lat": 12.955964,
+  "lon": 77.548564,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "BBMP Hospital",
+  "lat": 12.994988,
+  "lon": 77.593786,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "BBMP Maternity Hospital",
+  "lat": 12.949189,
+  "lon": 77.596815,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "BBMP Primary Health Center",
+  "lat": 12.959154,
+  "lon": 77.646448,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "BEL Hospital",
+  "lat": 13.050339,
+  "lon": 77.556765,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "BEML Hospital",
+  "lat": 12.971172,
+  "lon": 77.665179,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "BGS Gleneagles Hospitals",
+  "lat": 12.90306,
+  "lon": 77.497498,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "BMS Hospital",
+  "lat": 12.941336,
+  "lon": 77.567468,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "BMTC Hospital",
+  "lat": 12.923432,
+  "lon": 77.592337,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "BN Specialty Hospital",
+  "lat": 12.912486,
+  "lon": 77.676557,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Balaji Hospital and Gastroenterology Center",
+  "lat": 12.937609,
+  "lon": 77.566643,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Balaji Hospital, K.H. Ranganath Colony",
+  "lat": 12.963251,
+  "lon": 77.56029,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Banasawadi Hospital",
+  "lat": 13.020508,
+  "lon": 77.650967,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Banashankari Hospital",
+  "lat": 12.844365,
+  "lon": 77.583809,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Banashankari Referral Hospital",
+  "lat": 12.923134,
+  "lon": 77.564297,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Bangalore Diabetes Hospital",
+  "lat": 12.991841,
+  "lon": 77.596853,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Bangalore Eye Hospital And Retina Centre",
+  "lat": 13.022104,
+  "lon": 77.638773,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Bangalore Gastro Centre",
+  "lat": 12.916004,
+  "lon": 77.652309,
+  "emergency": false,
+  "phone": "080 46 888 888"
+ },
+ {
+  "name": "Bangalore Healthcare Center Pranav Ayurveda Hospital",
+  "lat": 13.077001,
+  "lon": 77.558104,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Bangalore Kidney Foundation - NU Hospital",
+  "lat": 12.917955,
+  "lon": 77.555816,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Bangalore Kidney Stones Hospital",
+  "lat": 12.967021,
+  "lon": 77.589267,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Bangalore Orthopeadic And Surgical Hospital",
+  "lat": 13.021938,
+  "lon": 77.638585,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Bangalore Prime Hospital",
+  "lat": 13.066842,
+  "lon": 77.639055,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Bangaluru Unani Hospital",
+  "lat": 12.94052,
+  "lon": 77.579439,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Baptist",
+  "lat": 12.997091,
+  "lon": 77.571977,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Baptist Hospital",
+  "lat": 13.034725,
+  "lon": 77.590171,
+  "emergency": true,
+  "phone": "08022024700"
+ },
+ {
+  "name": "Beams Hospitals Private Limited",
+  "lat": 12.934228,
+  "lon": 77.629632,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Belaku Eye Hospital",
+  "lat": 12.911077,
+  "lon": 77.480045,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Benaka Hospital",
+  "lat": 12.983582,
+  "lon": 77.528945,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Bengalure Hospital",
+  "lat": 13.103908,
+  "lon": 77.57549,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Bengaluru Child Neurology and Rehabilitaion Centre",
+  "lat": 12.973557,
+  "lon": 77.546125,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Bengaluru City Hospital",
+  "lat": 12.907594,
+  "lon": 77.570781,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Bengaluru Hospital, Susruta Medical Aid AndResearch Home Limited",
+  "lat": 12.937673,
+  "lon": 77.580284,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Bengaluru West Lions Hospital",
+  "lat": 12.956304,
+  "lon": 77.5831,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Best E City Hospital",
+  "lat": 12.850377,
+  "lon": 77.656706,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Bhagavathi Hospitals Private Limited",
+  "lat": 12.916126,
+  "lon": 77.631151,
+  "emergency": false,
+  "phone": "+91-80 4124 5860"
+ },
+ {
+  "name": "Bhagavathi Multi Speciality Hospital",
+  "lat": 12.916064,
+  "lon": 77.630822,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Bhagwan Mahaveer Jain Hospital",
+  "lat": 12.991488,
+  "lon": 77.595299,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "Bharathi Hospitals",
+  "lat": 12.93341,
+  "lon": 77.562235,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Bharathy Hospital",
+  "lat": 12.976129,
+  "lon": 77.532637,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Bhavatprabhu Hospitals Pvt Limited",
+  "lat": 12.967061,
+  "lon": 77.590316,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Bhoomi Diagnostics",
+  "lat": 12.911699,
+  "lon": 77.649544,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Big Hospitals",
+  "lat": 12.940505,
+  "lon": 77.584868,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Bilva Hospital",
+  "lat": 12.998983,
+  "lon": 77.580202,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Blossom Infertility Center",
+  "lat": 12.96497,
+  "lon": 77.538984,
+  "emergency": false,
+  "phone": "+91 99009 99116"
+ },
+ {
+  "name": "Blossoms Hospital",
+  "lat": 12.906439,
+  "lon": 77.630824,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "Boregowda Lingamma Hospital",
+  "lat": 13.016705,
+  "lon": 77.539386,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Bowring and Lady Curzon Hospitals",
+  "lat": 12.983011,
+  "lon": 77.604712,
+  "emergency": false,
+  "phone": "+91-80-25591325"
+ },
+ {
+  "name": "Brahmi Ayurvedic Center",
+  "lat": 12.883005,
+  "lon": 77.607328,
+  "emergency": false,
+  "phone": "+9190086 54547"
+ },
+ {
+  "name": "Brains Hospital",
+  "lat": 13.118387,
+  "lon": 77.608206,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Brains Super Speciality Hospital",
+  "lat": 12.947827,
+  "lon": 77.592481,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Bright Children's Clinic",
+  "lat": 12.989182,
+  "lon": 77.689783,
+  "emergency": false,
+  "phone": "+9178994 22511"
+ },
+ {
+  "name": "Brinda Hospital",
+  "lat": 12.978053,
+  "lon": 77.511596,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Brookefield Hospital(A Unit Of Sanjeevani Hospital)",
+  "lat": 12.966821,
+  "lon": 77.716889,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "C.S. Hospital",
+  "lat": 12.911883,
+  "lon": 77.552881,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "CDEC Hospital",
+  "lat": 13.026989,
+  "lon": 77.628174,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "CRPF Hospital",
+  "lat": 13.124784,
+  "lon": 77.576413,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "CSI Hospital",
+  "lat": 12.991305,
+  "lon": 77.601131,
+  "emergency": false,
+  "phone": "080 22861103"
+ },
+ {
+  "name": "Cadabam's Hospitals",
+  "lat": 12.906071,
+  "lon": 77.586928,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Cambridge Hospital",
+  "lat": 12.971624,
+  "lon": 77.627383,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Cambridge Hospital",
+  "lat": 13.019595,
+  "lon": 77.541981,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Care Health",
+  "lat": 13.055203,
+  "lon": 77.602823,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Cauvery Orthopaedic Centre",
+  "lat": 12.998489,
+  "lon": 77.550422,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Center for Liver Disease Hospital",
+  "lat": 12.916234,
+  "lon": 77.593019,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Chaitanya Hospital",
+  "lat": 13.099091,
+  "lon": 77.58619,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Chaitanya Hospital",
+  "lat": 13.023732,
+  "lon": 77.594146,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Chaitanya Medical Centre Maternity and Surgical Care",
+  "lat": 13.092491,
+  "lon": 77.586333,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Chaitanya Nursing Home",
+  "lat": 13.099077,
+  "lon": 77.586147,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Chamundi Hi Tech Hospital",
+  "lat": 12.924092,
+  "lon": 77.617785,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "ChanRe Rheumatology And Immunology Center And Research",
+  "lat": 12.995567,
+  "lon": 77.535422,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "ChanRe Rheumatology and Immunology Center and Research",
+  "lat": 12.995573,
+  "lon": 77.535421,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "ChanRe Rheumatology and Immunology Center and Research",
+  "lat": 12.999208,
+  "lon": 77.550269,
+  "emergency": false,
+  "phone": "080 - 42516699"
+ },
+ {
+  "name": "Chandana Hospital",
+  "lat": 12.957989,
+  "lon": 77.511439,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Charaka Super Speciality Hospital",
+  "lat": 12.989639,
+  "lon": 77.60226,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Charan Homeopathy, Ramamurthy Nagar",
+  "lat": 13.010041,
+  "lon": 77.667467,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Chinmaya Hrudayalaya",
+  "lat": 12.977812,
+  "lon": 77.645945,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Chinmaya Mission Hospital",
+  "lat": 12.977934,
+  "lon": 77.646188,
+  "emergency": true,
+  "phone": "+91 80 2502 6100"
+ },
+ {
+  "name": "Chinmaya Narayana Super Specialty Centre",
+  "lat": 12.977711,
+  "lon": 77.645977,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Chirag Global Hospital",
+  "lat": 12.905882,
+  "lon": 77.603752,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Chirag Hospital and Maternity Center",
+  "lat": 12.91263,
+  "lon": 77.591359,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Chiranjeevi Hospital & Maternity Home",
+  "lat": 12.938699,
+  "lon": 77.551839,
+  "emergency": false,
+  "phone": "080 2691 7676"
+ },
+ {
+  "name": "Chord Road Hospital Pvt Ltd",
+  "lat": 12.998121,
+  "lon": 77.540484,
+  "emergency": false,
+  "phone": "+91-80-23225858;+91-80-23225868;+91-80-23225878"
+ },
+ {
+  "name": "Citi Hospital",
+  "lat": 12.995651,
+  "lon": 77.55107,
+  "emergency": false,
+  "phone": "+(91)-80-23131778"
+ },
+ {
+  "name": "Clinic",
+  "lat": 12.913418,
+  "lon": 77.677485,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Cloud Nine",
+  "lat": 12.956683,
+  "lon": 77.741428,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Cloud Nine",
+  "lat": 12.915693,
+  "lon": 77.675203,
+  "emergency": true,
+  "phone": "+91 99728 99728"
+ },
+ {
+  "name": "Cloud Nine Fertility",
+  "lat": 12.905509,
+  "lon": 77.585835,
+  "emergency": false,
+  "phone": "080 4350 0123"
+ },
+ {
+  "name": "Cloud Nine Hospital",
+  "lat": 13.007874,
+  "lon": 77.562532,
+  "emergency": false,
+  "phone": "9972999729"
+ },
+ {
+  "name": "Cloud Nine Hospital",
+  "lat": 12.987871,
+  "lon": 77.731977,
+  "emergency": false,
+  "phone": "+91 80 6799 9999"
+ },
+ {
+  "name": "Cloudnine",
+  "lat": 12.92442,
+  "lon": 77.672497,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Cloudnine Hospital",
+  "lat": 13.020084,
+  "lon": 77.654053,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Cloudnine Hospital",
+  "lat": 12.883291,
+  "lon": 77.550086,
+  "emergency": true,
+  "phone": "9972999729"
+ },
+ {
+  "name": "Cloudnine Hospital Pvt. Ltd.",
+  "lat": 12.959775,
+  "lon": 77.656913,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Columbiaa Hospital",
+  "lat": 13.010434,
+  "lon": 77.658324,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Comfort Multispeciality Hospital",
+  "lat": 12.981717,
+  "lon": 77.680041,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Command Hospital (Air Force)",
+  "lat": 12.963877,
+  "lon": 77.627935,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Corporation Hospital",
+  "lat": 12.961345,
+  "lon": 77.560893,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Cure & Care Dental Clinic Dr. Moumita Mukherjee",
+  "lat": 12.907497,
+  "lon": 77.649221,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Cure Hospital",
+  "lat": 13.032432,
+  "lon": 77.608526,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Cure N Care Hospital",
+  "lat": 12.989869,
+  "lon": 77.676589,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Cutis Academy of Cutaneous Sciences",
+  "lat": 12.976812,
+  "lon": 77.544909,
+  "emergency": false,
+  "phone": "080 4115 9049"
+ },
+ {
+  "name": "CyteCare",
+  "lat": 13.118638,
+  "lon": 77.607878,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "DG Hospital",
+  "lat": 12.920665,
+  "lon": 77.559867,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "Dasappa Maternity Hospital",
+  "lat": 12.964348,
+  "lon": 77.584526,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "Dasarahalli Referral Hospital",
+  "lat": 12.97736,
+  "lon": 77.54282,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Dave Gray Hospital",
+  "lat": 12.945829,
+  "lon": 77.579902,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Deeksha Hospital",
+  "lat": 13.09824,
+  "lon": 77.597047,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Deeksha Orthopaedic Hospital",
+  "lat": 13.097392,
+  "lon": 77.596489,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Deepa Hospital",
+  "lat": 13.012051,
+  "lon": 77.699882,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Deepak Hospital",
+  "lat": 12.926224,
+  "lon": 77.577511,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Deepashri Hospital",
+  "lat": 12.97059,
+  "lon": 77.51085,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Desai Nursing Home",
+  "lat": 12.986374,
+  "lon": 77.579315,
+  "emergency": false,
+  "phone": "+9180 2226 0307"
+ },
+ {
+  "name": "Devagiri Hospital",
+  "lat": 12.924153,
+  "lon": 77.565797,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Devi Eye Hospital",
+  "lat": 12.916258,
+  "lon": 77.637407,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Devi Eye Hospital",
+  "lat": 12.941211,
+  "lon": 77.623899,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Devi Eye Hospital",
+  "lat": 12.955607,
+  "lon": 77.721663,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Devi Hospital",
+  "lat": 12.923944,
+  "lon": 77.619863,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Devine Hospital",
+  "lat": 13.0039,
+  "lon": 77.603931,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Dhanavantri Hospital",
+  "lat": 13.083402,
+  "lon": 77.634864,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Dhanush Hospital",
+  "lat": 12.970621,
+  "lon": 77.515189,
+  "emergency": false,
+  "phone": "080 2318 5544"
+ },
+ {
+  "name": "Dhanush Hospital",
+  "lat": 12.965432,
+  "lon": 77.52312,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Dhee Hospital",
+  "lat": 12.88351,
+  "lon": 77.550214,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Diacon Hospital",
+  "lat": 13.003768,
+  "lon": 77.549834,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Diacon Hospital",
+  "lat": 13.003744,
+  "lon": 77.54983,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Dianova Diabetes Center and Hospital",
+  "lat": 13.014761,
+  "lon": 77.633546,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Diavista Diabetes & Multispeciality Hospital",
+  "lat": 12.935429,
+  "lon": 77.547796,
+  "emergency": false,
+  "phone": "080 4096 9392"
+ },
+ {
+  "name": "Divakars speciality Hospital",
+  "lat": 12.910063,
+  "lon": 77.592459,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Divisional Railway Hospital",
+  "lat": 12.979835,
+  "lon": 77.565111,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Divya Drishti Eye Hospital, Vijayanagar",
+  "lat": 12.958691,
+  "lon": 77.535267,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Doctor's diagnostics Centre",
+  "lat": 13.014746,
+  "lon": 77.635788,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Dr Agarwal's Eye Hospital",
+  "lat": 12.9569,
+  "lon": 77.60476,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Dr Agarwals Eye Hospital Ltd",
+  "lat": 12.91223,
+  "lon": 77.599491,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Dr Ambedkar Medical College Hospital",
+  "lat": 13.021819,
+  "lon": 77.613084,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Dr Chaitanyas Dental Care & Implant Centre",
+  "lat": 12.967599,
+  "lon": 77.656553,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Dr Ganesh Medical and Diabetic Clinic",
+  "lat": 12.912901,
+  "lon": 77.64191,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Dr Kamini Rao Hospital(A Unit Of Bacc Health Care Pvt Ltd)",
+  "lat": 12.916399,
+  "lon": 77.584738,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Dr Lal PathLabs",
+  "lat": 12.924274,
+  "lon": 77.568093,
+  "emergency": true,
+  "phone": "080 4091 6014"
+ },
+ {
+  "name": "Dr Mohan Nursing Home",
+  "lat": 12.912437,
+  "lon": 77.681392,
+  "emergency": true,
+  "phone": "+91-80-42119084"
+ },
+ {
+  "name": "Dr Rachna - Homeopathy",
+  "lat": 12.917983,
+  "lon": 77.669126,
+  "emergency": false,
+  "phone": "+9195909 10963"
+ },
+ {
+  "name": "Dr Ramachandra Hospital",
+  "lat": 13.048319,
+  "lon": 77.508036,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Dr Ramesh Dalwai Spine Surgeon",
+  "lat": 12.932467,
+  "lon": 77.685362,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Dr Raos Maternity Hospital",
+  "lat": 12.985042,
+  "lon": 77.546048,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Dr Saju George Kottakkal",
+  "lat": 13.062163,
+  "lon": 77.517764,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Dr Solankis Eye Hospital",
+  "lat": 12.995163,
+  "lon": 77.573814,
+  "emergency": false,
+  "phone": "080 2356 2211"
+ },
+ {
+  "name": "Dr Zamindar's Micro Surgical Eye Centre",
+  "lat": 13.002198,
+  "lon": 77.632902,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Dr. Agarwal Eye Hospital",
+  "lat": 13.094315,
+  "lon": 77.58071,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Dr. Agarwal's Eye Hospital",
+  "lat": 12.967875,
+  "lon": 77.750048,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Dr. Agarwal's Eye Hospital",
+  "lat": 12.910337,
+  "lon": 77.600479,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Dr. Agrawal's Eye Hospital",
+  "lat": 12.999898,
+  "lon": 77.550112,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Dr. Ambedkar Medical College Hospital",
+  "lat": 13.024862,
+  "lon": 77.613958,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "Dr. B. Venkatasubbarao Memorial Hospital",
+  "lat": 12.998198,
+  "lon": 77.568151,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Dr. Batra Clinic",
+  "lat": 12.979729,
+  "lon": 77.727109,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Dr. Bhargavi Reddy Women & Children Hospital",
+  "lat": 12.975403,
+  "lon": 77.647059,
+  "emergency": false,
+  "phone": "080 2525 6666"
+ },
+ {
+  "name": "Dr. Hemant Agrawal",
+  "lat": 12.958321,
+  "lon": 77.659636,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Dr. Nothesh Child Specialist",
+  "lat": 12.975423,
+  "lon": 77.540659,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Dr. P.R. Desai Hospital Pvt Ltd",
+  "lat": 12.986358,
+  "lon": 77.579211,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Dr. Rajesh Hospitals Eye and Dental",
+  "lat": 12.968899,
+  "lon": 77.642213,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Dr. Rajkumar Blood Bank",
+  "lat": 12.968031,
+  "lon": 77.587822,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Dr. Roshni's Tooth Planet Dental Clinic",
+  "lat": 12.987633,
+  "lon": 77.685159,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "Dr. Rudrappa's Hospital",
+  "lat": 12.96503,
+  "lon": 77.595495,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Dr. Sailaja's Super Speciality Eye Hospital",
+  "lat": 13.027674,
+  "lon": 77.661419,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Dr. T.V.Ramesh Piles Hospital",
+  "lat": 13.025014,
+  "lon": 77.585629,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Dr. Vidyananda's Surgery and Dia Centre",
+  "lat": 12.924252,
+  "lon": 77.573217,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Dr.Agarwal Eye & Dental Hospital",
+  "lat": 12.970036,
+  "lon": 77.636244,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Dr.Agarwal Eye Hospital, Frazer Town, Bangalore",
+  "lat": 12.99602,
+  "lon": 77.612841,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Dr.Agarwal's Eye Hospital Ltd, Padmanabha Nagar",
+  "lat": 12.916929,
+  "lon": 77.559257,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Dr.Zamindar Microsurgical Eye Centre",
+  "lat": 13.017859,
+  "lon": 77.654758,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Drishti Nethralaya",
+  "lat": 12.942254,
+  "lon": 77.550633,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "ESI Dispensary",
+  "lat": 12.992488,
+  "lon": 77.706222,
+  "emergency": false,
+  "phone": "080 28524261"
+ },
+ {
+  "name": "ESI Hospital",
+  "lat": 12.995242,
+  "lon": 77.652326,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "ESI Hospital",
+  "lat": 12.972126,
+  "lon": 77.573351,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "ESI Hospital",
+  "lat": 13.004596,
+  "lon": 77.554003,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "ESI Hospital",
+  "lat": 12.971348,
+  "lon": 77.636724,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "ESI Hospital",
+  "lat": 12.995256,
+  "lon": 77.652714,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "ESI Hospital",
+  "lat": 12.927995,
+  "lon": 77.589406,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "ESI Hospital Malleshwaram Branch",
+  "lat": 13.01512,
+  "lon": 77.560001,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "ESI Hospital Peenya",
+  "lat": 13.024986,
+  "lon": 77.530936,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "ESIC Hospital",
+  "lat": 12.969301,
+  "lon": 77.631754,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "ESIC Model Hospital",
+  "lat": 12.991692,
+  "lon": 77.553901,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "ESi Hospital",
+  "lat": 13.007794,
+  "lon": 77.69231,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "East Point Hospital and Medical College",
+  "lat": 13.052933,
+  "lon": 77.71727,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Emergency Block , NIMHANS",
+  "lat": 12.940385,
+  "lon": 77.594539,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "Employees State Insurance Dispensary",
+  "lat": 12.966771,
+  "lon": 77.534923,
+  "emergency": false,
+  "phone": "080 2845 2785"
+ },
+ {
+  "name": "Employees' State Insurance Corporation Model Hospital",
+  "lat": 12.990967,
+  "lon": 77.553501,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "Endocrine Speciality Centre",
+  "lat": 13.013761,
+  "lon": 77.648529,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Epidemic Disesase Hospital",
+  "lat": 12.986415,
+  "lon": 77.643759,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Esha Hospital",
+  "lat": 13.098072,
+  "lon": 77.567378,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Eshawar HospItal",
+  "lat": 13.033219,
+  "lon": 77.674769,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Esi Dispensary",
+  "lat": 13.043993,
+  "lon": 77.506549,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Esi Hospital Bangalore",
+  "lat": 12.990498,
+  "lon": 77.553092,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Esi Hospital Peenya 1st Stage",
+  "lat": 13.028073,
+  "lon": 77.523186,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Essential Hospital",
+  "lat": 12.974865,
+  "lon": 77.509631,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Eswar Women and Day Care Hospital",
+  "lat": 13.065847,
+  "lon": 77.599284,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Excel Care Hospital",
+  "lat": 12.920731,
+  "lon": 77.573602,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Faculty Of Dental Sciences",
+  "lat": 13.029222,
+  "lon": 77.569375,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "Fathima Hospital",
+  "lat": 13.055951,
+  "lon": 77.532946,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Feran Hospital",
+  "lat": 13.026366,
+  "lon": 77.630214,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Fj Merrit Hydrotherapy And Wellness",
+  "lat": 12.934422,
+  "lon": 77.629979,
+  "emergency": false,
+  "phone": "080 4095 1282"
+ },
+ {
+  "name": "Focus Diagnostic Center",
+  "lat": 12.987063,
+  "lon": 77.549951,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Fortis Hospital",
+  "lat": 13.002241,
+  "lon": 77.549088,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Fortis Hospital",
+  "lat": 12.988165,
+  "lon": 77.554818,
+  "emergency": false,
+  "phone": "080-2300-4444"
+ },
+ {
+  "name": "Fortis Hospital",
+  "lat": 13.002201,
+  "lon": 77.549101,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "Fortis Hospital, Nagarbhavi",
+  "lat": 12.959603,
+  "lon": 77.511248,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Fortis Hospitals Limited, Bengaluru Urban",
+  "lat": 12.988493,
+  "lon": 77.59455,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "Fortis Hospitals, Bannerghatta Road",
+  "lat": 12.894751,
+  "lon": 77.598582,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "Furtde Hospital",
+  "lat": 12.965465,
+  "lon": 77.589476,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "G.R. Hospital",
+  "lat": 12.98023,
+  "lon": 77.554882,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "GM Hospital",
+  "lat": 12.992946,
+  "lon": 77.538693,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "GM Hospital, Nagarabhavi",
+  "lat": 12.961324,
+  "lon": 77.511726,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Ganesh Nursing Home, Bengaluru Urban",
+  "lat": 12.895764,
+  "lon": 77.633029,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Gangothri Hospital",
+  "lat": 12.916288,
+  "lon": 77.613822,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "Gavipuramguttahalli Maternity Home",
+  "lat": 12.952651,
+  "lon": 77.554863,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Gawai Hospital",
+  "lat": 12.996274,
+  "lon": 77.607569,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Gayathri Hospital, Bengaluru Urban",
+  "lat": 12.974405,
+  "lon": 77.542682,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "Geetha Hospital",
+  "lat": 13.035717,
+  "lon": 77.73517,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Geriatric Hospitals",
+  "lat": 13.028398,
+  "lon": 77.659958,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Get Well Hospital",
+  "lat": 12.952662,
+  "lon": 77.61503,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Gift IVF center",
+  "lat": 12.962951,
+  "lon": 77.641871,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Gleneagles Global Hospitals",
+  "lat": 12.96545,
+  "lon": 77.599904,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Global Ayurveda Multispeciality Hospital",
+  "lat": 12.916579,
+  "lon": 77.636219,
+  "emergency": false,
+  "phone": "080674 75757"
+ },
+ {
+  "name": "Goldage Hospital",
+  "lat": 12.890836,
+  "lon": 77.604072,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Good Shepherd Hospital",
+  "lat": 13.032804,
+  "lon": 77.633289,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Gopala Eye Care Centre",
+  "lat": 12.988362,
+  "lon": 77.534326,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Goverment Hospital, Hosahalli",
+  "lat": 12.974493,
+  "lon": 77.534205,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Government Homeopathic Hospital",
+  "lat": 12.983055,
+  "lon": 77.536518,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Government Hospital",
+  "lat": 12.887061,
+  "lon": 77.603414,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Government Hospital",
+  "lat": 12.966103,
+  "lon": 77.554965,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Government Hospital",
+  "lat": 12.978073,
+  "lon": 77.525193,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Government Hospital",
+  "lat": 12.963983,
+  "lon": 77.51889,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Government Hospital",
+  "lat": 12.960949,
+  "lon": 77.561394,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Government Hospital",
+  "lat": 12.949104,
+  "lon": 77.563226,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Government Hospital",
+  "lat": 13.090394,
+  "lon": 77.496677,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Government Hospital",
+  "lat": 13.08032,
+  "lon": 77.553506,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Government Hospital",
+  "lat": 13.070554,
+  "lon": 77.538897,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Government Hospital",
+  "lat": 12.990505,
+  "lon": 77.556635,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Government Hospital",
+  "lat": 12.984496,
+  "lon": 77.55518,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Government Hospital",
+  "lat": 12.949023,
+  "lon": 77.619925,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Government Hospital",
+  "lat": 13.099184,
+  "lon": 77.596866,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Government Hospital, Banglore",
+  "lat": 12.958746,
+  "lon": 77.557346,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Government Hospital, Budigere",
+  "lat": 13.137652,
+  "lon": 77.744809,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Government Hospital, Gunjur",
+  "lat": 12.922327,
+  "lon": 77.736038,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Government Maternity Home",
+  "lat": 12.99834,
+  "lon": 77.620093,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Government Maternity Hospital",
+  "lat": 12.99886,
+  "lon": 77.581742,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Government Maternity Hospital",
+  "lat": 12.937727,
+  "lon": 77.569786,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Government Maternity Hospital",
+  "lat": 13.021479,
+  "lon": 77.55361,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Government Multi-Speciality Hospital",
+  "lat": 12.951066,
+  "lon": 77.48106,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Government Primary Health Centre",
+  "lat": 12.950323,
+  "lon": 77.616262,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Government Primary Health Centre",
+  "lat": 13.003447,
+  "lon": 77.504284,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Government Primary Health Centre",
+  "lat": 12.971812,
+  "lon": 77.693776,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Government Primary Health Centre",
+  "lat": 13.097274,
+  "lon": 77.647752,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Government Primary Healthcare Center, Begur",
+  "lat": 12.877853,
+  "lon": 77.624658,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Government Veterinary Hospital",
+  "lat": 12.964165,
+  "lon": 77.567695,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Green City Hospital, Bengaluru Urban",
+  "lat": 12.906219,
+  "lon": 77.580682,
+  "emergency": false,
+  "phone": "080 2653 6222"
+ },
+ {
+  "name": "Greenview Hospital",
+  "lat": 12.919193,
+  "lon": 77.638122,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Greenview Medical Center",
+  "lat": 12.919181,
+  "lon": 77.638138,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "Gulecha Dental Care",
+  "lat": 12.929242,
+  "lon": 77.589362,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Gunasheela Hospitals",
+  "lat": 12.925011,
+  "lon": 77.627871,
+  "emergency": false,
+  "phone": "+91-80 - 4646 2626"
+ },
+ {
+  "name": "Gunasheela Surgical and Maternity Hospital",
+  "lat": 12.940301,
+  "lon": 77.57647,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Guru Kripa Clinic",
+  "lat": 13.034983,
+  "lon": 77.567684,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Gurukripa Hospital and Health Care Centre",
+  "lat": 13.00018,
+  "lon": 77.546115,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Gurushree Hitech Multispeciality Hospital",
+  "lat": 12.959314,
+  "lon": 77.526505,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "H B S Hospital",
+  "lat": 12.989194,
+  "lon": 77.603786,
+  "emergency": false,
+  "phone": "080 2554 1321"
+ },
+ {
+  "name": "H Siddiah Referral Hospital",
+  "lat": 12.956906,
+  "lon": 77.58244,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "HAL Hospital",
+  "lat": 12.962369,
+  "lon": 77.666403,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "HCG",
+  "lat": 12.960531,
+  "lon": 77.592659,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "HCG Cancer Hospital",
+  "lat": 12.960316,
+  "lon": 77.593049,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "HCG Cancer Hospital",
+  "lat": 12.963774,
+  "lon": 77.58968,
+  "emergency": false,
+  "phone": "+918040206000"
+ },
+ {
+  "name": "HCG Hebbal",
+  "lat": 13.065886,
+  "lon": 77.593967,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "HCG, Koramangala",
+  "lat": 12.934328,
+  "lon": 77.622885,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "HK Hospital",
+  "lat": 12.908598,
+  "lon": 77.478416,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "HMT Hospital",
+  "lat": 13.049563,
+  "lon": 77.550919,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "HOSMAT Hospital, Kalyan Nagar",
+  "lat": 13.028489,
+  "lon": 77.632556,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Hair Loss Treatment in Bangalore - Hairline International",
+  "lat": 12.956686,
+  "lon": 77.741928,
+  "emergency": true,
+  "phone": "091488 74972"
+ },
+ {
+  "name": "Halasuru Referal Hospital",
+  "lat": 12.973692,
+  "lon": 77.626677,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Happy Tooth",
+  "lat": 12.974419,
+  "lon": 77.533648,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Healing Earth Multispeciality Ayurveda Hospital",
+  "lat": 12.916536,
+  "lon": 77.636186,
+  "emergency": false,
+  "phone": "080674 75757"
+ },
+ {
+  "name": "Healing Hands Advanced Physiotherapy Clinic",
+  "lat": 12.912862,
+  "lon": 77.57149,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Healing Hands Clinic - HSR Layout, Bengaluru",
+  "lat": 12.912042,
+  "lon": 77.64799,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Healing Hands Clinic - Indiranagar, Bengaluru",
+  "lat": 12.978309,
+  "lon": 77.64262,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Healing Hands Clinic - J.P Nagar, Bengaluru",
+  "lat": 12.906136,
+  "lon": 77.586871,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Healing Hands Clinic - Rajajinagar, Bengaluru",
+  "lat": 12.99817,
+  "lon": 77.542972,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Healing Hands Clinic - Sahakar Nagar, Bengaluru",
+  "lat": 13.063599,
+  "lon": 77.589596,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Healing Hands Clinic - Sarjapura, Bengaluru",
+  "lat": 12.866626,
+  "lon": 77.767802,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Healing Hands Clinic - Whitefield, Bengaluru",
+  "lat": 12.988063,
+  "lon": 77.729843,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Health Care Global",
+  "lat": 12.958476,
+  "lon": 77.591928,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Health Centre",
+  "lat": 13.015772,
+  "lon": 77.563804,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Health Cottage Hospital",
+  "lat": 12.970914,
+  "lon": 77.632112,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Health India Hospital",
+  "lat": 12.926518,
+  "lon": 77.609099,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Health Plus Multi Speciality Hospital",
+  "lat": 13.021952,
+  "lon": 77.699405,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Hema Poly Clinic",
+  "lat": 12.960765,
+  "lon": 77.713796,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Herbocare Hospital Pvt",
+  "lat": 13.020442,
+  "lon": 77.644061,
+  "emergency": false,
+  "phone": "+9174064 30003"
+ },
+ {
+  "name": "Herige Hospital",
+  "lat": 12.960972,
+  "lon": 77.56097,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Hi Tech Kidney Stone Hospital",
+  "lat": 12.927139,
+  "lon": 77.579028,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Hillside Hospital",
+  "lat": 12.916275,
+  "lon": 77.558954,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Hiremath Hospital",
+  "lat": 12.975435,
+  "lon": 77.535897,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Hitech Kidney Stone Hospital, Bengaluru Urban",
+  "lat": 12.98781,
+  "lon": 77.580983,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Hosmat Hospital",
+  "lat": 13.008,
+  "lon": 77.583748,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Hosmat Hospital",
+  "lat": 12.969103,
+  "lon": 77.613323,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "Hosmat Hospitals",
+  "lat": 12.964473,
+  "lon": 77.614302,
+  "emergency": false,
+  "phone": "+918025593796"
+ },
+ {
+  "name": "Hospital",
+  "lat": 12.991412,
+  "lon": 77.611733,
+  "emergency": false,
+  "phone": "+9193411 44150"
+ },
+ {
+  "name": "Hospital Complex",
+  "lat": 12.938368,
+  "lon": 77.589907,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Hospital Sharavathi",
+  "lat": 12.959498,
+  "lon": 77.527552,
+  "emergency": false,
+  "phone": "+918023300222"
+ },
+ {
+  "name": "Hospitec Multispeciality Hospital",
+  "lat": 12.885965,
+  "lon": 77.648908,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Hsis Gosha Hospital",
+  "lat": 12.985698,
+  "lon": 77.605858,
+  "emergency": false,
+  "phone": "\"080 2286 6529"
+ },
+ {
+  "name": "ISRO Employees Hospital",
+  "lat": 12.966082,
+  "lon": 77.656317,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "ITI General Hospital",
+  "lat": 13.004636,
+  "lon": 77.682357,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Icon Hospital",
+  "lat": 13.052821,
+  "lon": 77.604104,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Indianova Healthcare Pvt Ltd",
+  "lat": 12.970358,
+  "lon": 77.63022,
+  "emergency": false,
+  "phone": "+9197390 07505"
+ },
+ {
+  "name": "Indicus",
+  "lat": 13.014609,
+  "lon": 77.646456,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Indiranagar Government Hospital",
+  "lat": 12.982924,
+  "lon": 77.644697,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Institute Of Nephro Urology hospital",
+  "lat": 12.961953,
+  "lon": 77.572856,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Institute of Ayurveda and Integrative Medicine (I-AIM)",
+  "lat": 13.125616,
+  "lon": 77.54683,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Isolation Hospital",
+  "lat": 12.983926,
+  "lon": 77.643619,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Isolation Hospital",
+  "lat": 12.985828,
+  "lon": 77.642965,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "J M J Hospital, Bengaluru Urban",
+  "lat": 13.039822,
+  "lon": 77.623084,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "J.P.Nursing Home",
+  "lat": 13.009835,
+  "lon": 77.538472,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "JBS Hospital",
+  "lat": 12.920717,
+  "lon": 77.574597,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "JC Nagar Municipal Hospital",
+  "lat": 13.009931,
+  "lon": 77.594122,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "JJ Hospital",
+  "lat": 12.835045,
+  "lon": 77.693987,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "JJ Hospitals",
+  "lat": 12.835014,
+  "lon": 77.695308,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Jagjeevanram Hospital",
+  "lat": 12.968292,
+  "lon": 77.524492,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Jai Maruthi Hospital",
+  "lat": 13.006881,
+  "lon": 77.505564,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Janani Clinics",
+  "lat": 12.99185,
+  "lon": 77.543783,
+  "emergency": false,
+  "phone": "9036817877"
+ },
+ {
+  "name": "Jayalakshmi Hospital",
+  "lat": 13.098909,
+  "lon": 77.596219,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Jayanagar General Hospital",
+  "lat": 12.926118,
+  "lon": 77.592549,
+  "emergency": false,
+  "phone": "0821-2461158"
+ },
+ {
+  "name": "Jayanagar Orthopaedic Centre",
+  "lat": 12.929329,
+  "lon": 77.587709,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Jayanagar heart Centre",
+  "lat": 12.923168,
+  "lon": 77.584433,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Jayashree Multi Specilaity Hospital",
+  "lat": 12.881611,
+  "lon": 77.626076,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Jeevan Hospital",
+  "lat": 12.99013,
+  "lon": 77.671332,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Jeevika Hospital",
+  "lat": 12.965907,
+  "lon": 77.702553,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "Jeevini Sarvodaya Hospital",
+  "lat": 12.941588,
+  "lon": 77.564192,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Jhon's Medical Hospital",
+  "lat": 12.96353,
+  "lon": 77.666289,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Jindal Charitable Hospital",
+  "lat": 12.993725,
+  "lon": 77.553972,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Jindal Naturecure Institute hospital",
+  "lat": 13.050748,
+  "lon": 77.483283,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Jnana Sanjeevini",
+  "lat": 12.916223,
+  "lon": 77.589025,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Jupiter Hospital And Institute Of Vascular Surgery",
+  "lat": 12.999846,
+  "lon": 77.566365,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Just Smiles",
+  "lat": 13.098668,
+  "lon": 77.582684,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Jyothi The Lasik Vision Centre",
+  "lat": 12.949611,
+  "lon": 77.579079,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "K C General Hospital",
+  "lat": 12.995053,
+  "lon": 77.569743,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "K C Raju Multi Speciality Hospital",
+  "lat": 13.009083,
+  "lon": 77.623559,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "K R Puram Super Speciality Hospital",
+  "lat": 13.011012,
+  "lon": 77.693597,
+  "emergency": true,
+  "phone": "080 2561 7799"
+ },
+ {
+  "name": "K.C. General Hospital",
+  "lat": 12.993382,
+  "lon": 77.569417,
+  "emergency": false,
+  "phone": "08199-242555"
+ },
+ {
+  "name": "K.C.General Hospital",
+  "lat": 12.996024,
+  "lon": 77.569371,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "K.T.G. Hospital",
+  "lat": 13.000477,
+  "lon": 77.505403,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "KK Hospital",
+  "lat": 13.097143,
+  "lon": 77.589385,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "KLE Dental College",
+  "lat": 13.030508,
+  "lon": 77.535667,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "KPTCL Hospital Yelahanka",
+  "lat": 13.116679,
+  "lon": 77.580071,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Kala Hospital",
+  "lat": 13.022367,
+  "lon": 77.55873,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Kalasa Maternity Home",
+  "lat": 12.954821,
+  "lon": 77.567258,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Kamadhenu Hospital",
+  "lat": 12.975501,
+  "lon": 77.534972,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Kangila Clinic",
+  "lat": 12.93365,
+  "lon": 77.56606,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "Kangroo Hospital",
+  "lat": 12.974339,
+  "lon": 77.542325,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Kannamangala Primary Health Center",
+  "lat": 13.030885,
+  "lon": 77.759956,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "Kanva Diagnostics Collection Centre",
+  "lat": 12.967291,
+  "lon": 77.542916,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Kanva Hospital",
+  "lat": 13.017561,
+  "lon": 77.539431,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Karanth Speciality Hospital",
+  "lat": 12.916008,
+  "lon": 77.619357,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "Kareem E.N.T and Multispeciality Centre",
+  "lat": 12.918895,
+  "lon": 77.605891,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Karthik Hospital",
+  "lat": 12.948436,
+  "lon": 77.594259,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Karthik Hospital, Bengaluru Urban",
+  "lat": 12.948941,
+  "lon": 77.594993,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Karunalayam Hospital",
+  "lat": 12.911126,
+  "lon": 77.707338,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Karunalayam Hospital",
+  "lat": 12.911266,
+  "lon": 77.707584,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Karunashraya",
+  "lat": 12.95741,
+  "lon": 77.713487,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Karunya Homoeopathy Centre",
+  "lat": 13.03079,
+  "lon": 77.653594,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Kauvery hospital",
+  "lat": 12.855088,
+  "lon": 77.66316,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Kavya Hospital",
+  "lat": 12.898744,
+  "lon": 77.626313,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Kengeri Upanagara Government Hospital",
+  "lat": 12.91569,
+  "lon": 77.480806,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Ketham's Hospital Pvt. Ltd",
+  "lat": 13.068657,
+  "lon": 77.558257,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Keva Ayurveda Health Care Pvt Ltd",
+  "lat": 12.912706,
+  "lon": 77.620167,
+  "emergency": false,
+  "phone": "080508 01515"
+ },
+ {
+  "name": "Khincha Orthopaedic Centre",
+  "lat": 12.939882,
+  "lon": 77.573989,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Kids Care Clinic",
+  "lat": 12.914434,
+  "lon": 77.605021,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Kids Health Link",
+  "lat": 13.003194,
+  "lon": 77.712876,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Kidwai Cancer Institute Radiation Block",
+  "lat": 12.935597,
+  "lon": 77.597157,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Kidwai Memorial Institute of Oncology",
+  "lat": 12.936526,
+  "lon": 77.598139,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "Kims Hospital and Research Centre",
+  "lat": 12.956302,
+  "lon": 77.574787,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Kinder Women's Hospital & Fertility Center",
+  "lat": 12.992052,
+  "lon": 77.706475,
+  "emergency": true,
+  "phone": "+91 80 2888 8880"
+ },
+ {
+  "name": "Klinik Guhen - Dental Clinic",
+  "lat": 12.909041,
+  "lon": 77.66389,
+  "emergency": true,
+  "phone": "+916366800859"
+ },
+ {
+  "name": "Konanakunte Government Hospital",
+  "lat": 12.88409,
+  "lon": 77.566403,
+  "emergency": false,
+  "phone": "8026323311"
+ },
+ {
+  "name": "Koshys Hospital",
+  "lat": 13.020703,
+  "lon": 77.676059,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Kottakkal Arya Vaidya Sala",
+  "lat": 12.941106,
+  "lon": 77.585059,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Kottakkal Arya Vaidya Sala",
+  "lat": 12.90026,
+  "lon": 77.6271,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Kottakkal Arya Vaidya Sala",
+  "lat": 12.92176,
+  "lon": 77.661832,
+  "emergency": false,
+  "phone": "+91-80 6450 4434"
+ },
+ {
+  "name": "Krishna Nursing Home",
+  "lat": 12.947422,
+  "lon": 77.598692,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Krishna Specialty Clinic",
+  "lat": 13.026721,
+  "lon": 77.578927,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Krupa Medical center",
+  "lat": 13.000431,
+  "lon": 77.541166,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Kruthika Hospital",
+  "lat": 13.065014,
+  "lon": 77.504196,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Kushi Hospital",
+  "lat": 13.093808,
+  "lon": 77.580417,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Kusuma Hospital",
+  "lat": 12.942012,
+  "lon": 77.550692,
+  "emergency": false,
+  "phone": "080 2642 1177"
+ },
+ {
+  "name": "Laggere Government Hospital",
+  "lat": 13.009817,
+  "lon": 77.523185,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Lakeside Medical Centre and Hospital",
+  "lat": 12.987863,
+  "lon": 77.617743,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Lakshmi Hospital, Ganganagar",
+  "lat": 13.024837,
+  "lon": 77.592089,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Lakshmi Maternity Home",
+  "lat": 13.005823,
+  "lon": 77.569451,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Lalbagh Nursing Home",
+  "lat": 12.945231,
+  "lon": 77.586173,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Lavis Hospital",
+  "lat": 12.925461,
+  "lon": 77.609021,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Leela Hospital and Diagnostic Center",
+  "lat": 13.000267,
+  "lon": 77.569489,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Leprosy Hospital",
+  "lat": 12.974455,
+  "lon": 77.564022,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Life Care Hospital",
+  "lat": 12.919471,
+  "lon": 77.613011,
+  "emergency": false,
+  "phone": "+91-80 2684 6677"
+ },
+ {
+  "name": "Life Care Hospital",
+  "lat": 12.923974,
+  "lon": 77.613323,
+  "emergency": true,
+  "phone": "080 2684 6677"
+ },
+ {
+  "name": "Life Hospital",
+  "lat": 12.975618,
+  "lon": 77.647061,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Lions Airport City Hospital",
+  "lat": 12.95515,
+  "lon": 77.705164,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Lions Seva Hospital",
+  "lat": 12.955502,
+  "lon": 77.70532,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Little Flower Hospital",
+  "lat": 13.01132,
+  "lon": 77.677197,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Little Flower Hospital",
+  "lat": 12.980726,
+  "lon": 77.682373,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Live100",
+  "lat": 12.879171,
+  "lon": 77.645493,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "Lohitha Hospital",
+  "lat": 12.963951,
+  "lon": 77.64308,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Lokhande S Hospital",
+  "lat": 13.018605,
+  "lon": 77.647943,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Lotus Hospital",
+  "lat": 12.914483,
+  "lon": 77.649156,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Lourdes High School",
+  "lat": 13.01821,
+  "lon": 77.540004,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Lucid Medical Diagnostics",
+  "lat": 12.930688,
+  "lon": 77.579454,
+  "emergency": false,
+  "phone": "08049364444"
+ },
+ {
+  "name": "M C Modi Eye Hospital",
+  "lat": 12.998007,
+  "lon": 77.545901,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "M N Speciality Clinic",
+  "lat": 12.903991,
+  "lon": 77.585957,
+  "emergency": false,
+  "phone": "080 2653 0121"
+ },
+ {
+  "name": "M S Ramaiah Hospital",
+  "lat": 13.029729,
+  "lon": 77.568591,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "MEDSOL Hospital",
+  "lat": 12.930994,
+  "lon": 77.492984,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "MEDSTAR Speciality Hospital",
+  "lat": 13.058128,
+  "lon": 77.58604,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "MGA Hospital",
+  "lat": 12.956855,
+  "lon": 77.700226,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "MS Diabetes Speciality Center",
+  "lat": 12.980711,
+  "lon": 77.646011,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Madhu Hospital, Bengaluru Urban",
+  "lat": 12.978316,
+  "lon": 77.54296,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Magadi Road Maternity Home",
+  "lat": 12.974125,
+  "lon": 77.561823,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Magdum Hospital",
+  "lat": 12.958949,
+  "lon": 77.660377,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Magnus Diagnostic Lab",
+  "lat": 12.934919,
+  "lon": 77.630502,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Mahanandi",
+  "lat": 12.967036,
+  "lon": 77.717977,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Mahanth Hospital",
+  "lat": 12.907962,
+  "lon": 77.623571,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Maharaja Agrasen Hospital, Bengaluru Urban",
+  "lat": 12.915903,
+  "lon": 77.555022,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "Mahaveer Eye Hospital Private Limited",
+  "lat": 12.993355,
+  "lon": 77.572959,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Mahaveer Hospitals",
+  "lat": 12.989505,
+  "lon": 77.674144,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Mahaveer Ortho Care Speciality Centre",
+  "lat": 12.956968,
+  "lon": 77.569504,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Maithri Nursing Home",
+  "lat": 13.00484,
+  "lon": 77.703643,
+  "emergency": false,
+  "phone": "+918025611928"
+ },
+ {
+  "name": "Maiya Multispecialty Hospital",
+  "lat": 12.942614,
+  "lon": 77.585453,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Malleswaram Eye Day Care Hospital - Bengalore",
+  "lat": 12.996668,
+  "lon": 77.571604,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Mallige Medical Centre",
+  "lat": 12.985247,
+  "lon": 77.580385,
+  "emergency": false,
+  "phone": "080 2220 3333"
+ },
+ {
+  "name": "Mallya Audikesh Diagnostics Center",
+  "lat": 12.981505,
+  "lon": 77.601194,
+  "emergency": false,
+  "phone": "+918022868423"
+ },
+ {
+  "name": "Mamta Hospital, Bengaluru Rural",
+  "lat": 13.037756,
+  "lon": 77.574445,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Mamtha Health Center",
+  "lat": 12.918049,
+  "lon": 77.631876,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Manasa Hospital",
+  "lat": 12.968821,
+  "lon": 77.52463,
+  "emergency": false,
+  "phone": "+918023104640"
+ },
+ {
+  "name": "Manasa Hospital, Vijayanagar",
+  "lat": 12.970946,
+  "lon": 77.545106,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Manavarthapet Pregnancy Hospital",
+  "lat": 12.970255,
+  "lon": 77.573457,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Manipal Hospital",
+  "lat": 12.958578,
+  "lon": 77.648141,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Manipal Hospital",
+  "lat": 13.050953,
+  "lon": 77.593865,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "Manipal Hospital",
+  "lat": 12.988208,
+  "lon": 77.592157,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Manipal Hospital North",
+  "lat": 13.107628,
+  "lon": 77.603381,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Manipal Hospital OPD",
+  "lat": 13.062457,
+  "lon": 77.592227,
+  "emergency": false,
+  "phone": "18001025555"
+ },
+ {
+  "name": "Manipal Hospital Yeshwantpur",
+  "lat": 13.014294,
+  "lon": 77.556078,
+  "emergency": true,
+  "phone": "080 3989 8969"
+ },
+ {
+  "name": "Manipal Hospital, Bengaluru Urban",
+  "lat": 12.958707,
+  "lon": 77.64903,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "Manipal Hospitals",
+  "lat": 12.958337,
+  "lon": 77.745445,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "Manipal Hospitals",
+  "lat": 12.919968,
+  "lon": 77.665255,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "Manipal Hospitals Whitefield",
+  "lat": 12.988071,
+  "lon": 77.728641,
+  "emergency": true,
+  "phone": "1800 3001 4000"
+ },
+ {
+  "name": "Manipal Northside Hospital",
+  "lat": 13.001128,
+  "lon": 77.563929,
+  "emergency": false,
+  "phone": "080 2222 1111"
+ },
+ {
+  "name": "Manipal Speciality Hospital",
+  "lat": 12.908884,
+  "lon": 77.513619,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Manju Sree Hospital",
+  "lat": 13.021241,
+  "lon": 77.607074,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Manjunath Hospital",
+  "lat": 12.94836,
+  "lon": 77.594062,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Manjunatha Maternity Home and Surgical Centre",
+  "lat": 13.007727,
+  "lon": 77.569699,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Manjushree Speciality Hospital",
+  "lat": 12.982584,
+  "lon": 77.612493,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Marigold Hospital",
+  "lat": 12.913626,
+  "lon": 77.604537,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Maruthi Hospital",
+  "lat": 12.967761,
+  "lon": 77.541328,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Matha Pitha Hospital",
+  "lat": 12.942028,
+  "lon": 77.575634,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Mathru Hospital - Bangalore",
+  "lat": 12.911098,
+  "lon": 77.480606,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Maya Hospital",
+  "lat": 12.936528,
+  "lon": 77.704674,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Medcare Hospital",
+  "lat": 12.953049,
+  "lon": 77.574203,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Medi Derma Hospital",
+  "lat": 13.055556,
+  "lon": 77.651714,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Medi-Tech Multi Speciality Hospital",
+  "lat": 12.940867,
+  "lon": 77.560366,
+  "emergency": false,
+  "phone": "080 2660 2910"
+ },
+ {
+  "name": "Medic Star Hospital",
+  "lat": 12.987687,
+  "lon": 77.60931,
+  "emergency": false,
+  "phone": "080 2554 1337"
+ },
+ {
+  "name": "Medical Center",
+  "lat": 13.071105,
+  "lon": 77.578139,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Medical Centre",
+  "lat": 12.924639,
+  "lon": 77.500624,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Medicare Diagnostics",
+  "lat": 13.028523,
+  "lon": 77.55873,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Medicure Hospital",
+  "lat": 13.028346,
+  "lon": 77.629863,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Medihope Super Specialty Hospital",
+  "lat": 12.973637,
+  "lon": 77.675186,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Mediscope Hospital Private Limited",
+  "lat": 12.999447,
+  "lon": 77.616258,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Meenakshi Hospital",
+  "lat": 12.942072,
+  "lon": 77.553698,
+  "emergency": false,
+  "phone": "+918026755800"
+ },
+ {
+  "name": "Metro Hospital",
+  "lat": 12.891589,
+  "lon": 77.560715,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "Metro Hospital, Bengaluru Rural",
+  "lat": 12.891467,
+  "lon": 77.561211,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Milaan Hospital",
+  "lat": 13.010954,
+  "lon": 77.647642,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Milann Fertility Center",
+  "lat": 12.915925,
+  "lon": 77.585601,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Milann Fertility Center",
+  "lat": 12.978801,
+  "lon": 77.638085,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Minto Eye Hospital",
+  "lat": 12.961073,
+  "lon": 77.572289,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "Miracle Hopital",
+  "lat": 12.958861,
+  "lon": 77.654322,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Miracle Hospital",
+  "lat": 13.00914,
+  "lon": 77.759071,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Mitralaya Hospital",
+  "lat": 12.945591,
+  "lon": 77.571286,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Modern Family Doctor Pvt Ltd",
+  "lat": 12.969841,
+  "lon": 77.532721,
+  "emergency": false,
+  "phone": "080 2335 2200"
+ },
+ {
+  "name": "Motherhood",
+  "lat": 13.020242,
+  "lon": 77.651619,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Motherhood",
+  "lat": 12.917913,
+  "lon": 77.672255,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Motherhood Children's Hospital",
+  "lat": 13.062005,
+  "lon": 77.593064,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Motherhood Hospital(Unit Of Rhea Healthcare Pvt Ltd)",
+  "lat": 12.978441,
+  "lon": 77.637585,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Motherhood Whitefield",
+  "lat": 12.958966,
+  "lon": 77.746719,
+  "emergency": false,
+  "phone": "18002585727"
+ },
+ {
+  "name": "Motherhood Women & Children Hospital",
+  "lat": 13.01027,
+  "lon": 77.652591,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "My Dentist",
+  "lat": 12.942985,
+  "lon": 77.54606,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Myo Medex - Ace Speciality Clinic",
+  "lat": 12.861598,
+  "lon": 77.599932,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Mysore Hospital",
+  "lat": 13.027534,
+  "lon": 77.539705,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "N.D.R. Hospital",
+  "lat": 13.096517,
+  "lon": 77.578774,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "NASA Hospitals",
+  "lat": 13.005833,
+  "lon": 77.659739,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "NBRC(National Brain Research Center)",
+  "lat": 12.940428,
+  "lon": 77.598841,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "NDR Hospital",
+  "lat": 13.095781,
+  "lon": 77.579287,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "NDR Multi Speciality Hospital",
+  "lat": 13.105173,
+  "lon": 77.602786,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "NDR Orthopaedic",
+  "lat": 13.10051,
+  "lon": 77.595603,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "NELAMAHESHWARI Government Hospital",
+  "lat": 13.049152,
+  "lon": 77.510442,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "NIKISA Dementia Village",
+  "lat": 13.111447,
+  "lon": 77.555061,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "NIMHANS - Ashwini Block",
+  "lat": 12.939759,
+  "lon": 77.59445,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "NIMHANS Department Of Psychiatric and Neuro Rehabilitation",
+  "lat": 12.940052,
+  "lon": 77.595477,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "NIMHANS OPD",
+  "lat": 12.938806,
+  "lon": 77.594299,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "NIMHANS Physiotherapy Center",
+  "lat": 12.940204,
+  "lon": 77.595472,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "NIMHANS Screening block",
+  "lat": 12.938712,
+  "lon": 77.593774,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "NMPC Hospital",
+  "lat": 13.006205,
+  "lon": 77.700429,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "NRS Medical & Dental Specialists Centre",
+  "lat": 12.937836,
+  "lon": 77.557333,
+  "emergency": false,
+  "phone": "080-26696054"
+ },
+ {
+  "name": "NRS Medical & Dental Specialists Centre",
+  "lat": 12.915107,
+  "lon": 77.562489,
+  "emergency": false,
+  "phone": "08026696054"
+ },
+ {
+  "name": "NU Hospitals",
+  "lat": 13.011845,
+  "lon": 77.552606,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Naadi Ayurveda Center",
+  "lat": 12.912101,
+  "lon": 77.682,
+  "emergency": false,
+  "phone": "+91-9980016089"
+ },
+ {
+  "name": "Nagappa Hadli Hospital",
+  "lat": 13.082989,
+  "lon": 77.548903,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Nagarathna Hospital",
+  "lat": 12.905609,
+  "lon": 77.542696,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Namratha Hospital",
+  "lat": 13.004786,
+  "lon": 77.543073,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Namratha Nursing And Maternity Home",
+  "lat": 13.004575,
+  "lon": 77.543273,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Nano Hospitals",
+  "lat": 12.907099,
+  "lon": 77.546076,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Narayan Multispeciality clinic",
+  "lat": 12.928844,
+  "lon": 77.58287,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Narayana Hrudayalaya Dental Clinic",
+  "lat": 12.915576,
+  "lon": 77.63499,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Narayana Hrudayalaya Dental Clinic",
+  "lat": 12.923157,
+  "lon": 77.672807,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Narayana Multispeciality Hospital",
+  "lat": 12.908174,
+  "lon": 77.643511,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Narayana Nethralaya",
+  "lat": 12.875088,
+  "lon": 77.59501,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Narayana Nethralaya",
+  "lat": 12.980602,
+  "lon": 77.70921,
+  "emergency": false,
+  "phone": "08066121658"
+ },
+ {
+  "name": "Narayana Netralaya",
+  "lat": 12.96714,
+  "lon": 77.609448,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "National Institute of Mental Health and Neuro Sciences",
+  "lat": 12.940067,
+  "lon": 77.59316,
+  "emergency": false,
+  "phone": "08026995201;08026995000;08026995202"
+ },
+ {
+  "name": "National Institute of Mental Health and Neuro Sciences",
+  "lat": 12.938632,
+  "lon": 77.59441,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Nature Cure Hospital",
+  "lat": 12.933223,
+  "lon": 77.584263,
+  "emergency": false,
+  "phone": "+91 80 2663 1945;+91 80 2244 6035"
+ },
+ {
+  "name": "Natus Woman and Children Hospital",
+  "lat": 12.94272,
+  "lon": 77.525514,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Navachethana Hospital",
+  "lat": 13.103613,
+  "lon": 77.583799,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Navya Hospital",
+  "lat": 13.052484,
+  "lon": 77.612086,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Nayak Hospital, Gayathri Nagar",
+  "lat": 12.999386,
+  "lon": 77.56064,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "Nayanalaya Super Speciality Eye Care Centre",
+  "lat": 13.006795,
+  "lon": 77.571159,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Nayantara Opticals",
+  "lat": 12.892483,
+  "lon": 77.61985,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Neha Prakash Hospital, Bengaluru Urban",
+  "lat": 13.107731,
+  "lon": 77.57173,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Nelivigi Eye Hospital",
+  "lat": 12.924182,
+  "lon": 77.673752,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Neo Hospital",
+  "lat": 12.8474,
+  "lon": 77.643938,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Nethra Eye Hospital",
+  "lat": 13.02715,
+  "lon": 77.576862,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Nethradhama",
+  "lat": 12.976201,
+  "lon": 77.725833,
+  "emergency": false,
+  "phone": "080 62646800"
+ },
+ {
+  "name": "Nethradhama Superspeciality Eye Hospital",
+  "lat": 12.971981,
+  "lon": 77.647401,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Nethradhama Superspeciality Eye Hospital, Jayanagar",
+  "lat": 12.925693,
+  "lon": 77.577313,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Nethradhama Superspeciality Eye Hospital, Rajajinagar",
+  "lat": 12.997613,
+  "lon": 77.550942,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Netradama Eye Hospital",
+  "lat": 12.973484,
+  "lon": 77.635728,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Netradhama",
+  "lat": 12.99743,
+  "lon": 77.551029,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Netradhama Hospital",
+  "lat": 12.925302,
+  "lon": 77.577406,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "Netraspandana Healthcare and Research Pvt. Ltd",
+  "lat": 12.929128,
+  "lon": 77.546136,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "New Akshay Mallya Hospital",
+  "lat": 12.956853,
+  "lon": 77.699047,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "New Life Hospital bangalore",
+  "lat": 12.996761,
+  "lon": 77.759125,
+  "emergency": true,
+  "phone": "080 4954 0540"
+ },
+ {
+  "name": "New Varalakshmi Hospital",
+  "lat": 12.998838,
+  "lon": 77.555096,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Nikad Ortho Centre",
+  "lat": 12.975802,
+  "lon": 77.618481,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Nimhans Mr-pet Center",
+  "lat": 12.93965,
+  "lon": 77.596783,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Nmpc Hospital",
+  "lat": 13.022416,
+  "lon": 77.65804,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "North City CT Scan",
+  "lat": 13.094589,
+  "lon": 77.594104,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "North Side Health Centre",
+  "lat": 13.026799,
+  "lon": 77.587081,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "North Star Maternity and Nursing Home",
+  "lat": 12.906708,
+  "lon": 77.584928,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Nova Specialty Surgery Center, Koramangala",
+  "lat": 12.93391,
+  "lon": 77.620208,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Nrr Hospital",
+  "lat": 13.072524,
+  "lon": 77.503587,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Nu Trust",
+  "lat": 12.917622,
+  "lon": 77.55507,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "OJUS Multi Speciality Hospital",
+  "lat": 12.957269,
+  "lon": 77.653945,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Om Shakthi Hospital",
+  "lat": 13.12157,
+  "lon": 77.612608,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Omega Multispeciality Hospital",
+  "lat": 13.100188,
+  "lon": 77.581343,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Orthopedic & Eye Care Center",
+  "lat": 13.005493,
+  "lon": 77.571952,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Ovum Birthing Centre",
+  "lat": 13.020149,
+  "lon": 77.651663,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Ovum Hospitals",
+  "lat": 13.01713,
+  "lon": 77.643294,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Ovum Women & Child Speciality Hospital",
+  "lat": 12.907269,
+  "lon": 77.64555,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Oxford Hospital",
+  "lat": 12.93121,
+  "lon": 77.575691,
+  "emergency": false,
+  "phone": "080 2245 2500"
+ },
+ {
+  "name": "Oxford Hospital",
+  "lat": 12.858418,
+  "lon": 77.665335,
+  "emergency": false,
+  "phone": "080 2245 2500"
+ },
+ {
+  "name": "P.D. Hinduja Sindhi Hospital",
+  "lat": 12.964441,
+  "lon": 77.592675,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "PESU HOSPITAL",
+  "lat": 12.862792,
+  "lon": 77.666288,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "PMC Hospital",
+  "lat": 13.006505,
+  "lon": 77.554501,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Padmashree Diagnostics",
+  "lat": 12.974598,
+  "lon": 77.543679,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Padmashree Nursing Home and Maternity Home",
+  "lat": 12.958321,
+  "lon": 77.535043,
+  "emergency": false,
+  "phone": "080 2311 8372"
+ },
+ {
+  "name": "Padmavathi Hospital, Bengaluru Urban",
+  "lat": 12.981731,
+  "lon": 77.533371,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Panchamukhi Specialityu Hospital",
+  "lat": 12.995718,
+  "lon": 77.503164,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Panchsheela Nagar Hospital",
+  "lat": 12.97455,
+  "lon": 77.520894,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Parameshwari Hospital",
+  "lat": 12.948971,
+  "lon": 77.563543,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Parimala Clinic",
+  "lat": 12.913571,
+  "lon": 77.578894,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Parimala Health Care",
+  "lat": 12.900319,
+  "lon": 77.600806,
+  "emergency": true,
+  "phone": "080 2658 3117"
+ },
+ {
+  "name": "Parimala Health Care",
+  "lat": 12.900928,
+  "lon": 77.598664,
+  "emergency": true,
+  "phone": "080 2658 3117"
+ },
+ {
+  "name": "Parimala Speciality Hospital",
+  "lat": 12.900457,
+  "lon": 77.600547,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Patil Hospital",
+  "lat": 13.011214,
+  "lon": 77.69796,
+  "emergency": true,
+  "phone": "080 2561 3891"
+ },
+ {
+  "name": "Patil Hospital, Bengaluru Urban",
+  "lat": 13.009085,
+  "lon": 77.696957,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Pavan Hospitals",
+  "lat": 13.098149,
+  "lon": 77.596139,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Pd Hinduja Sindhi Hospital",
+  "lat": 12.964636,
+  "lon": 77.592651,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Penta Care Ayurvedic Hospital",
+  "lat": 12.973689,
+  "lon": 77.536948,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "People Tree Hospitals",
+  "lat": 12.942076,
+  "lon": 77.553598,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "People Tree Hospitals",
+  "lat": 13.028289,
+  "lon": 77.539146,
+  "emergency": false,
+  "phone": "+9180 4959 9999"
+ },
+ {
+  "name": "Perfetual Help Hospital",
+  "lat": 12.905575,
+  "lon": 77.542526,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Phoenix Hospital",
+  "lat": 12.91661,
+  "lon": 77.645052,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "Phoenix Hospital, Bengaluru Urban",
+  "lat": 12.960803,
+  "lon": 77.591172,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Place Guttahalli Maternity Home",
+  "lat": 12.998824,
+  "lon": 77.581989,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Poornayu Ayurveda Hospital",
+  "lat": 12.998238,
+  "lon": 77.551173,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Poornima Hospital",
+  "lat": 13.026334,
+  "lon": 77.595128,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Popular Hospital",
+  "lat": 12.951485,
+  "lon": 77.570356,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "Pothys Hospital",
+  "lat": 12.915935,
+  "lon": 77.60341,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Pragathi Ayurvedic Center",
+  "lat": 12.98437,
+  "lon": 77.555666,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Pragathi Piles Hospital",
+  "lat": 12.996631,
+  "lon": 77.671863,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Prakriya Hospital",
+  "lat": 13.046337,
+  "lon": 77.50653,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Prakruti Hospital",
+  "lat": 12.991561,
+  "lon": 77.675783,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Pranam Dental Hospital",
+  "lat": 13.029101,
+  "lon": 77.620568,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Prasad Eye Hospital",
+  "lat": 12.935193,
+  "lon": 77.608682,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Prasad Eye Hospital, Bengaluru Urban",
+  "lat": 12.93567,
+  "lon": 77.60799,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Prasad Hospital, Bengaluru Urban",
+  "lat": 13.098347,
+  "lon": 77.577368,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Prasad Nethralaya",
+  "lat": 12.960331,
+  "lon": 77.53008,
+  "emergency": false,
+  "phone": "080 2339 2807"
+ },
+ {
+  "name": "Prashanth Hospital",
+  "lat": 12.906664,
+  "lon": 77.628746,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Prashanth Hospital",
+  "lat": 12.906713,
+  "lon": 77.626508,
+  "emergency": true,
+  "phone": "080 4150 3714"
+ },
+ {
+  "name": "Prashanth Hospitals",
+  "lat": 12.939188,
+  "lon": 77.551313,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Premier Hospital",
+  "lat": 13.024186,
+  "lon": 77.596057,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Prerana Dental Clinic",
+  "lat": 12.918684,
+  "lon": 77.630774,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Presidency Hospital",
+  "lat": 12.995163,
+  "lon": 77.69923,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Pristine Health care",
+  "lat": 12.938277,
+  "lon": 77.618675,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "Pristine Hospital",
+  "lat": 12.998423,
+  "lon": 77.540389,
+  "emergency": false,
+  "phone": "+9180 4135 4444"
+ },
+ {
+  "name": "Pristine Hospital",
+  "lat": 12.998001,
+  "lon": 77.543278,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Pristline Hospital",
+  "lat": 12.997893,
+  "lon": 77.543613,
+  "emergency": false,
+  "phone": "+91-80-41354444;+91-80-51270776"
+ },
+ {
+  "name": "Pro MED Hospital",
+  "lat": 12.929436,
+  "lon": 77.564005,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Procare Hospital",
+  "lat": 13.020394,
+  "lon": 77.651268,
+  "emergency": true,
+  "phone": "080 4162 0620"
+ },
+ {
+  "name": "Prolife Hospital",
+  "lat": 13.065084,
+  "lon": 77.593634,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Proteeth Dental",
+  "lat": 12.934622,
+  "lon": 77.628467,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Proteeth Dental",
+  "lat": 12.934625,
+  "lon": 77.628467,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Pulse Multispecialty Hospital",
+  "lat": 12.938901,
+  "lon": 77.543881,
+  "emergency": false,
+  "phone": "080 2672 4466"
+ },
+ {
+  "name": "Punarjani Ayurvedic Multispeciality Hospital",
+  "lat": 12.896413,
+  "lon": 77.695064,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Punarjyoti Eye Hospital",
+  "lat": 12.96589,
+  "lon": 77.589928,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Punarjyoti Eye Hospital, Bengaluru Urban",
+  "lat": 12.96853,
+  "lon": 77.584396,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Puneeth Rajkumar Multispeciality Hospital",
+  "lat": 12.941429,
+  "lon": 77.522639,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Punya Hospital",
+  "lat": 13.001146,
+  "lon": 77.53598,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "Punya Hospital, Bengaluru Urban",
+  "lat": 12.986216,
+  "lon": 77.537485,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Pushpa Nursing Home",
+  "lat": 12.9689,
+  "lon": 77.749495,
+  "emergency": false,
+  "phone": "+917676548532"
+ },
+ {
+  "name": "R K Hospital, Bengaluru Urban",
+  "lat": 13.013812,
+  "lon": 77.635473,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "R R Hospital",
+  "lat": 13.008203,
+  "lon": 77.697197,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "R R Hospital & Trauma Centre",
+  "lat": 12.905947,
+  "lon": 77.590419,
+  "emergency": false,
+  "phone": "080 2671 8785"
+ },
+ {
+  "name": "R.R. Hospital and Trauma Centre",
+  "lat": 12.907427,
+  "lon": 77.571632,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "RICH CARE HOMEOPATHY",
+  "lat": 13.001546,
+  "lon": 77.572168,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "RMV Hospital",
+  "lat": 13.032279,
+  "lon": 77.576876,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "Radha Maternity and Surgical Hospital",
+  "lat": 12.969044,
+  "lon": 77.568854,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Radhakrishna Multispeciality Hospital",
+  "lat": 12.940961,
+  "lon": 77.545562,
+  "emergency": true,
+  "phone": "080 2642 2977"
+ },
+ {
+  "name": "Ragavendra Hospital",
+  "lat": 13.042543,
+  "lon": 77.515538,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Raghavendra Hospital",
+  "lat": 12.938787,
+  "lon": 77.554296,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Rahul Maternity & Child Health Centre",
+  "lat": 12.959623,
+  "lon": 77.614682,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Railways Hospital",
+  "lat": 13.104111,
+  "lon": 77.582996,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Rainbow Children's Hospital",
+  "lat": 12.975308,
+  "lon": 77.697834,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "Rainbow Children's Hospital",
+  "lat": 13.065565,
+  "lon": 77.593738,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Rainbow Children's Hospital",
+  "lat": 12.903383,
+  "lon": 77.600741,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "Rainbow Childrens Hospital",
+  "lat": 12.920236,
+  "lon": 77.667474,
+  "emergency": true,
+  "phone": "+91 08062261218"
+ },
+ {
+  "name": "Rainbow Clinic and Diagnostic Laboratory",
+  "lat": 12.891484,
+  "lon": 77.581696,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "Rainbow Health Care",
+  "lat": 13.099732,
+  "lon": 77.576089,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Raj Mahal Vilas Hospital",
+  "lat": 13.032282,
+  "lon": 77.577046,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Rajalakshmi Hospital",
+  "lat": 13.084202,
+  "lon": 77.530889,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Rajalakshmi Multispeciality Hospital",
+  "lat": 12.916464,
+  "lon": 77.579616,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Rajarajeshwari Hospital and Medical College",
+  "lat": 12.896052,
+  "lon": 77.461877,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Rajarajeshwari Medical College and Hospital",
+  "lat": 12.895144,
+  "lon": 77.461988,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Rajashree Granthim hospital",
+  "lat": 12.889313,
+  "lon": 77.602422,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Rajashri Grandhim Hospitals",
+  "lat": 12.895426,
+  "lon": 77.607662,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Rajbal Skin Clinic",
+  "lat": 13.020606,
+  "lon": 77.644536,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Rajnandani Hospital, Bangalore",
+  "lat": 12.884545,
+  "lon": 77.570128,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Rajshekhar Hospital",
+  "lat": 12.911014,
+  "lon": 77.579773,
+  "emergency": true,
+  "phone": "080 4252 7555"
+ },
+ {
+  "name": "Raksha Hospital",
+  "lat": 12.889262,
+  "lon": 77.650532,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Raksha Multispeciality Hospital",
+  "lat": 13.019573,
+  "lon": 77.541956,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Raksha Orthopaedic And Multi Speciality Centre",
+  "lat": 12.90415,
+  "lon": 77.674104,
+  "emergency": false,
+  "phone": "+91-74115 27777"
+ },
+ {
+  "name": "Ramaiah Memorial Hospital",
+  "lat": 13.028218,
+  "lon": 77.569775,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "Ramakrishna Clinic",
+  "lat": 12.978694,
+  "lon": 77.574461,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Ramakrishna Hospital",
+  "lat": 12.850065,
+  "lon": 77.662471,
+  "emergency": true,
+  "phone": "+918040800300"
+ },
+ {
+  "name": "Ramakrishna Hospital",
+  "lat": 12.854121,
+  "lon": 77.662481,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "Ramakrishna Nursing Home and Hospital",
+  "lat": 12.936433,
+  "lon": 77.583477,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Ramana Rao's clinic",
+  "lat": 13.013083,
+  "lon": 77.576145,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Ramani Orthopaedic Hospital",
+  "lat": 13.004431,
+  "lon": 77.578524,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Rangadore Memorial Hospital",
+  "lat": 12.953891,
+  "lon": 77.571146,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "Rangalakshmi Netralaya",
+  "lat": 13.098943,
+  "lon": 77.576716,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Rashmi Hospital",
+  "lat": 12.976695,
+  "lon": 77.636228,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Ravi Kirloskar Memorial Hospital",
+  "lat": 13.038468,
+  "lon": 77.527802,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "Rc Hospital",
+  "lat": 12.930936,
+  "lon": 77.515378,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Regal Hospital",
+  "lat": 13.083046,
+  "lon": 77.634717,
+  "emergency": false,
+  "phone": "08033082383"
+ },
+ {
+  "name": "Republic Hospital",
+  "lat": 12.964162,
+  "lon": 77.598225,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Respigen healthcare",
+  "lat": 12.955536,
+  "lon": 77.591835,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Respiratory and womens health clinic.",
+  "lat": 12.976264,
+  "lon": 77.637653,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Retina Institute Of Karnataka",
+  "lat": 12.95727,
+  "lon": 77.564083,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Revathi Hospital",
+  "lat": 12.967997,
+  "lon": 77.501576,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Ring Road Hospital",
+  "lat": 12.927455,
+  "lon": 77.551629,
+  "emergency": false,
+  "phone": "080 2679 7040"
+ },
+ {
+  "name": "Ring Road Hospital",
+  "lat": 12.927866,
+  "lon": 77.55193,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Rishi Women and Child Clinic",
+  "lat": 12.974581,
+  "lon": 77.532699,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Roopena Agrahara Government Hospital",
+  "lat": 12.910214,
+  "lon": 77.624465,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Rotary Eye Hospital (A Unit Of Bangalore North Rotary Trust)",
+  "lat": 12.981723,
+  "lon": 77.554936,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Royan Maternity & Child Welfare Centre",
+  "lat": 12.960311,
+  "lon": 77.568274,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "S K Hospital, Bengaluru Urban",
+  "lat": 12.957572,
+  "lon": 77.518444,
+  "emergency": false,
+  "phone": "080 2321 3699"
+ },
+ {
+  "name": "S. J. Hospital",
+  "lat": 13.036083,
+  "lon": 77.575065,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "S.N. Hospital",
+  "lat": 13.03574,
+  "lon": 77.734706,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "S.S.G. Hospital",
+  "lat": 12.986869,
+  "lon": 77.479483,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "SDM Institute of Ayurveda & Hospital",
+  "lat": 12.89386,
+  "lon": 77.457234,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "SDS Tuberculosis Research Centre and Rajiv Gandhi Institute of Chest diseases",
+  "lat": 12.936796,
+  "lon": 77.590709,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "SPS Surgicals",
+  "lat": 12.954158,
+  "lon": 77.660837,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "SRL Diagnostics",
+  "lat": 12.959931,
+  "lon": 77.716045,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "SS Sparsh Hospital",
+  "lat": 12.926419,
+  "lon": 77.521678,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sacred Oak",
+  "lat": 12.843308,
+  "lon": 77.675479,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sad Bydya Shala Ayurvedic Hospital",
+  "lat": 13.010654,
+  "lon": 77.696946,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sadhana Eye Hospital, Bengaluru Urban",
+  "lat": 12.970023,
+  "lon": 77.630799,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Safa Medicure Hospital",
+  "lat": 12.944739,
+  "lon": 77.596416,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sagar Chandramma Hospitals",
+  "lat": 12.948553,
+  "lon": 77.574825,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sagar Dental Clinic",
+  "lat": 12.916972,
+  "lon": 77.630057,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sagar Hospital",
+  "lat": 12.907867,
+  "lon": 77.565162,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sagar Hospitals",
+  "lat": 12.927899,
+  "lon": 77.599855,
+  "emergency": true,
+  "phone": "08042888888"
+ },
+ {
+  "name": "Sahasra Hospital",
+  "lat": 12.920651,
+  "lon": 77.574612,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sahasra Hospital",
+  "lat": 12.933775,
+  "lon": 77.743323,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sai Baba Hospital",
+  "lat": 13.00936,
+  "lon": 77.522211,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sai Baba Hospital",
+  "lat": 12.969819,
+  "lon": 77.631747,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sai Hospital",
+  "lat": 13.070134,
+  "lon": 77.63291,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sai Ortho and Dental Centre",
+  "lat": 12.969819,
+  "lon": 77.53608,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sai Sparsh Hospital",
+  "lat": 12.893389,
+  "lon": 77.636861,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sai Thunga Hospitals",
+  "lat": 12.924001,
+  "lon": 77.648181,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Saikrupa Hospital For Women's and Surgical Centre",
+  "lat": 12.969166,
+  "lon": 77.535192,
+  "emergency": false,
+  "phone": "+91080 2311 9592"
+ },
+ {
+  "name": "Sakhi Hospital (A Unit Of Prasad Healthcare Services)",
+  "lat": 12.905275,
+  "lon": 77.603195,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sakra World",
+  "lat": 12.932218,
+  "lon": 77.685326,
+  "emergency": true,
+  "phone": "080 4962 4962"
+ },
+ {
+  "name": "Sakra World Hospital",
+  "lat": 12.932315,
+  "lon": 77.685248,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Samastha Hospitals Pvt Ltd",
+  "lat": 12.89708,
+  "lon": 77.547336,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Samprathi Eye Hospital And Squint Centre",
+  "lat": 12.993281,
+  "lon": 77.580691,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sandhyashree Hospital",
+  "lat": 12.97618,
+  "lon": 77.526176,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sanghi Medical Centre (P) Ltd",
+  "lat": 12.95174,
+  "lon": 77.699483,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sangolli Nursing Home",
+  "lat": 13.008356,
+  "lon": 77.546927,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sanjay Gandhi Accident and Trauma Hospital",
+  "lat": 12.935639,
+  "lon": 77.593594,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "Sanjay Gandhi Accident and Trauma Hospital",
+  "lat": 12.935771,
+  "lon": 77.593943,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "Sanjeevani Hospital",
+  "lat": 13.011692,
+  "lon": 77.543873,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sanjeevini Children & Women Clinic",
+  "lat": 13.031648,
+  "lon": 77.602315,
+  "emergency": false,
+  "phone": "080 2292 4422"
+ },
+ {
+  "name": "Sankalpa Hospital",
+  "lat": 12.95119,
+  "lon": 77.491804,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sankara Eye Hospital",
+  "lat": 12.957144,
+  "lon": 77.712822,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sankeerthana Hospital and Fertility Center",
+  "lat": 12.925601,
+  "lon": 77.635964,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Santhamma Hospital",
+  "lat": 13.086685,
+  "lon": 77.553573,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Santhigiri Ayurveda and Siddha Hospital, Bengaluru Urban",
+  "lat": 12.943901,
+  "lon": 77.606586,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Santosh Hospital",
+  "lat": 12.995941,
+  "lon": 77.608257,
+  "emergency": false,
+  "phone": "080 2536 7706"
+ },
+ {
+  "name": "Sapthagiri Hospital",
+  "lat": 13.121367,
+  "lon": 77.617482,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sapthagiri Hospital",
+  "lat": 13.070577,
+  "lon": 77.502353,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Saralaya Hospital",
+  "lat": 13.121743,
+  "lon": 77.629478,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Saranalaya Hospital",
+  "lat": 13.121524,
+  "lon": 77.612611,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Saraswathi Hospital",
+  "lat": 12.927638,
+  "lon": 77.568896,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sarvodaya Hospital",
+  "lat": 12.939094,
+  "lon": 77.561906,
+  "emergency": false,
+  "phone": "098440 74946"
+ },
+ {
+  "name": "Sarvodaya Hospital",
+  "lat": 12.980367,
+  "lon": 77.539016,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "Sastry Memorial Hospital",
+  "lat": 12.969879,
+  "lon": 77.533283,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sathya Hospital",
+  "lat": 13.01855,
+  "lon": 77.636473,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sathya Sai Lake Side Ortho Hospital",
+  "lat": 13.021581,
+  "lon": 77.712805,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Seegehalli Government Hospital",
+  "lat": 13.016432,
+  "lon": 77.716989,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sevakshetra Hospital",
+  "lat": 12.921512,
+  "lon": 77.57247,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sevakshetra Hospital, Bengaluru Urban",
+  "lat": 12.921672,
+  "lon": 77.572165,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "Seventh Day Adventist Hospital",
+  "lat": 12.995625,
+  "lon": 77.611327,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sg Hospital",
+  "lat": 12.927531,
+  "lon": 77.54579,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Shadab Hospital",
+  "lat": 13.102523,
+  "lon": 77.627851,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Shalini Nursing & MAternity Home",
+  "lat": 12.943662,
+  "lon": 77.542,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Shanbhag Hospital",
+  "lat": 12.985688,
+  "lon": 77.543542,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Shankara Nethralaya Eye Hospital",
+  "lat": 13.008995,
+  "lon": 77.540619,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Shanthakumari Hospital",
+  "lat": 12.963716,
+  "lon": 77.518826,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Shanthinilaya Hospital",
+  "lat": 13.020758,
+  "lon": 77.701669,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Shanti Hospital",
+  "lat": 12.923504,
+  "lon": 77.585752,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Shanti Hospital",
+  "lat": 12.92022,
+  "lon": 77.577299,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sharada Medicals",
+  "lat": 13.015263,
+  "lon": 77.64671,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sharavathi Hospitals (P) Ltd.",
+  "lat": 12.962341,
+  "lon": 77.534285,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Shas Eye Care",
+  "lat": 12.960296,
+  "lon": 77.614714,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Shashank Clinic",
+  "lat": 12.926509,
+  "lon": 77.580839,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Shathayu Ayurveda Wellness Centre",
+  "lat": 12.95739,
+  "lon": 77.527688,
+  "emergency": false,
+  "phone": "+91 8040999110"
+ },
+ {
+  "name": "Shekar Hospital",
+  "lat": 12.945871,
+  "lon": 77.567519,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Shekhar Hospital",
+  "lat": 12.945944,
+  "lon": 77.567404,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Shekhar Hospital, Jayanagar",
+  "lat": 12.917589,
+  "lon": 77.594891,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Shifa Hospital, Bengaluru Urban",
+  "lat": 12.990011,
+  "lon": 77.598811,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Shifa Hospital, Bengaluru Urban",
+  "lat": 12.990004,
+  "lon": 77.598968,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Shirdi Sai Hospital",
+  "lat": 13.037244,
+  "lon": 77.564875,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "Shirdi Sai Hospital",
+  "lat": 13.066849,
+  "lon": 77.639416,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "Shishuka Children's Speciality Hospital",
+  "lat": 13.01938,
+  "lon": 77.653535,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Shiva Kumaraswamy Building",
+  "lat": 12.971705,
+  "lon": 77.549372,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Shiva Vision Care",
+  "lat": 12.936653,
+  "lon": 77.627713,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Shivakrupa Hospital",
+  "lat": 12.973967,
+  "lon": 77.547914,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Shobha Hospital, Bengaluru Urban",
+  "lat": 12.975585,
+  "lon": 77.53135,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Shraddha Eye Care",
+  "lat": 12.918462,
+  "lon": 77.555584,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Shree Dhanvantari Ayurveda Hospital",
+  "lat": 12.961561,
+  "lon": 77.522231,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Shree Manyata Hospitals",
+  "lat": 13.054451,
+  "lon": 77.631637,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Shree Sai Hospital",
+  "lat": 13.088579,
+  "lon": 77.545506,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Shree Sai Speciality Hospital",
+  "lat": 12.955595,
+  "lon": 77.641801,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Shree Vaishnavi Heart Centre and Multi Speciality",
+  "lat": 12.912163,
+  "lon": 77.609828,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Shree Vijayalakshmi Hospital and Trauma Centre",
+  "lat": 13.037357,
+  "lon": 77.640906,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Shreya Hearing Clinic",
+  "lat": 12.962152,
+  "lon": 77.533401,
+  "emergency": false,
+  "phone": "\" 080 2318 0012\""
+ },
+ {
+  "name": "Shreya Hospital, Bengaluru Rural",
+  "lat": 12.92151,
+  "lon": 77.48325,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Shreya Poly Clinic",
+  "lat": 12.972913,
+  "lon": 77.539472,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Shreyas Hospital, Bengaluru Urban",
+  "lat": 12.982986,
+  "lon": 77.530965,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Shri Krishna Sevashrama Hospital",
+  "lat": 12.91733,
+  "lon": 77.585103,
+  "emergency": false,
+  "phone": "+918022441631"
+ },
+ {
+  "name": "Shri Mokambika Women's Clinic, Child care and Nethralaya",
+  "lat": 12.951986,
+  "lon": 77.498908,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Shri Vishnu Ent Speciality Center",
+  "lat": 13.022608,
+  "lon": 77.474801,
+  "emergency": false,
+  "phone": "+91 80 2672 4211"
+ },
+ {
+  "name": "Shridevi Hospital, Bengaluru Urban",
+  "lat": 12.961704,
+  "lon": 77.521717,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Shushrusha Hospital",
+  "lat": 13.099732,
+  "lon": 77.598022,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Shyamala Hospital",
+  "lat": 12.971427,
+  "lon": 77.627494,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Siddanth Hospital",
+  "lat": 12.956332,
+  "lon": 77.730578,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sidvin Hospital Pvt Ltd",
+  "lat": 12.982442,
+  "lon": 77.549368,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sir Haji Ismail Gosha Sait Hospital",
+  "lat": 12.983717,
+  "lon": 77.599792,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Skin Remediez",
+  "lat": 13.00911,
+  "lon": 77.657949,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sky Diagnostic Centre kumbena agrahara",
+  "lat": 12.997771,
+  "lon": 77.754811,
+  "emergency": false,
+  "phone": "08033051529"
+ },
+ {
+  "name": "Smile Smart Dental & Implant Centre",
+  "lat": 12.880489,
+  "lon": 77.655259,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sneha Horizon Hospital",
+  "lat": 12.97543,
+  "lon": 77.5358,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Snehadaan Hospital",
+  "lat": 12.901728,
+  "lon": 77.715522,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Soujanya Clinic",
+  "lat": 12.968119,
+  "lon": 77.54325,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Soukya Hospital",
+  "lat": 13.077474,
+  "lon": 77.558755,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "South City Hospital",
+  "lat": 12.949652,
+  "lon": 77.580307,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "South City Hospital, Bengaluru Urban",
+  "lat": 12.949775,
+  "lon": 77.580278,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Span Health Center",
+  "lat": 12.977445,
+  "lon": 77.62713,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Spandana",
+  "lat": 12.867005,
+  "lon": 77.767129,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Spandana Heart Centre",
+  "lat": 12.957222,
+  "lon": 77.566486,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Spandana Hospital And Medical Centre",
+  "lat": 13.011217,
+  "lon": 77.674394,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sparsh Clinic",
+  "lat": 12.907238,
+  "lon": 77.67558,
+  "emergency": false,
+  "phone": "+91-99000 19567"
+ },
+ {
+  "name": "Sparsh Hospital",
+  "lat": 13.027751,
+  "lon": 77.542992,
+  "emergency": false,
+  "phone": "00919019108108"
+ },
+ {
+  "name": "Sparsh Hospital",
+  "lat": 13.094965,
+  "lon": 77.598645,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sparsh Hospital For Advanced Surgeries, Bengaluru Urban",
+  "lat": 12.983334,
+  "lon": 77.594536,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sparsh Hospital, Hennur",
+  "lat": 13.040171,
+  "lon": 77.640685,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Spine Care And Ortho Care Hospital",
+  "lat": 12.974513,
+  "lon": 77.549388,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Spring Leaf Health Care Pvt Ltd",
+  "lat": 12.852673,
+  "lon": 77.667646,
+  "emergency": false,
+  "phone": "080673 45000"
+ },
+ {
+  "name": "Springleaf Hospital",
+  "lat": 12.853228,
+  "lon": 77.665351,
+  "emergency": true,
+  "phone": "080673 45000"
+ },
+ {
+  "name": "Springleaf Hospital",
+  "lat": 12.852699,
+  "lon": 77.667688,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Spurthy Hospital",
+  "lat": 12.923934,
+  "lon": 77.61116,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Spurthy Hospital",
+  "lat": 12.923857,
+  "lon": 77.611355,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sree Lakshmi Hospital",
+  "lat": 12.982594,
+  "lon": 77.681474,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sree Ranga Hospital",
+  "lat": 12.935867,
+  "lon": 77.492713,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sree Venkateshwara Hospital",
+  "lat": 12.93885,
+  "lon": 77.74721,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sree Venkateshwara Speciality Hospital",
+  "lat": 12.942525,
+  "lon": 77.60253,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sreeniwasa Hospital",
+  "lat": 12.973271,
+  "lon": 77.572536,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sreerampura Referal Hospital",
+  "lat": 12.990743,
+  "lon": 77.564908,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sri Annapoorneshwari Hospital",
+  "lat": 12.92557,
+  "lon": 77.485776,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sri Arogya Hospital",
+  "lat": 13.121566,
+  "lon": 77.625051,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sri Dhavantari Ayurveda Hoapital",
+  "lat": 12.982219,
+  "lon": 77.559937,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sri Jayadeva Institute Of Cardiology",
+  "lat": 12.918526,
+  "lon": 77.599265,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "Sri Kalabyraveshwara Swamy Ayurvedic Medical College hospital",
+  "lat": 12.965044,
+  "lon": 77.543502,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sri Krishna Hospital",
+  "lat": 12.921501,
+  "lon": 77.565543,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sri Lakshmi Multi Speciality Hospital",
+  "lat": 12.988187,
+  "lon": 77.508727,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sri Lakshmi Multi Speciality Hospital",
+  "lat": 12.881238,
+  "lon": 77.751689,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sri Lakshmi Super Speciality Hospital",
+  "lat": 13.011115,
+  "lon": 77.697361,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sri Lakshmi Venkateshwara Hospital",
+  "lat": 13.105628,
+  "lon": 77.5773,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sri Laxmi Hospital",
+  "lat": 12.850472,
+  "lon": 77.655306,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sri Maruthi hospital, Sheshadripuram",
+  "lat": 12.992644,
+  "lon": 77.574205,
+  "emergency": false,
+  "phone": "080 2344 9632"
+ },
+ {
+  "name": "Sri Ram Hospital",
+  "lat": 13.009623,
+  "lon": 77.692471,
+  "emergency": true,
+  "phone": "080 2561 0988"
+ },
+ {
+  "name": "Sri Ram Netralaya and Surgical Centre",
+  "lat": 13.008807,
+  "lon": 77.694866,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sri Ram Speciality Hospital",
+  "lat": 12.954378,
+  "lon": 77.620976,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sri Ramakrishna Hospital, Bengaluru Urban",
+  "lat": 13.01217,
+  "lon": 77.69618,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sri Ranga Arogyadhama",
+  "lat": 12.998624,
+  "lon": 77.542782,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sri Sai Eye Hospital",
+  "lat": 13.011968,
+  "lon": 77.665917,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sri Sai Hospital",
+  "lat": 12.871395,
+  "lon": 77.654258,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sri Sai Hospital, Bengaluru Urban",
+  "lat": 13.037014,
+  "lon": 77.623873,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sri Sai Krupa Hospital, Bengaluru Urban",
+  "lat": 13.029418,
+  "lon": 77.559386,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sri Sai Ram Hospital",
+  "lat": 12.894305,
+  "lon": 77.568282,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sri Sai Ram Hospital - Bangalore",
+  "lat": 12.914459,
+  "lon": 77.600316,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sri Sanjeevini Cold Laser Therapy",
+  "lat": 13.005392,
+  "lon": 77.571335,
+  "emergency": false,
+  "phone": "080663 79862"
+ },
+ {
+  "name": "Sri Sapthagiri Clinic",
+  "lat": 12.873693,
+  "lon": 77.644963,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sri Sathya Sai Institute of Higher Medical Sciences",
+  "lat": 12.980881,
+  "lon": 77.730305,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sri Shankara Cancer Hospital And Research Centre (A Service Unit Of Sscf)",
+  "lat": 12.954262,
+  "lon": 77.570947,
+  "emergency": false,
+  "phone": "080-26981000"
+ },
+ {
+  "name": "Sri Venkateshwara Eye Hospital",
+  "lat": 13.042392,
+  "lon": 77.513665,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sri Venkateshwara Hospitals",
+  "lat": 12.926471,
+  "lon": 77.61674,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sri Venkateswara Hospital",
+  "lat": 12.905617,
+  "lon": 77.612269,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sri Vijayalakshmi Pragathi Hospital",
+  "lat": 13.037173,
+  "lon": 77.640954,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sri Vinayaka Hospital",
+  "lat": 12.957503,
+  "lon": 77.527647,
+  "emergency": false,
+  "phone": "080 2339 8062"
+ },
+ {
+  "name": "Sri Vinayaka Poly Clinic",
+  "lat": 12.939058,
+  "lon": 77.55108,
+  "emergency": false,
+  "phone": "080 2672 8455"
+ },
+ {
+  "name": "Sri Vishveshathirtha Memorial Hospital",
+  "lat": 12.956684,
+  "lon": 77.712382,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "Sri Vivekananda Sevashrama",
+  "lat": 12.92533,
+  "lon": 77.571189,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Srinidhi Health Centre",
+  "lat": 13.005821,
+  "lon": 77.572575,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Srinivas Clinic",
+  "lat": 12.907339,
+  "lon": 77.583066,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Srinivasa Eye Hospital",
+  "lat": 13.014722,
+  "lon": 77.651562,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Srinivasa Nursing Home",
+  "lat": 12.942304,
+  "lon": 77.617489,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Srinivasa Nursing Home",
+  "lat": 12.996508,
+  "lon": 77.622046,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Srinivasam Cancer Care Multi Speciality Hospital",
+  "lat": 12.961509,
+  "lon": 77.523151,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sriprasad Ayurveda",
+  "lat": 12.973409,
+  "lon": 77.546281,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sriram Hospital, Bangalore",
+  "lat": 13.00875,
+  "lon": 77.693981,
+  "emergency": true,
+  "phone": "080 2561 0988"
+ },
+ {
+  "name": "Srivijaya Speciality Hospital",
+  "lat": 13.012434,
+  "lon": 77.658027,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Srujana Hospital",
+  "lat": 12.841347,
+  "lon": 77.647545,
+  "emergency": true,
+  "phone": "+91 80 49152339"
+ },
+ {
+  "name": "Srushti Hospital, Bengaluru Rural",
+  "lat": 12.898157,
+  "lon": 77.620736,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "St Marthas Hospital",
+  "lat": 12.970818,
+  "lon": 77.585743,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "St Philomenas Hospital OPD Building",
+  "lat": 12.965851,
+  "lon": 77.610901,
+  "emergency": false,
+  "phone": "08040164346;08040164300"
+ },
+ {
+  "name": "St. Johns hospital Emergency ward",
+  "lat": 12.930594,
+  "lon": 77.618616,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "St. Martha's Heart Centre",
+  "lat": 12.970544,
+  "lon": 77.583477,
+  "emergency": false,
+  "phone": "+9195380 43453"
+ },
+ {
+  "name": "St. Martha's Hospital",
+  "lat": 12.906113,
+  "lon": 77.542548,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "St. Philomena's Hospital",
+  "lat": 12.964957,
+  "lon": 77.611185,
+  "emergency": false,
+  "phone": "080 4016 4433"
+ },
+ {
+  "name": "St. Theresa's Hospital",
+  "lat": 13.00675,
+  "lon": 77.552939,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "St.John's Medical College Hospital",
+  "lat": 12.929648,
+  "lon": 77.618593,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "Stanford Speciality Hospital",
+  "lat": 12.911533,
+  "lon": 77.676409,
+  "emergency": true,
+  "phone": "080 6566 6689"
+ },
+ {
+  "name": "Stroke Treatment Paralysis",
+  "lat": 13.024,
+  "lon": 77.65853,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Subbaiah Hospital",
+  "lat": 13.030207,
+  "lon": 77.560704,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "Subramanium Medicine Store",
+  "lat": 13.009091,
+  "lon": 77.656317,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sudha Prevention Centre",
+  "lat": 12.925457,
+  "lon": 77.54671,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Suguna Hospital",
+  "lat": 12.98823,
+  "lon": 77.560039,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "Suhusannidhi Hospital",
+  "lat": 12.969102,
+  "lon": 77.534951,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sujatha Hospital",
+  "lat": 12.978129,
+  "lon": 77.637239,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sukoon Psychiatry Centre",
+  "lat": 13.040829,
+  "lon": 77.562628,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sumanjara Hospital",
+  "lat": 12.941744,
+  "lon": 77.560178,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sumathi Nursing and Maternity Home",
+  "lat": 13.032572,
+  "lon": 77.55826,
+  "emergency": false,
+  "phone": "+9180 2337 2762"
+ },
+ {
+  "name": "Sumati Hospital",
+  "lat": 12.976379,
+  "lon": 77.524439,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sun Orthopaedic center",
+  "lat": 13.033222,
+  "lon": 77.554924,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sunayana Eye Hospital",
+  "lat": 12.925523,
+  "lon": 77.593775,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sundar Hospital",
+  "lat": 13.008017,
+  "lon": 77.622148,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sunetra Eye Hospital, Bengaluru Urban",
+  "lat": 12.940455,
+  "lon": 77.557849,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Sunny Medicals Hospital Clinic",
+  "lat": 12.926795,
+  "lon": 77.669909,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "Sunshine Hospital",
+  "lat": 13.059585,
+  "lon": 77.648516,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Super Specialty Eye Hospital",
+  "lat": 13.016688,
+  "lon": 77.660405,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Supra Diagnostics Spine Care And Ortho Care Hospital",
+  "lat": 12.997,
+  "lon": 77.573004,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Supra Hospital",
+  "lat": 12.992814,
+  "lon": 77.538646,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Supra South City Hospital",
+  "lat": 12.891951,
+  "lon": 77.579965,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Suprabha Hospital",
+  "lat": 13.007938,
+  "lon": 77.546906,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Supriya Hospital, Bengaluru Urban",
+  "lat": 12.992904,
+  "lon": 77.558802,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Suraksha Diagnostic Centre",
+  "lat": 12.951954,
+  "lon": 77.499034,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Suraksha Hospital",
+  "lat": 13.048083,
+  "lon": 77.628791,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Suraksha Hospitsls",
+  "lat": 12.939978,
+  "lon": 77.746741,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Suresh Hospital - Bangalore",
+  "lat": 12.989774,
+  "lon": 77.555101,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Suresh Hospital, Bengaluru Urban",
+  "lat": 13.00804,
+  "lon": 77.697109,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Surya Diagnostics and Health Services",
+  "lat": 12.924283,
+  "lon": 77.617088,
+  "emergency": true,
+  "phone": "080 2552 6667"
+ },
+ {
+  "name": "Surya Galaxy Hospital",
+  "lat": 12.931679,
+  "lon": 77.545089,
+  "emergency": false,
+  "phone": "080 2642 1051"
+ },
+ {
+  "name": "Susheel Hospital",
+  "lat": 12.964501,
+  "lon": 77.542719,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Suvarnamukhi",
+  "lat": 12.913559,
+  "lon": 77.679555,
+  "emergency": true,
+  "phone": "+91 98451 26869"
+ },
+ {
+  "name": "Svastha Hospital",
+  "lat": 12.965917,
+  "lon": 77.749386,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "Swamy Hospital",
+  "lat": 12.855063,
+  "lon": 77.664273,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Swasthya Hospitals",
+  "lat": 12.954498,
+  "lon": 77.640157,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Swastik Eye Hospital",
+  "lat": 12.947965,
+  "lon": 77.569639,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "T.R.Hospital",
+  "lat": 12.880755,
+  "lon": 77.584167,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "TSR heart care",
+  "lat": 13.026444,
+  "lon": 77.593369,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Tamara Hospital & IVF Centre",
+  "lat": 13.00445,
+  "lon": 77.553076,
+  "emergency": false,
+  "phone": "+91 80 2337 0780"
+ },
+ {
+  "name": "Tanmay Hospital",
+  "lat": 12.973376,
+  "lon": 77.547403,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Tele Rad RX DX Health care Pvt Ltd",
+  "lat": 12.999298,
+  "lon": 77.757564,
+  "emergency": false,
+  "phone": "080 4926 1111"
+ },
+ {
+  "name": "Telerad RXDX Kadugodi",
+  "lat": 13.002864,
+  "lon": 77.756916,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Telerad Rx Dx Health Care Whitefield",
+  "lat": 12.976842,
+  "lon": 77.710375,
+  "emergency": false,
+  "phone": "+91-80-49261111;+91-80-40187588"
+ },
+ {
+  "name": "Tenet diagnostics",
+  "lat": 12.957307,
+  "lon": 77.708704,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "The Eye Surgical Centre",
+  "lat": 12.982195,
+  "lon": 77.549314,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "The Family Doctor & The Family Pharma",
+  "lat": 12.9122,
+  "lon": 77.681864,
+  "emergency": false,
+  "phone": "+91-80 2574 6204"
+ },
+ {
+  "name": "The Family Doctor Malleswaram",
+  "lat": 13.002969,
+  "lon": 77.552667,
+  "emergency": false,
+  "phone": "+9180 2337 6262"
+ },
+ {
+  "name": "The Fracture and Orthopaedic Clinic",
+  "lat": 13.008174,
+  "lon": 77.563464,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "The Homoeo World",
+  "lat": 12.99472,
+  "lon": 77.571588,
+  "emergency": false,
+  "phone": "080 2346 1995"
+ },
+ {
+  "name": "The Local Dentist",
+  "lat": 12.909416,
+  "lon": 77.663997,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "The Pulse Multi Speciality Hospital",
+  "lat": 12.94248,
+  "lon": 77.547328,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "The Venlakh Hospital",
+  "lat": 12.957298,
+  "lon": 77.564452,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Thippenalli Government Hospital",
+  "lat": 13.031132,
+  "lon": 77.483923,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Thyrocare",
+  "lat": 13.015854,
+  "lon": 77.703317,
+  "emergency": false,
+  "phone": "080 6568 0365"
+ },
+ {
+  "name": "Tirumalai Eye Clinic",
+  "lat": 12.919454,
+  "lon": 77.583894,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Trilife Hospital",
+  "lat": 13.016983,
+  "lon": 77.643296,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Trilife Hospital",
+  "lat": 13.017015,
+  "lon": 77.642926,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Trinity Hospital and Heart Foundation",
+  "lat": 12.9435,
+  "lon": 77.579658,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Trupti Nursing Home",
+  "lat": 12.994657,
+  "lon": 77.539754,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Trustwell Hospitals",
+  "lat": 12.960654,
+  "lon": 77.58404,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Udhbhava Hospital",
+  "lat": 12.925684,
+  "lon": 77.548935,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "Ullalu Government Hospital",
+  "lat": 12.962913,
+  "lon": 77.475183,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Unani Hospital",
+  "lat": 12.963318,
+  "lon": 77.579014,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "United Medical lab",
+  "lat": 13.000768,
+  "lon": 77.61329,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Unity Hospital, Bengaluru Urban",
+  "lat": 12.910823,
+  "lon": 77.520789,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Unity Lifline Hospital Pvt Ltd",
+  "lat": 12.981977,
+  "lon": 77.510828,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Usha Vikranth Diagnostic Center and Hospital",
+  "lat": 12.913809,
+  "lon": 77.527363,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Uvin Care Hospital",
+  "lat": 12.977835,
+  "lon": 77.628284,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "V Care Hospital",
+  "lat": 13.015884,
+  "lon": 77.597347,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "V Care Medical Systems P Ltd",
+  "lat": 12.978705,
+  "lon": 77.540358,
+  "emergency": false,
+  "phone": "+918023110651"
+ },
+ {
+  "name": "V. S. Achar Multispeciality Hospital",
+  "lat": 12.947209,
+  "lon": 77.596691,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Vagus Super Speciality Hospital",
+  "lat": 13.008477,
+  "lon": 77.568422,
+  "emergency": false,
+  "phone": "080-23569970"
+ },
+ {
+  "name": "Vaidyam Hospital",
+  "lat": 12.984551,
+  "lon": 77.552832,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Vaidyaratnam Oushadhasala",
+  "lat": 12.9121,
+  "lon": 77.648585,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Valens Hospitals",
+  "lat": 13.120977,
+  "lon": 77.617608,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Vanivilas Women and Children Hospital",
+  "lat": 12.961469,
+  "lon": 77.573689,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "Varalakshmi Hospital",
+  "lat": 12.924624,
+  "lon": 77.617097,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Varsha Hospital",
+  "lat": 13.102658,
+  "lon": 77.629793,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Vasan Eye Care",
+  "lat": 12.91027,
+  "lon": 77.626554,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Vasan Eye Care Hospital",
+  "lat": 12.898052,
+  "lon": 77.633928,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Vasan Eye Care Hospital, Banaswadi",
+  "lat": 13.024134,
+  "lon": 77.633555,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Vasan Eye Care Hospital, Bannergatta Road",
+  "lat": 12.882281,
+  "lon": 77.595794,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Vasan Eye Care Hospital, Jayanagar",
+  "lat": 12.929201,
+  "lon": 77.581981,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Vasan Eye Care Hospital, Koramangala",
+  "lat": 12.940237,
+  "lon": 77.62534,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "Vasan Eye Care Hospital, Nagarabhavi",
+  "lat": 12.974613,
+  "lon": 77.512976,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Vasan Eye Care Hospital, R.T.Nagar",
+  "lat": 13.025183,
+  "lon": 77.592061,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Vasan Eye Care Hospital, Rajaji Nagar",
+  "lat": 12.999522,
+  "lon": 77.550533,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Vasan Eye Care Hospital, Rajarajeswari Nagar",
+  "lat": 12.931334,
+  "lon": 77.515478,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Vasan Eye Care Hospital, Sarakki",
+  "lat": 12.910339,
+  "lon": 77.57324,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Vasavi Hospital",
+  "lat": 12.903153,
+  "lon": 77.560308,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Vathsalya Speciality Hospital",
+  "lat": 12.993975,
+  "lon": 77.53918,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Vatsalya Chidren's Clinic",
+  "lat": 12.894851,
+  "lon": 77.610911,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Vedam Ayurveda Multi Speciality Hospital",
+  "lat": 12.994679,
+  "lon": 77.670999,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Vedam Ayurveda Multispeciality Hospital",
+  "lat": 12.917551,
+  "lon": 77.603949,
+  "emergency": false,
+  "phone": "080 4120 2911"
+ },
+ {
+  "name": "Venkat Charmalaya",
+  "lat": 12.964423,
+  "lon": 77.533332,
+  "emergency": false,
+  "phone": "+918023392788"
+ },
+ {
+  "name": "Venkateshwara Hospital",
+  "lat": 12.925784,
+  "lon": 77.617083,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Venkateswara Hospital, Bengaluru Urban",
+  "lat": 12.954346,
+  "lon": 77.575565,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Venus Bone & Joint Centre",
+  "lat": 13.066557,
+  "lon": 77.59647,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Venus MultiSpeciality Hospital",
+  "lat": 12.972178,
+  "lon": 77.680787,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Verna Hospital",
+  "lat": 12.940404,
+  "lon": 77.558036,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Veturi Child Health Centre",
+  "lat": 12.926323,
+  "lon": 77.515658,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Vicky Family Life",
+  "lat": 13.003162,
+  "lon": 77.705953,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Victoria Hospital",
+  "lat": 12.963496,
+  "lon": 77.573695,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "Vidya Eye Hospital",
+  "lat": 12.970743,
+  "lon": 77.537768,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Vignan Hospital",
+  "lat": 12.943864,
+  "lon": 77.596922,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Vignesh Lab and Diagnostics",
+  "lat": 13.026723,
+  "lon": 77.604113,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Vijay Diagnostic Centre",
+  "lat": 12.945875,
+  "lon": 77.587776,
+  "emergency": true,
+  "phone": "080 2668 4260"
+ },
+ {
+  "name": "Vijaya Hospital",
+  "lat": 12.96767,
+  "lon": 77.522646,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Vijaya Hospital, Bengaluru Urban",
+  "lat": 12.941883,
+  "lon": 77.48376,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Vijayanagar Global Hospital",
+  "lat": 12.97179,
+  "lon": 77.537286,
+  "emergency": false,
+  "phone": "080 4240 8200"
+ },
+ {
+  "name": "Vijayanagar Hospital",
+  "lat": 12.971629,
+  "lon": 77.537197,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Vijayashree Hospitals",
+  "lat": 12.857967,
+  "lon": 77.589269,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Vikram Aura Hospitals",
+  "lat": 12.965658,
+  "lon": 77.609722,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Vimalaya Hospital",
+  "lat": 12.834861,
+  "lon": 77.680768,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Vinayaka Health Care and Maternity Home",
+  "lat": 12.892,
+  "lon": 77.625783,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Vinayaka Hospital",
+  "lat": 12.93753,
+  "lon": 77.549675,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Vinayaka Hospital, Hanumantha Nagar",
+  "lat": 12.937375,
+  "lon": 77.549478,
+  "emergency": false,
+  "phone": "080 2679 6167"
+ },
+ {
+  "name": "Vinayaka Specialty Hospital",
+  "lat": 12.899,
+  "lon": 77.621855,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Vishwabharathi Hospital Pvt. Ltd",
+  "lat": 12.94067,
+  "lon": 77.56446,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Vittal Eye HOspital",
+  "lat": 12.931298,
+  "lon": 77.541257,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Vittala International Institute Of Ophthalmology, Hosakerehalli",
+  "lat": 12.930813,
+  "lon": 77.541222,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "Vydehi Institute Of Medical Sciences And Research Centre",
+  "lat": 12.975493,
+  "lon": 77.729354,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "Vydehi Superspeciality Hospital",
+  "lat": 12.968155,
+  "lon": 77.595042,
+  "emergency": false,
+  "phone": "+9180 2227 7979"
+ },
+ {
+  "name": "Ways2Guide Speech Therapy Center",
+  "lat": 12.959962,
+  "lon": 77.71263,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Well Spring hospital",
+  "lat": 12.942568,
+  "lon": 77.622435,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Wellness Ever",
+  "lat": 12.959358,
+  "lon": 77.746168,
+  "emergency": true,
+  "phone": "095919 89220"
+ },
+ {
+  "name": "Welnext",
+  "lat": 12.924006,
+  "lon": 77.654506,
+  "emergency": false,
+  "phone": "+9196960 00222"
+ },
+ {
+  "name": "Welnext",
+  "lat": 12.924287,
+  "lon": 77.653285,
+  "emergency": true,
+  "phone": "+9196960 00222"
+ },
+ {
+  "name": "Wipro First Aid Clinic",
+  "lat": 12.837727,
+  "lon": 77.658457,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Yadiyuru Maternity Hospital",
+  "lat": 12.927106,
+  "lon": 77.576658,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Yashas Neurocare",
+  "lat": 12.985399,
+  "lon": 77.545402,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Yashomathi Hospitals",
+  "lat": 12.95593,
+  "lon": 77.711269,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "Yelahanka Government Hospital",
+  "lat": 13.099572,
+  "lon": 77.596293,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Yogananda Medical and Research Centre",
+  "lat": 12.920279,
+  "lon": 77.559803,
+  "emergency": true,
+  "phone": null
+ },
+ {
+  "name": "Yogananda Multi Speciality Hospital",
+  "lat": 12.915852,
+  "lon": 77.559392,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Zion Hospital And Research Centre Pvt.Ltd.",
+  "lat": 13.014967,
+  "lon": 77.635496,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "Zymus Hospitals",
+  "lat": 12.878474,
+  "lon": 77.545023,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "apollo medical shop",
+  "lat": 12.843785,
+  "lon": 77.665927,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "clinic",
+  "lat": 12.939528,
+  "lon": 77.586437,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "health nest",
+  "lat": 12.907599,
+  "lon": 77.648851,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "naveen clinc",
+  "lat": 13.041378,
+  "lon": 77.505022,
+  "emergency": false,
+  "phone": null
+ },
+ {
+  "name": "touchwood",
+  "lat": 12.906,
+  "lon": 77.651123,
+  "emergency": false,
+  "phone": null
+ }
+]

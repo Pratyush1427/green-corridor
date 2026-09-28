@@ -3,38 +3,85 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Bengaluru Traffic Tracker</title>
+  <title>Green Corridor Map</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <style>
     :root {
-      --bg: #f7f7f5; --panel: #ffffff; --text: #1f2328; --muted: #6b7280; --border: #e5e7eb;
-      --green: #16a34a; --amber: #d97706; --red: #dc2626; --grey: #9ca3af; --accent: #2563eb;
+      --bg: #0b1a33; --panel: #0f2342; --panel-2: #14305a; --text: #e6eefb; --muted: #8fa6c9;
+      --border: #1f3d6b; --accent: #4ea8ff;
+      --green: #22c55e; --amber: #f59e0b; --red: #ef4444; --grey: #64748b;
+      --hospital: #c084fc;
     }
     * { box-sizing: border-box; }
     html, body { margin: 0; height: 100%; font-family: system-ui, -apple-system, sans-serif;
                  background: var(--bg); color: var(--text); }
-    .layout { display: grid; grid-template-columns: 1fr 380px; height: 100vh; }
-    #map { height: 100%; }
+    .layout { display: grid; grid-template-columns: 1fr 390px; height: 100vh; }
+    #map { height: 100%; background: var(--bg); }
+
+    /* Turn the dark grey CARTO tiles into a navy-blue map so coloured markers stand out. */
+    .blue-tiles { filter: sepia(1) hue-rotate(180deg) saturate(2.6) brightness(0.95) contrast(1.05); }
+    .leaflet-container { font-family: inherit; }
+    .leaflet-control-attribution { background: rgba(11, 26, 51, 0.8) !important; color: var(--muted); }
+    .leaflet-control-attribution a { color: var(--accent); }
+    .leaflet-tooltip { background: var(--panel); color: var(--text); border: 1px solid var(--border);
+                       box-shadow: 0 2px 8px rgba(0,0,0,.4); }
+    .leaflet-tooltip-top:before { border-top-color: var(--border); }
+
     aside { background: var(--panel); border-left: 1px solid var(--border); padding: 20px;
-            overflow-y: auto; display: flex; flex-direction: column; gap: 16px; }
+            overflow-y: auto; display: flex; flex-direction: column; gap: 18px; }
     h1 { font-size: 18px; margin: 0; }
     h2 { font-size: 16px; margin: 0; }
+    h3 { font-size: 12px; margin: 0 0 8px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
     .muted { color: var(--muted); font-size: 13px; }
-    .legend { display: flex; gap: 14px; font-size: 13px; flex-wrap: wrap; }
-    .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 5px; }
-    .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-    .stat { border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; }
+    .card { background: var(--panel-2); border: 1px solid var(--border); border-radius: 10px; padding: 12px; }
+
+    .modes { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 10px; }
+    .modes button, .play { font: inherit; font-size: 13px; padding: 7px; border-radius: 7px; cursor: pointer;
+                           border: 1px solid var(--border); background: var(--panel); color: var(--text); }
+    .modes button.on { background: var(--accent); border-color: var(--accent); color: #04142b; font-weight: 600; }
+    .time-row { display: flex; align-items: center; gap: 10px; }
+    .time-row input[type=range] { flex: 1; accent-color: var(--accent); }
+    #hour-label { font-variant-numeric: tabular-nums; font-weight: 600; min-width: 48px; text-align: right; }
+    .play { padding: 5px 10px; }
+    .off { opacity: .45; pointer-events: none; }
+    select { font: inherit; font-size: 13px; padding: 6px 8px; border: 1px solid var(--border); border-radius: 6px;
+             background: var(--panel); color: var(--text); }
+
+    .legend { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 12px; font-size: 13px; }
+    .legend label { display: flex; align-items: center; gap: 6px; cursor: pointer; }
+    .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; flex: none; }
+    .h-key { display: inline-grid; place-items: center; width: 14px; height: 14px; border-radius: 4px; flex: none;
+             background: var(--hospital); color: #1a0633; font-size: 12px; font-weight: 800; line-height: 1; }
+
+    .summary { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; text-align: center; }
+    .summary b { display: block; font-size: 20px; font-variant-numeric: tabular-nums; }
+    .summary span { font-size: 11px; color: var(--muted); }
+
+    .stats { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 10px; }
+    .stat { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; }
     .stat b { display: block; font-size: 18px; font-variant-numeric: tabular-nums; }
     .stat span { font-size: 12px; color: var(--muted); }
-    select { font: inherit; padding: 6px 8px; border: 1px solid var(--border); border-radius: 6px;
-             background: var(--panel); color: var(--text); }
-    .chart-wrap { position: relative; height: 240px; }
-    #detail[hidden] { display: none; }
+    .chart-wrap { position: relative; height: 220px; margin-top: 12px; }
+    #detail[hidden], #hint[hidden] { display: none; }
+    ol.near { margin: 6px 0 0; padding-left: 18px; font-size: 13px; }
+    ol.near li { margin: 3px 0; }
+
+    /* Junction markers: size and glow grow with congestion; jammed ones pulse. */
+    .jn { border-radius: 50%; border: 2px solid rgba(255,255,255,.9); box-shadow: 0 0 12px 3px var(--c); background: var(--c); }
+    .jn.jam::after { content: ""; position: absolute; inset: -8px; border-radius: 50%; border: 2px solid var(--c);
+                     animation: pulse 1.6s ease-out infinite; }
+    .jn.sel { border-color: var(--accent); border-width: 3px; }
+    @keyframes pulse { from { transform: scale(.6); opacity: 1; } to { transform: scale(1.6); opacity: 0; } }
+    @media (prefers-reduced-motion: reduce) { .jn.jam::after { animation: none; opacity: .6; } }
+    .hosp { display: grid; place-items: center; width: 14px; height: 14px; border-radius: 4px;
+            background: var(--hospital); color: #1a0633; font-weight: 800; font-size: 12px; line-height: 1;
+            border: 1.5px solid #fff; box-shadow: 0 1px 4px rgba(0,0,0,.5); }
+
     @media (max-width: 800px) {
-      .layout { grid-template-columns: 1fr; grid-template-rows: 55vh auto; height: auto; }
-      #map { height: 55vh; }
+      .layout { grid-template-columns: 1fr; grid-template-rows: 60vh auto; height: auto; }
+      #map { height: 60vh; }
       aside { border-left: none; border-top: 1px solid var(--border); padding: 16px; }
     }
   </style>
@@ -44,26 +91,25 @@
   <div id="map"></div>
   <aside>
     <div>
-      <h1>Bengaluru Traffic Tracker</h1>
+      <h1>Green Corridor · Bengaluru</h1>
       <div class="muted" id="updated">Loading…</div>
     </div>
-    <div class="legend">
-      <span><span class="dot" style="background:var(--green)"></span>Clear (&lt;30%)</span>
-      <span><span class="dot" style="background:var(--amber)"></span>Slow (30–60%)</span>
-      <span><span class="dot" style="background:var(--red)"></span>Jammed (&gt;60%)</span>
-      <span><span class="dot" style="background:var(--grey)"></span>No data</span>
-    </div>
-    <p class="muted" id="hint">Click a junction on the map to see its typical pattern by hour of day.</p>
 
-    <section id="detail" hidden>
-      <h2 id="j-name"></h2>
-      <div class="muted" id="j-time"></div>
-      <div class="stats" style="margin-top:10px">
-        <div class="stat"><b id="j-cong">–</b><span>Congestion now</span></div>
-        <div class="stat"><b id="j-speed">–</b><span>Speed / free flow (km/h)</span></div>
+    <section class="card">
+      <h3>Show congestion</h3>
+      <div class="modes">
+        <button id="mode-live" class="on">Live (latest)</button>
+        <button id="mode-typical">Typical by hour</button>
       </div>
-      <div style="margin:14px 0 8px; display:flex; align-items:center; gap:8px">
-        <label for="weekday" class="muted">Pattern for</label>
+      <div id="typical-controls" class="off">
+        <div class="time-row">
+          <button class="play" id="play" title="Play through the day">▶</button>
+          <input type="range" id="hour" min="0" max="23" step="1">
+          <span id="hour-label">--:--</span>
+        </div>
+      </div>
+      <div class="time-row" style="margin-top:10px">
+        <label for="weekday" class="muted">Day</label>
         <select id="weekday">
           <option value="">All days</option>
           <option value="0">Monday</option><option value="1">Tuesday</option>
@@ -72,8 +118,39 @@
           <option value="6">Sunday</option>
         </select>
       </div>
+    </section>
+
+    <section class="summary card">
+      <div><b id="n-jam" style="color:var(--red)">–</b><span>Jammed</span></div>
+      <div><b id="n-slow" style="color:var(--amber)">–</b><span>Slow</span></div>
+      <div><b id="n-clear" style="color:var(--green)">–</b><span>Clear</span></div>
+    </section>
+
+    <section>
+      <h3>Map layers</h3>
+      <div class="legend">
+        <span><span class="dot" style="background:var(--red)"></span>Jammed (&gt;60%)</span>
+        <span><span class="dot" style="background:var(--amber)"></span>Slow (30–60%)</span>
+        <span><span class="dot" style="background:var(--green)"></span>Clear (&lt;30%)</span>
+        <span><span class="dot" style="background:var(--grey)"></span>No data</span>
+        <label><input type="checkbox" id="show-er" checked><span class="h-key">+</span>Emergency hospitals</label>
+        <label><input type="checkbox" id="show-all"><span class="dot" style="background:var(--hospital)"></span>All hospitals</label>
+      </div>
+    </section>
+
+    <p class="muted" id="hint">Click a junction to see its daily pattern and the nearest emergency hospitals.</p>
+
+    <section id="detail" class="card" hidden>
+      <h2 id="j-name"></h2>
+      <div class="muted" id="j-time"></div>
+      <div class="stats">
+        <div class="stat"><b id="j-cong">–</b><span id="j-cong-label">Congestion now</span></div>
+        <div class="stat"><b id="j-speed">–</b><span>Latest speed / free flow (km/h)</span></div>
+      </div>
       <div class="chart-wrap"><canvas id="chart"></canvas></div>
       <div class="muted" id="j-samples" style="margin-top:6px"></div>
+      <h3 style="margin-top:14px">Nearest emergency hospitals</h3>
+      <ol class="near" id="j-near"></ol>
     </section>
   </aside>
 </div>
@@ -81,105 +158,268 @@
 <script>
   const REFRESH_MS = 60 * 1000;
   const css = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+  const $ = (id) => document.getElementById(id);
 
-  function colorFor(congestion) {
-    if (congestion == null) return css('--grey');
-    if (congestion < 0.3) return css('--green');
-    if (congestion < 0.6) return css('--amber');
-    return css('--red');
+  function level(c) {
+    if (c == null) return 'none';
+    if (c < 0.3) return 'clear';
+    if (c < 0.6) return 'slow';
+    return 'jam';
   }
+  const COLOR = { none: '--grey', clear: '--green', slow: '--amber', jam: '--red' };
+  const colorFor = (c) => css(COLOR[level(c)]);
   const pct = (x) => x == null ? '–' : Math.round(x * 100) + '%';
+  const hh = (h) => String(h).padStart(2, '0') + ':00';
   const istTime = (tsUtc) => new Date(tsUtc.replace(' ', 'T') + 'Z')
     .toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', dateStyle: 'medium', timeStyle: 'short' });
+  const istHourNow = () => Number(new Date().toLocaleString('en-US', { timeZone: 'Asia/Kolkata', hour: 'numeric', hourCycle: 'h23' }));
+  const escapeHtml = (s) => s.replace(/[&<>"']/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
 
-  const map = L.map('map').setView([12.975, 77.63], 12);
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19, attribution: '&copy; OpenStreetMap contributors',
+  function km(a, b) { // haversine distance in km
+    const R = 6371, rad = Math.PI / 180;
+    const dLat = (b.lat - a.lat) * rad, dLon = (b.lon - a.lon) * rad;
+    const x = Math.sin(dLat / 2) ** 2 + Math.cos(a.lat * rad) * Math.cos(b.lat * rad) * Math.sin(dLon / 2) ** 2;
+    return 2 * R * Math.asin(Math.sqrt(x));
+  }
+
+  // ---------- map ----------
+  const map = L.map('map', { zoomControl: true, preferCanvas: true, maxZoom: 16 }).setView([12.975, 77.63], 12);
+  // Esri's dark grey canvas (free, no API key), tinted navy by the .blue-tiles CSS filter.
+  const ESRI = 'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/';
+  L.tileLayer(ESRI + 'World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+    maxZoom: 16, className: 'blue-tiles',
+    attribution: 'Tiles &copy; Esri &mdash; Esri, HERE, Garmin, &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  }).addTo(map);
+  L.tileLayer(ESRI + 'World_Dark_Gray_Reference/MapServer/tile/{z}/{y}/{x}', {
+    maxZoom: 16, className: 'blue-tiles',
   }).addTo(map);
 
-  const markers = {};
-  let junctions = {};
-  let selectedId = null;
-  let chart = null;
+  const hospitalLayerER = L.layerGroup().addTo(map);
+  const hospitalLayerAll = L.layerGroup();
+  const junctionLayer = L.layerGroup().addTo(map);
 
+  let hospitals = [];
+  async function loadHospitals() {
+    try {
+      hospitals = await (await fetch('/static/hospitals.json')).json();
+    } catch (e) {
+      console.warn('No hospitals.json; run python fetch_hospitals.py', e);
+      return;
+    }
+    const icon = L.divIcon({ className: '', html: '<div class="hosp">+</div>', iconSize: [14, 14] });
+    for (const h of hospitals) {
+      const tip = `<b>${escapeHtml(h.name)}</b>${h.emergency ? '<br>Emergency department' : ''}${h.phone ? '<br>' + escapeHtml(h.phone) : ''}`;
+      if (h.emergency) {
+        L.marker([h.lat, h.lon], { icon, zIndexOffset: -100 }).bindTooltip(tip).addTo(hospitalLayerER);
+      } else {
+        L.circleMarker([h.lat, h.lon], { radius: 3, weight: 0, fillColor: css('--hospital'), fillOpacity: 0.7 })
+          .bindTooltip(tip).addTo(hospitalLayerAll);
+      }
+    }
+    if (selectedId) renderDetail();
+  }
+  $('show-er').addEventListener('change', (e) => e.target.checked ? hospitalLayerER.addTo(map) : hospitalLayerER.remove());
+  $('show-all').addEventListener('change', (e) => e.target.checked ? hospitalLayerAll.addTo(map) : hospitalLayerAll.remove());
+
+  // ---------- state ----------
+  let junctions = {};          // id -> junction incl. latest reading
+  let shown = {};              // id -> congestion currently displayed (live or typical)
+  let mode = 'live';
+  let selectedId = null;
+  const markers = {};
+
+  function junctionIcon(c, selected) {
+    const size = Math.round(14 + (c == null ? 0 : c) * 18);
+    const cls = `jn ${level(c) === 'jam' ? 'jam' : ''} ${selected ? 'sel' : ''}`;
+    return L.divIcon({
+      className: '', iconSize: [size, size],
+      html: `<div class="${cls}" style="--c:${colorFor(c)};width:${size}px;height:${size}px;position:relative"></div>`,
+    });
+  }
+
+  function drawJunctions() {
+    const counts = { jam: 0, slow: 0, clear: 0 };
+    for (const j of Object.values(junctions)) {
+      const c = shown[j.id] ?? null;
+      if (counts[level(c)] != null) counts[level(c)]++;
+      const icon = junctionIcon(c, j.id === selectedId);
+      if (!markers[j.id]) {
+        markers[j.id] = L.marker([j.lat, j.lon], { icon, zIndexOffset: 1000 })
+          .on('click', () => selectJunction(j.id)).addTo(junctionLayer);
+      } else {
+        markers[j.id].setIcon(icon);
+      }
+      markers[j.id].setZIndexOffset(1000 + Math.round((c ?? 0) * 100));
+      markers[j.id].bindTooltip(`<b>${escapeHtml(j.name)}</b><br>${pct(c)} congested`, { direction: 'top', offset: [0, -8] });
+    }
+    $('n-jam').textContent = counts.jam;
+    $('n-slow').textContent = counts.slow;
+    $('n-clear').textContent = counts.clear;
+  }
+
+  // ---------- data ----------
   async function loadJunctions() {
     try {
       const data = await (await fetch('/api/junctions')).json();
       junctions = Object.fromEntries(data.map(j => [j.id, j]));
-      for (const j of data) {
-        const c = j.latest ? j.latest.congestion : null;
-        const style = { radius: 11, weight: 2, color: '#fff', fillColor: colorFor(c), fillOpacity: 0.9 };
-        if (!markers[j.id]) {
-          markers[j.id] = L.circleMarker([j.lat, j.lon], style).addTo(map)
-            .on('click', () => selectJunction(j.id));
-        } else {
-          markers[j.id].setStyle(style);
-        }
-        markers[j.id].bindTooltip(`${j.name}: ${pct(c)}`);
+      if (mode === 'live') {
+        shown = Object.fromEntries(data.map(j => [j.id, j.latest ? j.latest.congestion : null]));
       }
-      document.getElementById('updated').textContent =
-        'Page refreshed ' + new Date().toLocaleTimeString('en-IN') + ' · auto-refresh every 60s';
+      drawJunctions();
+      const times = data.filter(j => j.latest).map(j => j.latest.ts_utc).sort();
+      $('updated').textContent = times.length
+        ? `Latest reading ${istTime(times[times.length - 1])} IST · refreshes every 60s`
+        : 'No readings yet. Run python collector.py --fake --backfill-days 7';
       if (selectedId) renderDetail();
     } catch (e) {
-      document.getElementById('updated').textContent = 'Could not load data: ' + e.message;
+      $('updated').textContent = 'Could not load data: ' + e.message;
     }
   }
 
+  async function loadTypical() {
+    const hour = Number($('hour').value);
+    $('hour-label').textContent = hh(hour);
+    const wd = $('weekday').value;
+    const url = `/api/typical?hour=${hour}` + (wd === '' ? '' : `&weekday=${wd}`);
+    const rows = await (await fetch(url)).json();
+    shown = Object.fromEntries(rows.map(r => [r.junction_id, r.congestion]));
+    drawJunctions();
+    if (selectedId) renderDetail();
+    if (chart) { chart.options.plugins.nowLine.hour = hour; chart.update('none'); }
+  }
+
+  function refresh() { mode === 'live' ? loadJunctions() : loadJunctions().then(loadTypical); }
+
+  // ---------- controls ----------
+  function setMode(m) {
+    mode = m;
+    $('mode-live').classList.toggle('on', m === 'live');
+    $('mode-typical').classList.toggle('on', m === 'typical');
+    $('typical-controls').classList.toggle('off', m === 'live');
+    if (m === 'live') { stopPlay(); if (chart) { chart.options.plugins.nowLine.hour = null; chart.update('none'); } }
+    refresh();
+  }
+  $('mode-live').addEventListener('click', () => setMode('live'));
+  $('mode-typical').addEventListener('click', () => setMode('typical'));
+  $('hour').value = istHourNow();
+  $('hour-label').textContent = hh(istHourNow());
+  $('hour').addEventListener('input', () => { stopPlay(); loadTypical(); });
+  $('weekday').addEventListener('change', () => { if (mode === 'typical') loadTypical(); loadPattern(); });
+
+  let playTimer = null;
+  function stopPlay() { clearInterval(playTimer); playTimer = null; $('play').textContent = '▶'; }
+  $('play').addEventListener('click', () => {
+    if (playTimer) return stopPlay();
+    $('play').textContent = '❚❚';
+    playTimer = setInterval(() => {
+      $('hour').value = (Number($('hour').value) + 1) % 24;
+      loadTypical();
+    }, 700);
+  });
+
+  // ---------- detail panel ----------
+  let chart = null;
+
   function renderDetail() {
     const j = junctions[selectedId];
-    document.getElementById('detail').hidden = false;
-    document.getElementById('hint').hidden = true;
-    document.getElementById('j-name').textContent = j.name;
+    if (!j) return;
+    $('detail').hidden = false;
+    $('hint').hidden = true;
+    $('j-name').textContent = j.name;
     const r = j.latest;
-    document.getElementById('j-time').textContent = r ? 'Latest reading ' + istTime(r.ts_utc) + ' IST' : 'No readings yet';
-    const cong = document.getElementById('j-cong');
-    cong.textContent = r ? pct(r.congestion) : '–';
-    cong.style.color = r ? colorFor(r.congestion) : '';
-    document.getElementById('j-speed').textContent = r ? `${r.current_speed} / ${r.free_flow_speed}` : '–';
+    if (mode === 'live') {
+      $('j-time').textContent = r ? 'Latest reading ' + istTime(r.ts_utc) + ' IST' : 'No readings yet';
+      $('j-cong-label').textContent = 'Congestion now';
+    } else {
+      $('j-time').textContent = `Typical at ${hh($('hour').value)}${$('weekday').value ? ' on ' + $('weekday').selectedOptions[0].text + 's' : ''}`;
+      $('j-cong-label').textContent = 'Typical congestion';
+    }
+    const c = shown[j.id] ?? null;
+    $('j-cong').textContent = pct(c);
+    $('j-cong').style.color = colorFor(c);
+    $('j-speed').textContent = r ? `${r.current_speed} / ${r.free_flow_speed}` : '–';
+
+    const near = hospitals.filter(h => h.emergency)
+      .map(h => ({ ...h, d: km(j, h) })).sort((a, b) => a.d - b.d).slice(0, 3);
+    $('j-near').innerHTML = near.length
+      ? near.map(h => `<li>${escapeHtml(h.name)} <span class="muted">· ${h.d.toFixed(1)} km</span></li>`).join('')
+      : '<li class="muted">Hospital data not loaded</li>';
   }
+
+  // Chart.js plugin: a vertical line marking the hour shown on the map.
+  const nowLine = {
+    id: 'nowLine',
+    afterDatasetsDraw(c, args, opts) {
+      if (opts.hour == null) return;
+      const x = c.scales.x.getPixelForValue(opts.hour);
+      const { top, bottom } = c.chartArea;
+      c.ctx.save();
+      c.ctx.strokeStyle = css('--text'); c.ctx.globalAlpha = 0.5; c.ctx.setLineDash([4, 4]);
+      c.ctx.beginPath(); c.ctx.moveTo(x, top); c.ctx.lineTo(x, bottom); c.ctx.stroke();
+      c.ctx.restore();
+    },
+  };
 
   async function loadPattern() {
     if (!selectedId) return;
-    const wd = document.getElementById('weekday').value;
+    const wd = $('weekday').value;
     const url = `/api/patterns/${selectedId}` + (wd === '' ? '' : `?weekday=${wd}`);
     const data = await (await fetch(url)).json();
     const values = data.hours.map(h => h.congestion == null ? null : Math.round(h.congestion * 100));
     const samples = data.hours.reduce((s, h) => s + h.samples, 0);
-    document.getElementById('j-samples').textContent = `Based on ${samples} readings (hours in IST)`;
+    $('j-samples').textContent = `Based on ${samples} readings (hours in IST)`;
 
+    Chart.defaults.color = css('--muted');
+    Chart.defaults.borderColor = css('--border');
     const cfg = {
       type: 'line',
       data: {
         labels: data.hours.map(h => String(h.hour).padStart(2, '0')),
         datasets: [{
           label: 'Avg congestion %', data: values, spanGaps: true, tension: 0.3,
-          borderColor: css('--accent'), backgroundColor: css('--accent') + '22', fill: true,
-          pointRadius: 2, borderWidth: 2,
+          borderColor: css('--accent'), backgroundColor: css('--accent') + '33', fill: true,
+          pointRadius: 0, pointHoverRadius: 4, borderWidth: 2,
+          segment: { borderColor: (ctx) => colorFor(ctx.p1.parsed.y / 100) },
         }],
       },
       options: {
-        maintainAspectRatio: false,
-        plugins: { legend: { display: false },
-                   tooltip: { callbacks: { title: (it) => it[0].label + ':00 IST', label: (it) => it.formattedValue + '% congested' } } },
+        maintainAspectRatio: false, animation: { duration: 250 },
+        interaction: { mode: 'index', intersect: false },
+        plugins: {
+          legend: { display: false },
+          nowLine: { hour: mode === 'typical' ? Number($('hour').value) : null },
+          tooltip: { callbacks: { title: (it) => it[0].label + ':00 IST', label: (it) => it.formattedValue + '% congested' } },
+        },
         scales: {
-          y: { min: 0, max: 100, ticks: { callback: (v) => v + '%' } },
-          x: { title: { display: true, text: 'Hour of day (IST)' } },
+          y: { min: 0, max: 100, ticks: { callback: (v) => v + '%', stepSize: 25 } },
+          x: { ticks: { maxTicksLimit: 8 } },
         },
       },
+      plugins: [nowLine],
     };
-    if (chart) { chart.data = cfg.data; chart.update(); }
-    else { chart = new Chart(document.getElementById('chart'), cfg); }
+    if (chart) chart.destroy();
+    chart = new Chart($('chart'), cfg);
   }
 
   function selectJunction(id) {
     selectedId = id;
+    drawJunctions();
     renderDetail();
     loadPattern();
   }
 
-  document.getElementById('weekday').addEventListener('change', loadPattern);
-  loadJunctions();
-  setInterval(() => { loadJunctions(); loadPattern(); }, REFRESH_MS);
+  loadHospitals();
+  // Deep links: /?hour=19 opens "typical" mode at 7pm; /?junction=silk_board selects a junction.
+  const params = new URLSearchParams(location.search);
+  const startHour = params.get('hour');
+  if (startHour !== null && /^([01]?\d|2[0-3])$/.test(startHour)) {
+    $('hour').value = Number(startHour);
+    setMode('typical');
+  } else {
+    loadJunctions();
+  }
+  if (params.get('junction')) selectJunction(params.get('junction'));
+  setInterval(() => { refresh(); loadPattern(); }, REFRESH_MS);
 </script>
 </body>
 </html>

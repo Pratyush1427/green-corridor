@@ -7,6 +7,7 @@ from typing import Optional
 
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 
 import db
 from config import JUNCTIONS, JUNCTIONS_BY_ID
@@ -15,6 +16,7 @@ STATIC_DIR = Path(__file__).parent / "static"
 
 app = FastAPI(title="Bengaluru Traffic Pattern Tracker")
 db.init_db()
+app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
 
 @app.get("/")
@@ -42,6 +44,18 @@ def junctions() -> list:
             },
         })
     return result
+
+
+@app.get("/api/typical")
+def typical(
+    hour: int = Query(..., ge=0, le=23, description="Hour of day in IST"),
+    weekday: Optional[int] = Query(None, ge=0, le=6, description="0 = Monday ... 6 = Sunday"),
+) -> list:
+    """Typical (average) congestion at every junction for one hour of the day."""
+    return [
+        {**r, "congestion": None if r["congestion"] is None else round(r["congestion"], 3)}
+        for r in db.typical_at_hour(hour, weekday)
+    ]
 
 
 @app.get("/api/patterns/{junction_id}")

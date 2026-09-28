@@ -54,17 +54,26 @@ def fetch_tomtom(client: httpx.Client, junction: dict, now: datetime) -> dict:
 
 # ---------- fake data ----------
 
+# Notorious bottlenecks get extra congestion in fake data; others get a random mild factor.
+FAKE_SEVERITY = {
+    "silk_board": 1.3, "marathahalli": 1.25, "kr_puram": 1.2, "ecospace": 1.2,
+    "iblur": 1.15, "hebbal": 1.15, "bommanahalli": 1.1, "hope_farm": 1.1,
+}
+
+
 def fake_congestion(ist_time: datetime, junction_id: str) -> float:
     """Rush-hour shaped congestion (0-1) for a given IST time."""
-    hour = ist_time.hour + ist_time.minute / 60
+    rng = random.Random(junction_id)  # stable per junction
+    severity = FAKE_SEVERITY.get(junction_id, rng.uniform(0.7, 1.0))
+    shift = rng.uniform(-0.75, 0.75)  # peaks don't hit every junction at the same minute
+    hour = ist_time.hour + ist_time.minute / 60 - shift
     # Two bell curves: morning peak ~10am, evening peak ~7:30pm.
     morning = 0.55 * math.exp(-((hour - 10) ** 2) / 2.0)
     evening = 0.65 * math.exp(-((hour - 19.5) ** 2) / 3.0)
     base = 0.12 + morning + evening
     if ist_time.weekday() >= 5:  # weekends are lighter
         base *= 0.6
-    # Some junctions are just worse than others (stable per junction).
-    base *= random.Random(junction_id).uniform(0.85, 1.15)
+    base *= severity
     return max(0.0, min(0.95, base + random.gauss(0, 0.05)))
 
 
