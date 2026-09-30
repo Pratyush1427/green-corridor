@@ -292,6 +292,8 @@ def plan_route(start_lat: float, start_lon: float, hour: int,
     corridor = g.describe(corridor_path, corridor_cost)
     for s in corridor["signals"]:
         s["eta_s"] = round(time_at(corridor, s["along_m"]), 1)
+    # The same path driven in normal traffic, for when police can't clear it.
+    same_path_normal = g.describe(corridor_path, normal_cost)
 
     # Baseline: the best route a driver would pick without the corridor, to the same hospital.
     _, normal_path = g.shortest(start, {end}, normal_cost, corridor=False)
@@ -310,6 +312,9 @@ def plan_route(start_lat: float, start_lon: float, hour: int,
         "hospital": {k: dest.get(k) for k in ("name", "lat", "lon", "phone")},
         "coords": corridor["coords"],
         "times": corridor["times"],
+        "times_normal": same_path_normal["times"],
+        "along": [round(a, 1) for a in corridor["along"]],
+        "red_wait_s": round(EXPECTED_RED_WAIT_S, 1),
         "distance_m": corridor["distance_m"],
         "eta_s": round(corridor["travel_s"]),
         "signals": corridor["signals"],

@@ -61,6 +61,11 @@ def insert_readings(readings: List[dict]) -> None:
         conn.executemany(INSERT_SQL, rows)
 
 
+def reading_count() -> int:
+    with connect() as conn:
+        return conn.execute("SELECT COUNT(*) FROM readings").fetchone()[0]
+
+
 def latest_per_junction() -> List[dict]:
     """The most recent reading for every junction that has data."""
     with connect() as conn:

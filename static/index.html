@@ -83,7 +83,32 @@
 
     button.primary { font: inherit; font-size: 13px; font-weight: 600; padding: 7px 12px; border-radius: 7px;
                      cursor: pointer; border: 1px solid var(--accent); background: var(--accent); color: #04142b; }
-    button.primary.armed { background: transparent; color: var(--accent); }
+    button.primary.armed, button.secondary.armed { background: transparent; color: var(--accent); border-color: var(--accent); }
+    button.primary, button.secondary { white-space: nowrap; }
+    button.secondary { font: inherit; font-size: 13px; font-weight: 600; padding: 7px 12px; border-radius: 7px;
+                       cursor: pointer; border: 1px solid var(--border); background: var(--panel); color: var(--text); }
+    .title-row { display: flex; align-items: center; gap: 8px; }
+    .title-row h1 { flex: 1; }
+    .icon-btn { width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--border); background: var(--panel-2);
+                color: var(--text); font: 700 14px/1 system-ui, sans-serif; cursor: pointer; }
+    .modal-bg { position: fixed; inset: 0; background: rgba(4, 10, 22, .7); display: grid; place-items: center;
+                z-index: 2000; padding: 16px; }
+    .modal-bg[hidden] { display: none; }
+    .modal { background: var(--panel); border: 1px solid var(--border); border-radius: 14px; padding: 24px;
+             max-width: 480px; width: 100%; box-shadow: 0 20px 60px rgba(0,0,0,.5); font-size: 14px; line-height: 1.5; }
+    .modal h2 { margin: 0 0 8px; font-size: 20px; }
+    .modal ol { padding-left: 20px; }
+    .modal li { margin: 6px 0; }
+    .modal a { color: var(--accent); }
+    .modal-actions { display: flex; gap: 10px; margin-top: 16px; flex-wrap: wrap; }
+    #toasts { position: fixed; left: 16px; bottom: 28px; z-index: 1500; display: flex; flex-direction: column; gap: 8px;
+              max-width: min(420px, calc(100vw - 32px)); pointer-events: none; }
+    .toast { background: var(--panel); border: 1px solid var(--border); border-left: 4px solid var(--corridor);
+             border-radius: 8px; padding: 10px 14px; font-size: 13px; box-shadow: 0 6px 20px rgba(0,0,0,.4);
+             animation: toast-in .25s ease-out; }
+    .toast.bad { border-left-color: var(--red); }
+    .toast.good { border-left-color: var(--green); }
+    @keyframes toast-in { from { transform: translateY(8px); opacity: 0; } to { transform: none; opacity: 1; } }
     .dropping, .dropping .leaflet-interactive { cursor: crosshair !important; }
     .amb-item { border-top: 1px solid var(--border); margin-top: 12px; padding-top: 10px; font-size: 13px; }
     .amb-head { display: flex; align-items: center; gap: 8px; }
@@ -92,7 +117,11 @@
     .amb-item select { width: 100%; margin: 6px 0; }
     .amb-tag { display: inline-grid; place-items: center; min-width: 26px; height: 20px; border-radius: 10px;
                background: var(--corridor); color: #03202b; font-weight: 700; font-size: 11px; padding: 0 6px; }
-    .amb-saved { color: var(--green); margin-top: 3px; }
+    .amb-saved { color: var(--muted); margin-top: 3px; }
+    .amb-police { margin: 2px 0 4px; font-weight: 600; }
+    .amb-police[data-state=pending] { color: var(--amber); }
+    .amb-police[data-state=approved], .amb-police[data-state=partial] { color: var(--green); }
+    .amb-police[data-state=declined], .amb-police[data-state=expired] { color: var(--red); }
     .amb-err { color: var(--red); }
     .bar { height: 4px; background: var(--panel); border-radius: 2px; margin-top: 6px; overflow: hidden; }
     .bar div { height: 100%; background: var(--corridor); width: 0; }
@@ -118,22 +147,27 @@
   <div id="map"></div>
   <aside>
     <div>
-      <h1>Green Corridor · Bengaluru</h1>
+      <div class="title-row">
+        <h1>🚑 Green Corridor · Bengaluru</h1>
+        <button class="icon-btn" id="help" title="How this works" aria-label="How this works">?</button>
+      </div>
+      <div class="muted"><a href="/police" target="_blank" style="color:var(--accent)">🚓 Open traffic control room</a></div>
       <div class="muted" id="updated">Loading…</div>
     </div>
 
     <section class="card">
       <h3>Simulated ambulances <span id="amb-summary" style="text-transform:none;letter-spacing:0"></span></h3>
       <div class="time-row">
-        <button class="primary" id="amb-drop">＋ Drop ambulance</button>
-        <label for="amb-speed" class="muted" style="margin-left:auto">Speed</label>
-        <select id="amb-speed">
+        <button class="primary" id="demo">▶ Run demo</button>
+        <button class="secondary" id="amb-drop">＋ Add ambulance</button>
+        <select id="amb-speed" title="Simulation speed" aria-label="Simulation speed" style="margin-left:auto">
           <option value="1">1×</option><option value="5">5×</option>
           <option value="10" selected>10×</option><option value="30">30×</option>
         </select>
       </div>
-      <p class="muted" id="amb-hint" style="margin:8px 0 0">Drop an ambulance on the map. It drives to the fastest
-        emergency hospital and the signals ahead turn green. Drag it to move it.</p>
+      <p class="muted" id="amb-hint" style="margin:8px 0 0">Drop an ambulance on the map. It sets off for the fastest
+        emergency hospital and asks traffic police to clear its route. Answer as the police in the
+        <a href="/police" target="_blank" style="color:var(--accent)">traffic control room</a>. Drag an ambulance to move it.</p>
       <div id="amb-list"></div>
     </section>
 
@@ -198,6 +232,28 @@
     </section>
   </aside>
 </div>
+
+<div class="modal-bg" id="welcome" hidden>
+  <div class="modal" role="dialog" aria-labelledby="welcome-title">
+    <h2 id="welcome-title">🚑 Green Corridor</h2>
+    <p>A simulation of <b>green corridors</b> for ambulances in Bengaluru: the traffic signals on an
+      ambulance's route turn green just before it arrives, once traffic police approve.</p>
+    <ol>
+      <li><b>Drop an ambulance</b> anywhere. It picks the fastest emergency hospital, using
+        typical traffic for the time of day.</li>
+      <li><b>Traffic police decide</b> in the <a href="/police" target="_blank">control room</a>:
+        clear the whole route, only some junctions, or "not possible".</li>
+      <li><b>Cleared signals turn green</b> ahead of the ambulance, and you see how much time it saves.</li>
+    </ol>
+    <p class="muted">Roads, hospitals and signal locations are real (OpenStreetMap). Traffic data,
+      signal timings and ambulances are simulated.</p>
+    <div class="modal-actions">
+      <button class="primary" id="welcome-demo">▶ Run the demo</button>
+      <button class="secondary" id="welcome-close">Explore on my own</button>
+    </div>
+  </div>
+</div>
+<div id="toasts" aria-live="polite"></div>
 
 <script>
   const REFRESH_MS = 60 * 1000;
@@ -522,6 +578,23 @@
     renderDetail();
     loadPattern();
   }
+
+  // ---------- toasts & welcome ----------
+  function toast(message, kind = '') {
+    const el = document.createElement('div');
+    el.className = 'toast ' + kind;
+    el.textContent = message;
+    $('toasts').appendChild(el);
+    setTimeout(() => el.remove(), 5000);
+  }
+
+  function showWelcome(show) { $('welcome').hidden = !show; }
+  $('help').addEventListener('click', () => showWelcome(true));
+  $('welcome-close').addEventListener('click', () => showWelcome(false));
+  $('welcome-demo').addEventListener('click', () => { showWelcome(false); window.runDemo(); });
+  $('welcome').addEventListener('click', (e) => { if (e.target.id === 'welcome') showWelcome(false); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') showWelcome(false); });
+  $('demo').addEventListener('click', () => window.runDemo());
 
   loadHospitals();
   loadSignals();

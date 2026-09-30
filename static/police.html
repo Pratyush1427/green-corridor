@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Traffic Control Room</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+  <style>
+    :root {
+      --bg: #0b1a33; --panel: #0f2342; --panel-2: #14305a; --text: #e6eefb; --muted: #8fa6c9;
+      --border: #1f3d6b; --accent: #4ea8ff; --corridor: #22d3ee;
+      --green: #22c55e; --amber: #f59e0b; --red: #ef4444; --grey: #64748b;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; height: 100%; font-family: system-ui, -apple-system, sans-serif;
+                 background: var(--bg); color: var(--text); }
+    .layout { display: grid; grid-template-columns: 1fr 440px; height: 100vh; }
+    #map { height: 100%; background: var(--bg); }
+    .blue-tiles { filter: sepia(1) hue-rotate(180deg) saturate(2.6) brightness(0.95) contrast(1.05); }
+    .leaflet-container { font-family: inherit; }
+    .leaflet-control-attribution { background: rgba(11, 26, 51, 0.8) !important; color: var(--muted); }
+    .leaflet-control-attribution a { color: var(--accent); }
+    .leaflet-tooltip { background: var(--panel); color: var(--text); border: 1px solid var(--border); }
+
+    aside { background: var(--panel); border-left: 1px solid var(--border); padding: 20px;
+            overflow-y: auto; display: flex; flex-direction: column; gap: 16px; }
+    h1 { font-size: 18px; margin: 0; }
+    h3 { font-size: 12px; margin: 0 0 8px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+    a { color: var(--accent); }
+    .muted { color: var(--muted); font-size: 13px; }
+    .row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    input[type=text] { font: inherit; font-size: 13px; padding: 6px 8px; border: 1px solid var(--border);
+                       border-radius: 6px; background: var(--bg); color: var(--text); }
+    .empty { color: var(--muted); font-size: 13px; font-style: italic; }
+
+    .card { background: var(--panel-2); border: 1px solid var(--border); border-radius: 10px; padding: 12px;
+            font-size: 13px; margin-bottom: 10px; cursor: pointer; }
+    #pending .card { border-color: var(--amber); }
+    .card.new { animation: flash 1.2s ease-out 3; }
+    @keyframes flash { 0% { box-shadow: 0 0 0 3px var(--amber); } 100% { box-shadow: 0 0 0 0 transparent; } }
+    @media (prefers-reduced-motion: reduce) { .card.new { animation: none; border-color: var(--amber); } }
+    .card-head { display: flex; align-items: center; gap: 8px; }
+    .card-head b { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 14px; }
+    .tag { display: inline-grid; place-items: center; min-width: 30px; height: 20px; border-radius: 10px; padding: 0 6px;
+           background: var(--corridor); color: #03202b; font-weight: 700; font-size: 11px; }
+    .badge { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 10px; white-space: nowrap; }
+    .badge.pending { background: var(--amber); color: #2a1800; }
+    .badge.approved, .badge.partial { background: var(--green); color: #04210f; }
+    .badge.declined, .badge.expired { background: var(--red); color: #2b0404; }
+    .badge.closed { background: var(--grey); color: #fff; }
+    .meta { margin: 6px 0; color: var(--muted); }
+    .actions { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
+    .actions button, .junctions button { font: inherit; font-size: 13px; font-weight: 600; padding: 7px 12px;
+                                         border-radius: 7px; cursor: pointer; border: 1px solid var(--border); }
+    .btn-approve { background: var(--green); border-color: var(--green) !important; color: #04210f; }
+    .btn-decline { background: transparent; color: var(--red); border-color: var(--red) !important; }
+    .btn-plain { background: var(--panel); color: var(--text); }
+    .junctions { margin-top: 8px; border-top: 1px solid var(--border); padding-top: 8px; }
+    .junctions label { display: flex; gap: 8px; align-items: center; padding: 3px 0; cursor: pointer; }
+    .junctions input[type=text] { width: 100%; margin: 6px 0; }
+    .expires { color: var(--amber); font-weight: 600; }
+    .log { margin: 8px 0 0; padding: 8px; background: var(--bg); border-radius: 6px; font-size: 12px; }
+    .log div { margin: 2px 0; }
+
+    .amb { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: #fff;
+           border: 3px solid var(--corridor); font-size: 15px; position: relative; }
+    .amb span { position: absolute; top: -9px; right: -12px; background: var(--corridor); color: #03202b;
+                font: 700 10px/1 system-ui, sans-serif; padding: 2px 4px; border-radius: 6px; white-space: nowrap; }
+
+    @media (max-width: 900px) {
+      .layout { grid-template-columns: 1fr; grid-template-rows: 50vh auto; height: auto; }
+      #map { height: 50vh; }
+      aside { border-left: none; border-top: 1px solid var(--border); padding: 16px; }
+    }
+  </style>
+</head>
+<body>
+<div class="layout">
+  <div id="map"></div>
+  <aside>
+    <div>
+      <h1>🚓 Traffic Control Room</h1>
+      <div class="muted">Ambulance green-corridor requests · <a href="/">open the ambulance map</a></div>
+    </div>
+    <div class="row">
+      <label class="muted" for="officer">Officer</label>
+      <input type="text" id="officer" value="Control room" maxlength="60" style="flex:1">
+    </div>
+    <label class="row muted"><input type="checkbox" id="auto"> Auto-approve new requests (for demos)</label>
+
+    <section><h3>Waiting for decision <span id="n-pending"></span></h3><div id="pending"></div></section>
+    <section><h3>Active corridors <span id="n-active"></span></h3><div id="active"></div></section>
+    <section><h3>Recent</h3><div id="recent"></div></section>
+  </aside>
+</div>
+
+<script>
+  const $ = (id) => document.getElementById(id);
+  const css = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+  const escapeHtml = (s) => String(s).replace(/[&<>"']/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
+  const fmt = (s) => { s = Math.max(0, Math.round(s)); return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`; };
+  const istTime = (ts) => new Date(ts.replace(' ', 'T') + 'Z')
+    .toLocaleTimeString('en-IN', { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', second: '2-digit' });
+  const post = (url, body) => fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+
+  try { $('officer').value = localStorage.getItem('officer') || $('officer').value; } catch (e) {}
+  $('officer').addEventListener('change', () => { try { localStorage.setItem('officer', $('officer').value); } catch (e) {} });
+
+  // ---------- map ----------
+  const map = L.map('map', { preferCanvas: true, maxZoom: 16 }).setView([12.975, 77.63], 12);
+  const ESRI = 'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/';
+  L.tileLayer(ESRI + 'World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+    maxZoom: 16, className: 'blue-tiles',
+    attribution: 'Tiles &copy; Esri &mdash; Esri, HERE, Garmin, &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  }).addTo(map);
+  L.tileLayer(ESRI + 'World_Dark_Gray_Reference/MapServer/tile/{z}/{y}/{x}', { maxZoom: 16, className: 'blue-tiles' }).addTo(map);
+
+  const layers = new Map();  // emergency id -> layer group on the map
+  const cards = new Map();   // emergency id -> card element
+  const seen = new Set();
+  const autoDone = new Set();
+  let fitted = false;
+
+  const signalName = (s, i) => s.name ? escapeHtml(s.name) : `Junction ${i + 1}`;
+
+  function drawEmergency(e) {
+    if (layers.has(e.id)) layers.get(e.id).remove();
+    if (e.status !== 'active') { layers.delete(e.id); return; }
+    const g = L.layerGroup().addTo(map);
+    const c = e.clearance.status;
+    const color = c === 'pending' ? css('--amber') : ['approved', 'partial'].includes(c) ? css('--corridor') : css('--red');
+    L.polyline(e.route.coords, { color, weight: 5, opacity: 0.9, dashArray: ['declined', 'expired'].includes(c) ? '6 6' : null })
+      .addTo(g);
+    e.route.signals.forEach((s, i) => {
+      const passed = s.along_m <= e.position.along_m;
+      const held = e.held_signals.includes(s.id);
+      const cleared = e.clearance.cleared_signals.includes(s.id);
+      const fill = passed ? css('--grey') : held ? css('--green') : cleared ? '#050b16' : c === 'pending' ? css('--amber') : css('--red');
+      L.circleMarker([s.lat, s.lon], {
+        radius: held ? 8 : 6, weight: 2, color: cleared && !held ? css('--green') : '#fff', fillColor: fill, fillOpacity: 1,
+        opacity: passed ? 0.4 : 1,
+      }).bindTooltip(`${signalName(s, i)} · ${(s.along_m / 1000).toFixed(1)} km along<br>` +
+        (passed ? 'Passed' : held ? 'Held green now' : cleared ? 'Cleared' : c === 'pending' ? 'Awaiting decision' : 'Not cleared')).addTo(g);
+    });
+    L.marker([e.hospital.lat, e.hospital.lon], {
+      icon: L.divIcon({ className: '', iconSize: [14, 14], html: '<div style="width:14px;height:14px;border-radius:4px;background:#c084fc;border:2px solid #fff"></div>' }),
+    }).bindTooltip(escapeHtml(e.hospital.name)).addTo(g);
+    L.marker([e.position.lat, e.position.lon], {
+      icon: L.divIcon({ className: '', iconSize: [28, 28], html: `<div class="amb">🚑<span>${escapeHtml(e.ambulance)}</span></div>` }),
+      zIndexOffset: 1000,
+    }).bindTooltip(`${escapeHtml(e.ambulance)} → ${escapeHtml(e.hospital.name)}`).addTo(g);
+    layers.set(e.id, g);
+  }
+
+  // ---------- cards ----------
+  const BADGE = {
+    pending: 'Waiting', approved: 'Cleared', partial: 'Partly cleared', declined: 'Not possible', expired: 'No response',
+  };
+
+  function createCard(e) {
+    const el = document.createElement('div');
+    el.className = 'card';
+    el.innerHTML = `
+      <div class="card-head"><span class="tag">${escapeHtml(e.ambulance)}</span>
+        <b>→ ${escapeHtml(e.hospital.name)}</b><span class="badge" data-f="badge"></span></div>
+      <div class="meta" data-f="meta"></div>
+      <div data-f="status"></div>
+      <div class="actions" data-f="actions"></div>
+      <div class="junctions" data-f="junctions" hidden>
+        ${e.route.signals.map((s, i) => `<label><input type="checkbox" value="${s.id}" checked>
+          ${signalName(s, i)} <span class="muted">· ${(s.along_m / 1000).toFixed(1)} km along</span></label>`).join('')
+          || '<div class="empty">No signals on this route</div>'}
+        <input type="text" data-f="note" placeholder="Note to the crew (optional), e.g. road works at KR Market" maxlength="300">
+        <div class="actions"><button class="btn-approve" data-act="partial">Clear selected junctions</button></div>
+      </div>
+      <div class="log" data-f="log" hidden></div>`;
+    el.addEventListener('click', (ev) => {
+      if (ev.target.closest('button, input, label')) return;
+      map.fitBounds(L.latLngBounds(e.route.coords).pad(0.3));
+    });
+    el.querySelector('[data-act=partial]').addEventListener('click', () => {
+      const declined = [...el.querySelectorAll('.junctions input[type=checkbox]:not(:checked)')].map(i => Number(i.value));
+      decide(e.id, 'partial', declined, el.querySelector('[data-f=note]').value);
+    });
+    return el;
+  }
+
+  function actionButtons(el, e) {
+    const box = el.querySelector('[data-f=actions]');
+    const want = e.status !== 'active' ? 'closed' : e.clearance.status === 'pending' ? 'pending'
+      : ['approved', 'partial'].includes(e.clearance.status) ? 'active' : 'none';
+    if (box.dataset.state === want) return;
+    box.dataset.state = want;
+    const note = () => el.querySelector('[data-f=note]').value;
+    const buttons = {
+      pending: [['btn-approve', 'Clear all junctions', () => decide(e.id, 'approved', [], note())],
+                ['btn-decline', 'Not possible', () => decide(e.id, 'declined', [], note())],
+                ['btn-plain', 'Choose junctions…', () => { const j = el.querySelector('[data-f=junctions]'); j.hidden = !j.hidden; }]],
+      active: [['btn-decline', 'Revoke clearance', () => decide(e.id, 'declined', [], 'Clearance revoked')]],
+      none: [], closed: [],
+    }[want];
+    box.innerHTML = '';
+    for (const [cls, text, fn] of buttons.concat([['btn-plain', 'Log', () => toggleLog(el, e.id)]])) {
+      const b = document.createElement('button');
+      b.className = cls; b.textContent = text; b.addEventListener('click', fn);
+      box.appendChild(b);
+    }
+    if (want !== 'pending') el.querySelector('[data-f=junctions]').hidden = true;
+  }
+
+  function updateCard(el, e) {
+    const c = e.clearance, r = e.route;
+    const badge = el.querySelector('[data-f=badge]');
+    const closed = e.status !== 'active';
+    badge.className = 'badge ' + (closed ? 'closed' : c.status);
+    badge.textContent = closed ? { arrived: 'Arrived', cancelled: 'Cancelled', abandoned: 'Lost contact' }[e.status] : BADGE[c.status];
+    el.querySelector('[data-f=meta]').textContent =
+      `Requested ${istTime(e.created_utc)} · ${(r.distance_m / 1000).toFixed(1)} km · ${r.signals.length} junctions · ` +
+      `ETA ${fmt(r.eta_s)} cleared vs ${fmt(r.normal.eta_s)} normal`;
+    let status = '';
+    if (!closed && c.status === 'pending') {
+      status = `<span class="expires">Auto-expires in ${c.expires_in_s}s</span> <span class="muted">(ambulance is already moving)</span>`;
+    } else if (!closed && ['approved', 'partial'].includes(c.status)) {
+      const passed = r.signals.filter(s => s.along_m <= e.position.along_m).length;
+      status = `Cleared ${c.cleared_signals.length}/${r.signals.length} junctions · ${e.held_signals.length} held green now · ` +
+               `${passed} passed · ${((r.distance_m - e.position.along_m) / 1000).toFixed(1)} km to go`;
+    } else if (c.status === 'declined' || c.status === 'expired') {
+      status = c.status === 'expired' ? 'No decision in time; ambulance continued in normal traffic.' : 'Declined: ambulance continues in normal traffic.';
+    }
+    if (c.note) status += `<div class="muted">Note: ${escapeHtml(c.note)}</div>`;
+    el.querySelector('[data-f=status]').innerHTML = status;
+    actionButtons(el, e);
+  }
+
+  async function toggleLog(el, id) {
+    const log = el.querySelector('[data-f=log]');
+    if (!log.hidden) { log.hidden = true; return; }
+    const events = await (await fetch(`/api/emergencies/${id}/events`)).json();
+    log.innerHTML = events.map(ev => `<div><span class="muted">${istTime(ev.ts_utc)}</span> <b>${escapeHtml(ev.actor)}</b>: ` +
+      `${escapeHtml(ev.event.replace(/_/g, ' '))}${ev.detail ? ' · ' + escapeHtml(ev.detail) : ''}</div>`).join('');
+    log.hidden = false;
+  }
+
+  async function decide(id, decision, declined, note) {
+    const resp = await post(`/api/emergencies/${id}/clearance`, {
+      decision, declined_signals: declined, officer: $('officer').value || 'traffic police', note: note || null,
+    });
+    if (!resp.ok) alert((await resp.json()).detail || 'Could not save the decision');
+    refresh();
+  }
+
+  // ---------- polling ----------
+  async function refresh() {
+    let list;
+    try { list = await (await fetch('/api/emergencies?include_closed=true&limit=30')).json(); } catch (e) { return; }
+    const buckets = { pending: [], active: [], recent: [] };
+    for (const e of list) {
+      const bucket = e.status !== 'active' ? 'recent' : e.clearance.status === 'pending' ? 'pending' : 'active';
+      buckets[bucket].push(e);
+      if (!cards.has(e.id)) {
+        const el = createCard(e);
+        if (!seen.has(e.id) && bucket === 'pending' && seen.size) el.classList.add('new');
+        cards.set(e.id, el);
+      }
+      seen.add(e.id);
+      updateCard(cards.get(e.id), e);
+      drawEmergency(e);
+      if (bucket === 'pending' && $('auto').checked && !autoDone.has(e.id)) {
+        autoDone.add(e.id);
+        setTimeout(() => decide(e.id, 'approved', [], 'Auto-approved (demo)'), 1500);
+      }
+    }
+    for (const [name, items] of Object.entries(buckets)) {
+      const box = $(name);
+      items.forEach(e => box.appendChild(cards.get(e.id)));  // moves cards between sections
+      [...box.children].forEach(ch => { if (![...items.map(e => cards.get(e.id))].includes(ch)) ch.remove(); });
+      if (!items.length) box.innerHTML = `<div class="empty">${{ pending: 'No requests waiting', active: 'No active corridors', recent: 'Nothing yet' }[name]}</div>`;
+    }
+    $('n-pending').textContent = buckets.pending.length ? `(${buckets.pending.length})` : '';
+    $('n-active').textContent = buckets.active.length ? `(${buckets.active.length})` : '';
+    document.title = (buckets.pending.length ? `(${buckets.pending.length}) ` : '') + 'Traffic Control Room';
+    // On first load, zoom to the active routes.
+    if (!fitted && layers.size) {
+      fitted = true;
+      const pts = list.filter(e => e.status === 'active').flatMap(e => e.route.coords);
+      map.fitBounds(L.latLngBounds(pts).pad(0.2));
+    }
+    const ids = new Set(list.map(e => e.id));
+    for (const [id, g] of layers) if (!ids.has(id)) { g.remove(); layers.delete(id); }
+  }
+  refresh();
+  setInterval(refresh, 1500);
+</script>
+</body>
+</html>
