@@ -12,7 +12,7 @@
       --bg: #0b1a33; --panel: #0f2342; --panel-2: #14305a; --text: #e6eefb; --muted: #8fa6c9;
       --border: #1f3d6b; --accent: #4ea8ff;
       --green: #22c55e; --amber: #f59e0b; --red: #ef4444; --grey: #64748b;
-      --hospital: #c084fc;
+      --hospital: #c084fc; --corridor: #22d3ee;
     }
     * { box-sizing: border-box; }
     html, body { margin: 0; height: 100%; font-family: system-ui, -apple-system, sans-serif;
@@ -75,9 +75,36 @@
     .jn.sel { border-color: var(--accent); border-width: 3px; }
     @keyframes pulse { from { transform: scale(.6); opacity: 1; } to { transform: scale(1.6); opacity: 0; } }
     @media (prefers-reduced-motion: reduce) { .jn.jam::after { animation: none; opacity: .6; } }
+    .sig-key { width: 12px; height: 12px; border-radius: 50%; flex: none; background: #050b16;
+               border: 1px solid #9fb3d1; box-shadow: inset 0 0 0 2px #050b16, inset 0 0 0 6px var(--green); }
     .hosp { display: grid; place-items: center; width: 14px; height: 14px; border-radius: 4px;
             background: var(--hospital); color: #1a0633; font-weight: 800; font-size: 12px; line-height: 1;
             border: 1.5px solid #fff; box-shadow: 0 1px 4px rgba(0,0,0,.5); }
+
+    button.primary { font: inherit; font-size: 13px; font-weight: 600; padding: 7px 12px; border-radius: 7px;
+                     cursor: pointer; border: 1px solid var(--accent); background: var(--accent); color: #04142b; }
+    button.primary.armed { background: transparent; color: var(--accent); }
+    .dropping, .dropping .leaflet-interactive { cursor: crosshair !important; }
+    .amb-item { border-top: 1px solid var(--border); margin-top: 12px; padding-top: 10px; font-size: 13px; }
+    .amb-head { display: flex; align-items: center; gap: 8px; }
+    .amb-head b { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .amb-head button { font: inherit; background: none; border: none; color: var(--muted); cursor: pointer; font-size: 16px; padding: 0 4px; }
+    .amb-item select { width: 100%; margin: 6px 0; }
+    .amb-tag { display: inline-grid; place-items: center; min-width: 26px; height: 20px; border-radius: 10px;
+               background: var(--corridor); color: #03202b; font-weight: 700; font-size: 11px; padding: 0 6px; }
+    .amb-saved { color: var(--green); margin-top: 3px; }
+    .amb-err { color: var(--red); }
+    .bar { height: 4px; background: var(--panel); border-radius: 2px; margin-top: 6px; overflow: hidden; }
+    .bar div { height: 100%; background: var(--corridor); width: 0; }
+    .amb { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; background: #fff;
+           border: 3px solid var(--corridor); box-shadow: 0 0 14px 4px rgba(34,211,238,.55); font-size: 16px; line-height: 1;
+           position: relative; cursor: grab; }
+    .amb span { position: absolute; top: -9px; right: -12px; background: var(--corridor); color: #03202b;
+                font: 700 10px/1 system-ui, sans-serif; padding: 2px 4px; border-radius: 6px; }
+    .amb.err { border-color: var(--red); box-shadow: 0 0 14px 4px rgba(239,68,68,.5); }
+    .amb.done { border-color: var(--green); box-shadow: none; }
+    .route-line { filter: drop-shadow(0 0 4px rgba(34,211,238,.8)); }
+    .dest { width: 26px; height: 26px; border-radius: 50%; border: 3px solid var(--corridor); background: rgba(34,211,238,.15); }
 
     @media (max-width: 800px) {
       .layout { grid-template-columns: 1fr; grid-template-rows: 60vh auto; height: auto; }
@@ -94,6 +121,21 @@
       <h1>Green Corridor · Bengaluru</h1>
       <div class="muted" id="updated">Loading…</div>
     </div>
+
+    <section class="card">
+      <h3>Simulated ambulances <span id="amb-summary" style="text-transform:none;letter-spacing:0"></span></h3>
+      <div class="time-row">
+        <button class="primary" id="amb-drop">＋ Drop ambulance</button>
+        <label for="amb-speed" class="muted" style="margin-left:auto">Speed</label>
+        <select id="amb-speed">
+          <option value="1">1×</option><option value="5">5×</option>
+          <option value="10" selected>10×</option><option value="30">30×</option>
+        </select>
+      </div>
+      <p class="muted" id="amb-hint" style="margin:8px 0 0">Drop an ambulance on the map. It drives to the fastest
+        emergency hospital and the signals ahead turn green. Drag it to move it.</p>
+      <div id="amb-list"></div>
+    </section>
 
     <section class="card">
       <h3>Show congestion</h3>
@@ -135,6 +177,7 @@
         <span><span class="dot" style="background:var(--grey)"></span>No data</span>
         <label><input type="checkbox" id="show-er" checked><span class="h-key">+</span>Emergency hospitals</label>
         <label><input type="checkbox" id="show-all"><span class="dot" style="background:var(--hospital)"></span>All hospitals</label>
+        <label style="grid-column: 1 / -1"><input type="checkbox" id="show-signals" checked><span class="sig-key"></span>Traffic signals <span class="muted" id="signal-note"></span></label>
       </div>
     </section>
 
@@ -151,6 +194,7 @@
       <div class="muted" id="j-samples" style="margin-top:6px"></div>
       <h3 style="margin-top:14px">Nearest emergency hospitals</h3>
       <ol class="near" id="j-near"></ol>
+      <div class="muted" id="j-signals" style="margin-top:10px"></div>
     </section>
   </aside>
 </div>
@@ -197,6 +241,75 @@
   const hospitalLayerER = L.layerGroup().addTo(map);
   const hospitalLayerAll = L.layerGroup();
   const junctionLayer = L.layerGroup().addTo(map);
+
+  // ---------- traffic signals ----------
+  // Locations are real (OpenStreetMap). The red/amber/green state is SIMULATED: real signal
+  // timings in Bengaluru aren't public. Each signal runs a fixed cycle with its own offset.
+  const SIGNAL_MIN_ZOOM = 13;
+  const CYCLE_S = 90, GREEN_S = 40, AMBER_S = 4;  // red for the remaining 46s
+  const signalLayer = L.layerGroup();
+  let signals = [];
+  // Signals held green for an ambulance: signal id -> set of ambulance ids (see ambulances.js).
+  const corridorHolds = new Map();
+
+  function signalPhase(sig, nowS) {
+    if (corridorHolds.has(sig.id)) return { phase: 'green', left: null, corridor: true };
+    const t = (nowS + sig.id % CYCLE_S) % CYCLE_S;
+    if (t < GREEN_S) return { phase: 'green', left: GREEN_S - t };
+    if (t < GREEN_S + AMBER_S) return { phase: 'amber', left: GREEN_S + AMBER_S - t };
+    return { phase: 'red', left: CYCLE_S - t };
+  }
+  const PHASE_COLOR = { green: '--green', amber: '--amber', red: '--red' };
+
+  async function loadSignals() {
+    try {
+      signals = await (await fetch('/static/signals.json')).json();
+    } catch (e) {
+      console.warn('No signals.json; run python fetch_signals.py', e);
+      return;
+    }
+    for (const sig of signals) {
+      const tip = () => {
+        const { phase, left, corridor } = signalPhase(sig, Math.floor(Date.now() / 1000));
+        const state = corridor ? 'Held green for an ambulance' : `Simulated: ${phase} for ${left}s more`;
+        return `<b>${sig.name ? escapeHtml(sig.name) : 'Traffic signal'}</b><br>` +
+               `${state}${sig.countdown ? '<br>Has countdown timer' : ''}`;
+      };
+      // Dark housing with a coloured "lamp" inside, so signals don't look like congestion markers.
+      sig.housing = L.circleMarker([sig.lat, sig.lon], { radius: 5, weight: 1, color: '#9fb3d1', fillColor: '#050b16', fillOpacity: 1 })
+        .bindTooltip(tip).addTo(signalLayer);
+      sig.lamp = L.circleMarker([sig.lat, sig.lon], { radius: 2.5, weight: 0, fillOpacity: 1, interactive: false })
+        .addTo(signalLayer);
+    }
+    $('signal-note').textContent = `(${signals.length}, simulated state)`;
+    updateSignals();
+    toggleSignals();
+    if (selectedId) renderDetail();
+  }
+
+  function updateSignals() {
+    if (!map.hasLayer(signalLayer)) return;
+    const nowS = Math.floor(Date.now() / 1000);
+    for (const sig of signals) {
+      const { phase } = signalPhase(sig, nowS);
+      if (sig.shownPhase !== phase) {
+        sig.shownPhase = phase;
+        sig.lamp.setStyle({ fillColor: css(PHASE_COLOR[phase]) });
+      }
+    }
+  }
+
+  // Hundreds of signals clutter the city-wide view, so only draw them when zoomed in.
+  function toggleSignals() {
+    const want = $('show-signals').checked && map.getZoom() >= SIGNAL_MIN_ZOOM;
+    if (want && !map.hasLayer(signalLayer)) { signalLayer.addTo(map); updateSignals(); }
+    if (!want && map.hasLayer(signalLayer)) signalLayer.remove();
+    const hint = $('show-signals').checked && !want ? ' · zoom in to see them' : '';
+    $('signal-note').textContent = signals.length ? `(${signals.length}, simulated state${hint})` : '';
+  }
+  $('show-signals').addEventListener('change', toggleSignals);
+  map.on('zoomend', toggleSignals);
+  setInterval(updateSignals, 1000);
 
   let hospitals = [];
   async function loadHospitals() {
@@ -344,6 +457,8 @@
     $('j-near').innerHTML = near.length
       ? near.map(h => `<li>${escapeHtml(h.name)} <span class="muted">· ${h.d.toFixed(1)} km</span></li>`).join('')
       : '<li class="muted">Hospital data not loaded</li>';
+    const nearbySignals = signals.filter(sig => km(j, sig) <= 0.5).length;
+    $('j-signals').textContent = signals.length ? `${nearbySignals} traffic signal${nearbySignals === 1 ? '' : 's'} within 500 m` : '';
   }
 
   // Chart.js plugin: a vertical line marking the hour shown on the map.
@@ -409,6 +524,7 @@
   }
 
   loadHospitals();
+  loadSignals();
   // Deep links: /?hour=19 opens "typical" mode at 7pm; /?junction=silk_board selects a junction.
   const params = new URLSearchParams(location.search);
   const startHour = params.get('hour');
@@ -419,7 +535,16 @@
     loadJunctions();
   }
   if (params.get('junction')) selectJunction(params.get('junction'));
+  // /?junction=silk_board&zoom=15 zooms in on that junction once junctions have loaded.
+  const startZoom = Number(params.get('zoom'));
+  if (startZoom >= 10 && startZoom <= 16) {
+    fetch('/api/junctions').then(r => r.json()).then(list => {
+      const target = list.find(x => x.id === params.get('junction'));
+      map.setView(target ? [target.lat, target.lon] : map.getCenter(), startZoom);
+    });
+  }
   setInterval(() => { refresh(); loadPattern(); }, REFRESH_MS);
 </script>
+<script src="/static/ambulances.js"></script>
 </body>
 </html>

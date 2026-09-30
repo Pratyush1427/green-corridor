@@ -2,14 +2,17 @@
 
 Run with:  uvicorn app:app --reload
 """
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
-from typing import Optional
+from typing import List, Optional
 
 from fastapi import FastAPI, HTTPException, Query
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
+from pydantic import BaseModel, Field
 
 import db
+import routing
 from config import JUNCTIONS, JUNCTIONS_BY_ID
 
 STATIC_DIR = Path(__file__).parent / "static"
@@ -70,3 +73,25 @@ def patterns(
         "weekday": weekday,
         "hours": db.hourly_pattern(junction_id, weekday),
     }
+
+
+class RouteRequest(BaseModel):
+    start: List[float] = Field(..., min_length=2, max_length=2, description="[lat, lon] of the ambulance")
+    hospital: Optional[List[float]] = Field(
+        None, min_length=2, max_length=2,
+        description="[lat, lon] of the destination; omit for the fastest emergency hospital",
+    )
+    hour: Optional[int] = Field(None, ge=0, le=23, description="IST hour for traffic; default: now")
+
+
+@app.post("/api/route")
+def route(req: RouteRequest) -> dict:
+    """Plan a simulated ambulance trip, with and without a green corridor."""
+    hour = req.hour
+    if hour is None:
+        hour = datetime.now(timezone(timedelta(hours=5, minutes=30))).hour
+    try:
+        return routing.plan_route(req.start[0], req.start[1], hour,
+                                  tuple(req.hospital) if req.hospital else None)
+    except routing.RouteError as e:
+        raise HTTPException(status_code=422, detail=str(e))

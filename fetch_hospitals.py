@@ -4,38 +4,16 @@ Run once (or whenever you want fresh data):  python fetch_hospitals.py
 Data (c) OpenStreetMap contributors, ODbL.
 """
 import json
-import time
 from pathlib import Path
 
-import httpx
+from osm import BBOX, overpass
 
-OVERPASS_URL = "https://overpass-api.de/api/interpreter"
-BBOX = "12.83,77.45,13.14,77.78"  # south, west, north, east around Bengaluru
 QUERY = f'[out:json][timeout:90];nwr["amenity"="hospital"]({BBOX});out center tags;'
 OUT_PATH = Path(__file__).parent / "static" / "hospitals.json"
 
 
-def fetch(attempts: int = 3) -> dict:
-    """The public Overpass server is often busy (504/429), so retry a few times."""
-    for attempt in range(1, attempts + 1):
-        try:
-            resp = httpx.post(
-                OVERPASS_URL,
-                data={"data": QUERY},
-                headers={"User-Agent": "green-corridor/0.1", "Accept": "application/json"},
-                timeout=120,
-            )
-            resp.raise_for_status()
-            return resp.json()
-        except httpx.HTTPError as e:
-            if attempt == attempts:
-                raise
-            print(f"Attempt {attempt} failed ({e}), retrying in 20s...")
-            time.sleep(20)
-
-
 def main() -> None:
-    data = fetch()
+    data = overpass(QUERY)
 
     hospitals = []
     for el in data["elements"]:
