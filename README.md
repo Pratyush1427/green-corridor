@@ -6,6 +6,10 @@ signals on the route turn green just before the ambulance reaches them.
 
 A working simulation on Bengaluru's real road network, with its real hospitals and signal locations.
 
+**▶ Try it live: [green-corridor-tt52.onrender.com](https://green-corridor-tt52.onrender.com)** ·
+[presenter view](https://green-corridor-tt52.onrender.com/pitch)
+<sub>(free hosting: the first visit after a quiet spell takes up to a minute to wake up)</sub>
+
 ![Python](https://img.shields.io/badge/Python-3.9+-3776AB?logo=python&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-009688?logo=fastapi&logoColor=white)
 ![Leaflet](https://img.shields.io/badge/Leaflet-199900?logo=leaflet&logoColor=white)
