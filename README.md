@@ -16,7 +16,7 @@ A working simulation on Bengaluru's real road network, with its real hospitals a
 ![OpenStreetMap](https://img.shields.io/badge/OpenStreetMap-7EBC6F?logo=openstreetmap&logoColor=white)
 ![License: MIT](https://img.shields.io/badge/License-MIT-blue)
 
-![Three ambulances in 7pm traffic: one route cleared, one partly cleared, one declined](docs/screenshots/demo.gif)
+![The presenter view: an accident at 7 pm, the control room clears the route, the signal officer is alerted and taps 'I will clear the road', and the driver's next signal turns green](docs/screenshots/demo.gif)
 
 ## The idea
 
