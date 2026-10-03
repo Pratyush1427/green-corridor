@@ -13,6 +13,29 @@ const istHourNow = () => Number(new Date().toLocaleString('en-US', { timeZone: '
 const params = new URLSearchParams(location.search);
 const EMBED = !!params.get('embed');  // shown inside the /pitch presenter view
 
+// ---------- light / dark theme ----------
+// ?theme=dark|light in the link wins, then the user's choice (🌙/☀️ button), then the device setting.
+const THEME_KEY = 'gc-theme';
+function themeChoice() {
+  const p = params.get('theme');
+  if (p === 'dark' || p === 'light') return p;
+  try { return localStorage.getItem(THEME_KEY); } catch (e) { return null; }
+}
+const isDark = () => document.body.classList.contains('theme-dark');
+function applyTheme(fallbackDark) {
+  const choice = themeChoice();
+  const dark = choice ? choice === 'dark' : (fallbackDark ?? matchMedia('(prefers-color-scheme: dark)').matches);
+  document.body.classList.toggle('theme-dark', dark);
+  document.querySelector('meta[name=theme-color]')?.setAttribute('content', dark ? '#0b1220' : '#ffffff');
+}
+// A 🌙 / ☀️ button. Changing theme reloads the page so maps and colours all switch cleanly.
+function themeButton() {
+  return `<button class="themebtn" onclick="(function(){ try { localStorage.setItem('${THEME_KEY}', ${'isDark()'} ? 'light' : 'dark'); } catch(e) {} location.reload(); })()"
+    title="Switch light / dark" aria-label="Switch light or dark theme">${isDark() ? '☀️' : '🌙'}</button>`;
+}
+if (document.body) applyTheme();
+else document.addEventListener('DOMContentLoaded', () => applyTheme());
+
 async function api(path, body) {
   const opts = body === undefined ? {} : { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) };
   const resp = await fetch(path, opts);
@@ -49,7 +72,7 @@ function tip(container, key, html) {
 
 // Maps: a green-and-blue topographic map by day; a navy night map for the driver after dark.
 // Both are free Esri tiles (no API key). Tiles exist up to zoom 16; above that they're enlarged.
-function addBaseMap(map, { night = false } = {}) {
+function addBaseMap(map, { night = isDark() } = {}) {
   const ATTR = 'Tiles &copy; Esri &mdash; Esri, HERE, Garmin, &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
   if (night) {
     const C = 'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/';
@@ -419,5 +442,5 @@ function topbar(el, roleName, extraHtml = '') {
   if (EMBED) { el.remove(); return; }
   el.className = 'topbar';
   el.innerHTML = `<a class="brand" href="/" title="Back to the start"><span class="logo">🚑</span>Green Corridor</a>
-    <span class="who">· ${escapeHtml(roleName)}</span><span class="grow"></span>${extraHtml}`;
+    <span class="who">· ${escapeHtml(roleName)}</span><span class="grow"></span><span class="extra row" style="gap:10px;flex-wrap:nowrap">${extraHtml}</span>${themeButton()}`;
 }

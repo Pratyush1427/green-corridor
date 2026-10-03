@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="/static/common.css">
   <style>
     html, body { height: 100%; }
+    @media (max-width: 900px) { html, body { height: auto; min-height: 100%; } }
     body { display: grid; grid-template-rows: 64px 1fr; overflow: hidden; }
     body.embed { grid-template-rows: 1fr; }
     .layout { display: grid; grid-template-columns: 460px 1fr; min-height: 0; }
@@ -17,7 +18,7 @@
     .mapwrap { position: relative; min-height: 0; }
     #map { position: absolute; inset: 0; }
     body.embed .mapwrap { display: none; }
-    body.embed .layout { grid-template-columns: 1fr !important; grid-template-rows: 1fr !important; height: 100vh; }
+    body.embed .layout { grid-template-columns: minmax(0, 1fr) !important; grid-template-rows: 1fr !important; height: 100vh; }
     body.embed aside { padding: 10px; gap: 10px; }
     body.embed .req { gap: 9px; padding: 12px; }
     body.embed .req [data-f=sigs] { order: 9; }
@@ -57,8 +58,11 @@
     .answers { background: var(--surface-2); border-radius: 10px; padding: 8px 12px; font-size: 14px; }
     .settings { font-size: 14px; color: var(--muted); display: flex; flex-direction: column; gap: 8px; }
     .settings label { display: flex; gap: 8px; align-items: center; }
-    @media (max-width: 900px) { body { overflow: auto; grid-template-rows: 64px auto; } .layout { grid-template-columns: 1fr !important; grid-template-rows: 45vh auto; }
-      .mapwrap { order: -1; } }
+    .phone-only { display: none !important; }
+    @media (max-width: 700px) { .phone-only { display: flex !important; } }
+    /* phones: the decision first, the map below it */
+    @media (max-width: 900px) { body { overflow: auto; grid-template-rows: 64px auto; } .layout { grid-template-columns: minmax(0, 1fr) !important; grid-template-rows: auto 45vh; }
+      aside { overflow: visible; border-right: none; } }
   </style>
 </head>
 <body>
@@ -73,6 +77,7 @@
     <div class="stack" id="road"></div>
     <details id="done-box" hidden><summary class="section-title" style="cursor:pointer">Finished</summary><div class="stack" id="done" style="margin-top:12px"></div></details>
     <div class="settings" id="settings">
+      <label class="phone-only" style="flex-direction:column;align-items:stretch">Your name <input type="text" id="officer2"></label>
       <label><input type="checkbox" id="sound"> 🔔 Ring when a new ambulance asks</label>
       <label><input type="checkbox" id="auto"> Practice mode: say yes to every request automatically</label>
     </div>
@@ -86,7 +91,11 @@
   let officer = remember.get('gc-control-officer') || 'Control room';
   topbar($('topbar'), 'Traffic control room', `<label class="small muted" for="officer">Your name</label>
     <input type="text" id="officer" style="width:200px;min-height:44px" value="${escapeHtml(officer)}">`);
-  $('officer')?.addEventListener('change', (e) => { officer = e.target.value || 'Control room'; remember.set('gc-control-officer', officer); });
+  for (const id of ['officer', 'officer2']) {
+    if (!$(id)) continue;
+    $(id).value = officer;
+    $(id).addEventListener('change', (e) => { officer = e.target.value || 'Control room'; remember.set('gc-control-officer', officer); });
+  }
   tip($('tips'), 'police-start', 'When an ambulance asks for a clear road, it appears here in <b>orange</b>. Press <b>Yes, clear the road</b> to turn its signals green as it arrives. If you do not answer in 60 seconds, the ambulance drives in normal traffic.');
 
   const map = L.map('map', { maxZoom: 19 }).setView([12.975, 77.62], 12);

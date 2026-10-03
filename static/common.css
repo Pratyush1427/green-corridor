@@ -7,7 +7,7 @@
 :root {
   --bg: #f3f6fb; --surface: #ffffff; --surface-2: #eef2f8; --surface-3: #e3e9f2;
   --text: #0f1b2d; --muted: #586980; --border: #d6deea;
-  --primary: #1767d8; --primary-dark: #0f4fa8; --on-primary: #ffffff;
+  --primary: #1767d8; --primary-dark: #0f4fa8; --on-primary: #ffffff; --primary-bg: var(--primary-bg);
   --green: #15803d; --green-bg: #dcfce7; --green-strong: #16a34a;
   --amber: #a16207; --amber-bg: #fef3c7; --amber-strong: #f59e0b;
   --red: #b91c1c; --red-bg: #fee2e2; --red-strong: #dc2626;
@@ -19,7 +19,7 @@
 .theme-dark {
   --bg: #0b1220; --surface: #121d30; --surface-2: #1a2840; --surface-3: #22344f;
   --text: #eef3fb; --muted: #9fb0c8; --border: #2a3d5c;
-  --primary: #3b8cff; --primary-dark: #2f74d6; --on-primary: #04142b;
+  --primary: #4d9bff; --primary-dark: #3b8cff; --on-primary: #04142b; --primary-bg: rgba(77,155,255,.16);
   --green: #4ade80; --green-bg: rgba(34,197,94,.18); --green-strong: #22c55e;
   --amber: #fbbf24; --amber-bg: rgba(245,158,11,.18); --amber-strong: #f59e0b;
   --red: #f87171; --red-bg: rgba(239,68,68,.18); --red-strong: #ef4444;
@@ -29,6 +29,7 @@
 }
 
 * { box-sizing: border-box; }
+aside, main, section, .card { min-width: 0; }
 html, body { margin: 0; min-height: 100%; }
 body { font: 17px/1.45 system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", "Noto Sans Kannada", "Noto Sans Devanagari", sans-serif;
        background: var(--bg); color: var(--text); -webkit-font-smoothing: antialiased; }
@@ -53,7 +54,9 @@ p { margin: 0 0 12px; }
           border-bottom: 1px solid var(--border); }
 .topbar .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 19px; color: var(--text); text-decoration: none; }
 .topbar .brand .logo { width: 36px; height: 36px; border-radius: 10px; background: var(--green-strong); display: grid; place-items: center; font-size: 20px; }
-.topbar .who { color: var(--muted); font-size: 15px; }
+.topbar .who { color: var(--muted); font-size: 15px; white-space: nowrap; }
+.topbar .brand { white-space: nowrap; }
+@media (max-width: 700px) { .topbar { padding: 0 12px; } .topbar .who, .topbar .extra { display: none; } }
 
 /* ---------- buttons ---------- */
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: var(--tap); padding: 0 20px;
@@ -86,9 +89,16 @@ input[type=text], input[type=search], select { font: inherit; font-size: 17px; m
 label.field { display: block; font-weight: 700; margin-bottom: 6px; }
 
 /* ---------- first-time help ---------- */
-.tip { display: flex; gap: 12px; align-items: flex-start; background: #eaf2ff; border: 1px solid #c7dbfb; color: #12325f;
+.tip { display: flex; gap: 12px; align-items: flex-start; background: var(--primary-bg); border: 1px solid #c7dbfb; color: #12325f;
        border-radius: 12px; padding: 12px 14px; font-size: 15px; }
 .theme-dark .tip { background: #13284a; border-color: #2a4b7c; color: #d9e7ff; }
+.theme-dark .leaflet-tooltip { background: var(--surface-2); color: var(--text); border-color: var(--border); }
+.theme-dark .leaflet-tooltip-top:before { border-top-color: var(--surface-2); }
+.theme-dark .leaflet-bar a { background: var(--surface); color: var(--text); border-color: var(--border); }
+.theme-dark .leaflet-control-attribution { background: rgba(18,29,48,.8) !important; color: var(--muted); }
+.theme-dark .leaflet-control-attribution a { color: var(--primary); }
+.theme-dark .amb { background: #e8eef7; }
+.themebtn { width: 44px; height: 44px; border-radius: 12px; border: 2px solid var(--border); background: var(--surface); color: var(--text); font-size: 20px; cursor: pointer; flex: none; }
 .tip .tip-icon { font-size: 20px; line-height: 1.2; }
 .tip .tip-close { margin-left: auto; background: none; border: none; font-size: 20px; color: inherit; cursor: pointer; padding: 0 4px; }
 
@@ -153,6 +163,7 @@ label.field { display: block; font-weight: 700; margin-bottom: 6px; }
 .sidebar-resizer::after { content: ""; position: absolute; top: 50%; left: 2px; width: 4px; height: 48px; margin-top: -24px;
                           border-radius: 2px; background: var(--border); }
 .sidebar-resizer:hover::after, .sidebar-resizer:active::after { background: var(--primary); }
+@media (max-width: 900px) { .sidebar-resizer { display: none; } }
 
 /* ---------- toasts ---------- */
 #toasts { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); z-index: 3000; display: flex; flex-direction: column;

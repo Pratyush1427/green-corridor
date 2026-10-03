@@ -198,7 +198,7 @@
   function hospitalOptions() {
     const near = hospitals.map(h => ({ ...h, d: map.distance(report.point, [h.lat, h.lon]) / 1000 }))
       .sort((a, b) => a.d - b.d).slice(0, 15);
-    return `<option value="">Nearest suitable hospital (chosen for you)</option>` + near.map(h => {
+    return `<option value="">Automatic: best nearby hospital</option>` + near.map(h => {
       const v = JSON.stringify([h.lat, h.lon]);
       return `<option value='${v}' ${JSON.stringify(report.hospital) === v ? 'selected' : ''}>${escapeHtml(h.name)} · ${h.d.toFixed(1)} km</option>`;
     }).join('');

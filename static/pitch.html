@@ -119,6 +119,7 @@
     <div class="kpi good" id="k-saved"></div>
   </div>
   <span id="clock"></span>
+  <span id="themebox"></span>
 </header>
 
 <main id="main">
@@ -204,6 +205,7 @@
   let run = 0, auto = true, advance = null, incidentId = null, feedSeen = 0, started = false;
 
   // ---------- chrome: clock, stepper, controls, keyboard ----------
+  $('themebox').innerHTML = themeButton();
   setInterval(() => { $('clock').textContent = new Date().toLocaleTimeString('en-IN', { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit' }) + ' IST'; }, 1000);
   function renderStepper(n) {
     $('stepper').innerHTML = STEPS.map((name, i) => `<div class="stp ${i + 1 < n ? 'done' : i + 1 === n ? 'now' : ''}">

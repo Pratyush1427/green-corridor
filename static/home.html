@@ -19,7 +19,7 @@
             transition: transform .15s ease, border-color .15s ease; min-height: 128px; }
     .tile:hover, .tile:focus-visible { border-color: var(--c); transform: translateY(-2px); }
     .tile .ic { width: 76px; height: 76px; border-radius: 18px; display: grid; place-items: center; font-size: 40px; flex: none;
-                background: color-mix(in srgb, var(--c) 14%, white); }
+                background: color-mix(in srgb, var(--c) 16%, var(--surface)); }
     .tile b { display: block; font-size: 22px; margin-bottom: 4px; }
     .tile span { color: var(--muted); font-size: 16px; }
     .tile .go { margin-left: auto; font-size: 28px; color: var(--c); flex: none; }
@@ -36,6 +36,8 @@
   </style>
 </head>
 <body>
+<script src="/static/common.js"></script>
+<div id="themebox" style="position:fixed;top:14px;right:14px;z-index:5"></div>
 <main>
   <div class="hero">
     <div class="logo">🚑</div>
@@ -67,5 +69,6 @@
 
   <footer>Showing it to an audience? Open the <a href="/pitch">presenter view</a> · This is a simulation: ambulances and traffic are not real.</footer>
 </main>
+<script>$("themebox").innerHTML = themeButton();</script>
 </body>
 </html>

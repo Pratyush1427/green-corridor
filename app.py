@@ -70,7 +70,7 @@ dispatch.init()
 @app.get("/")
 def home(request: Request):
     """Start page: "Who are you?". Old links with options (e.g. /?demo=1) go to the dispatch screen."""
-    if request.url.query:
+    if any(k in request.query_params for k in ("demo", "hour", "junction", "amb", "zoom")):
         return RedirectResponse(f"/dispatch?{request.url.query}")
     return FileResponse(STATIC_DIR / "home.html")
 

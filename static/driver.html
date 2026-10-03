@@ -29,6 +29,8 @@
     .chip.wait { background: var(--amber-strong); color: #2a1800; }
     .chip.bad { background: var(--red-strong); color: #fff; }
     .chip.stop { background: #fff; color: var(--red-strong); }
+    .chip.sig-chip { background: var(--surface); color: var(--text); white-space: nowrap; max-width: 100%; overflow: hidden; text-overflow: ellipsis; }
+    .chip .dot { width: 14px; height: 14px; }
 
     /* bottom sheet: head (always visible) */
     .sum { display: flex; align-items: center; gap: 12px; }
@@ -77,9 +79,10 @@
 <script>
   const ambId = Number(params.get('amb')) || null;
   // Dark at night (easier on the eyes while driving), light by day. ?theme=light|dark overrides.
+  // Dark after dark (easier on the eyes while driving) unless the driver chose a theme.
   const hourIST = istHourNow();
-  const night = params.get('theme') ? params.get('theme') === 'dark' : (hourIST >= 18 || hourIST < 6);
-  if (night) document.body.classList.add('theme-dark');
+  applyTheme(hourIST >= 18 || hourIST < 6 || matchMedia('(prefers-color-scheme: dark)').matches);
+  const night = isDark();
 
   const sheet = makeSheet($('sheet'), { start: 'peek', onChange: () => { if (follow && last) centre(last, false); } });
   const map = L.map('map', { zoomControl: false, maxZoom: 19 }).setView([12.975, 77.6], 13);
@@ -119,7 +122,8 @@
     const lastAmb = remember.get('gc-amb');
     $('picker').innerHTML = `<div class="inner">
       <div class="row"><span class="logo" style="width:44px;height:44px;border-radius:12px;background:var(--green-strong);display:grid;place-items:center;font-size:24px">🚑</span>
-        <b style="font-size:20px" class="grow">Green Corridor</b><div class="lang" id="lang"></div></div>
+        <b style="font-size:20px" class="grow">Green Corridor</b>${themeButton()}</div>
+      <div class="lang" id="lang" style="align-self:flex-start"></div>
       <h1>${t('choose_ambulance')}</h1>
       ${s.fleet.map(a => `<a class="choice" href="/driver?amb=${a.id}" ${String(a.id) === lastAmb ? 'style="border-color:var(--primary)"' : ''}>
         <span class="icon">🚑</span><span class="grow"><b>${escapeHtml(a.callsign)}</b><span class="muted">${escapeHtml(a.base || '')}</span></span>
@@ -184,7 +188,7 @@
       const d = fmtDist(next.along_m - leg.along_m);
       const k = SIGNAL[next.state].kind;
       const text = next.state === 'held' ? t('green_for_you') : next.state === 'cleared' ? t('will_be_green') : k === 'wait' ? t('waiting_police') : t('not_cleared');
-      chip = `<div class="chip ${k}">🚦 ${t('next_signal')} ${d} · ${text}</div>`;
+      chip = `<div class="chip sig-chip"><span class="dot ${k}"></span>🚦 ${d} · <span style="color:${css(KIND_COLOR[k])}">${text}</span></div>`;
     }
     $('top').innerHTML = banner + chip;
   }
@@ -197,7 +201,7 @@
   const setHead = (key, html, after) => { if (headKey === key) return; headKey = key; $('head').innerHTML = html; after?.(); };
   const setBody = (key, html, after) => { if (bodyKey === key) return; bodyKey = key; $('body').innerHTML = html; after?.(); };
   const settingsHtml = (a) => `<div class="body-title">⚙️ ${t('settings')}</div><div class="settings">
-      <div class="row"><div class="lang" id="lang"></div><span class="grow"></span>
+      <div class="row"><div class="lang" id="lang"></div>${themeButton()}<span class="grow"></span>
         <a href="/driver" class="linkbtn">🚑 ${escapeHtml(a.callsign)} · ${t('change')}</a></div><div id="voicebox"></div></div>`;
   const wireSettings = () => {
     langSwitch($('lang'), () => { headKey = bodyKey = ''; setVoice(voiceOn); tick(); });
