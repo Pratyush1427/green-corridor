@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Green Corridor · Live Demo</title>
+  <link rel="stylesheet" href="/static/common.css">
+  <style>
+    /* Role colours, used everywhere a role appears */
+    :root { --role-ctrl: #60a5fa; --role-map: #22d3ee; --role-driver: #34d399; --role-officer: #fbbf24; }
+    html, body { height: 100%; overflow: hidden; }
+    body { display: grid; grid-template-rows: 60px 1fr 150px; background: var(--bg); }
+
+    /* ---------- header: title + live metrics ---------- */
+    header { display: flex; align-items: center; gap: 14px; padding: 0 20px; background: var(--surface); border-bottom: 1px solid var(--border); }
+    .live { background: var(--red); color: #fff; font-weight: 800; font-size: 12px; padding: 4px 9px; border-radius: 6px; letter-spacing: .08em; }
+    header h1 { font-size: 19px; flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .kpis { display: flex; gap: 8px; }
+    .kpis[hidden] { display: none; }
+    .kpi { background: var(--surface-2); border: 1px solid var(--border); border-radius: 10px; padding: 5px 12px; font-size: 13px; white-space: nowrap; }
+    .kpi b { font-size: 16px; font-variant-numeric: tabular-nums; }
+    .kpi.good { border-color: var(--green-strong); background: var(--green-bg); color: var(--green); }
+    #clock { color: var(--muted); font-size: 13px; font-variant-numeric: tabular-nums; }
+
+    /* ---------- main: control room | city | people in the field ---------- */
+    main { position: relative; display: grid; grid-template-columns: 400px minmax(0, 1fr) auto; gap: 16px; padding: 16px 16px 12px; min-height: 0; }
+    .col { display: flex; flex-direction: column; gap: 12px; min-height: 0; }
+    .panel { display: flex; flex-direction: column; min-height: 0; transition: opacity .4s ease, filter .4s ease; }
+    .role { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; font-size: 12px; font-weight: 800; letter-spacing: .08em;
+            text-transform: uppercase; color: var(--muted); }
+    .role .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--c); box-shadow: 0 0 0 3px color-mix(in srgb, var(--c) 25%, transparent); }
+    .role .badge-now { margin-left: auto; font-size: 10px; letter-spacing: .1em; padding: 3px 8px; border-radius: 10px; background: var(--c); color: #fff; display: none; }
+    .frame { flex: 1; min-height: 0; border: 1.5px solid var(--border); border-radius: 16px; overflow: hidden; background: var(--surface);
+             transition: border-color .3s ease, box-shadow .3s ease; }
+    .frame iframe { width: 100%; height: 100%; border: 0; display: block; }
+    .hint { font-size: 12px; color: var(--muted); margin-top: 8px; text-align: center; }
+
+    /* Spotlight: while a step is about someone, everyone else dims */
+    main.focusing .panel:not(.on) { opacity: .38; filter: saturate(.5); }
+    .panel.on .role { color: var(--text); }
+    .panel.on .role .badge-now { display: inline-block; }
+    .panel.on .frame, .panel.on .phone { border-color: var(--c); box-shadow: 0 0 0 3px color-mix(in srgb, var(--c) 30%, transparent); }
+    .panel.tap .frame, .panel.tap .phone { animation: tap 1.3s ease-in-out infinite; }
+    @keyframes tap { 50% { box-shadow: 0 0 0 7px color-mix(in srgb, var(--c) 45%, transparent); } }
+    @media (prefers-reduced-motion: reduce) { .panel.tap .frame, .panel.tap .phone { animation: none; } }
+
+    .feed { flex: 0 0 150px; }
+    .feed .frame { overflow-y: auto; padding: 8px 12px; }
+    .ev { display: flex; gap: 10px; font-size: 12.5px; padding: 6px 0; border-bottom: 1px solid var(--border); animation: in .3s ease-out; }
+    .ev:last-child { border-bottom: none; }
+    .ev .t { color: var(--muted); font-variant-numeric: tabular-nums; flex: none; }
+    @keyframes in { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+
+    /* Phones */
+    .phones { display: flex; gap: 18px; align-items: flex-start; }
+    .phone { --w: 300px; width: var(--w); height: calc(var(--w) * 2.1); border-radius: 40px; border: 10px solid #03060c; background: #03060c;
+             overflow: hidden; position: relative; box-shadow: 0 12px 30px rgba(0,0,0,.5); transition: border-color .3s ease, box-shadow .3s ease; }
+    /* the screens are laid out at phone size (390 px wide) and scaled down to fit the frame */
+    .phone iframe { width: 390px; height: 852px; border: 0; transform: scale(.718); transform-origin: 0 0; }
+    .phone .idle { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 24px;
+                   color: var(--muted); font-size: 14px; background: var(--bg); line-height: 1.5; }
+    .phone .idle[hidden] { display: none; }
+    .phone .idle span { font-size: 34px; display: block; margin-bottom: 8px; }
+    .phone-panel { width: 300px; }
+
+    /* ---------- footer: stepper + caption + controls ---------- */
+    footer { display: grid; grid-template-rows: auto 1fr; padding: 12px 20px 14px; background: var(--surface); border-top: 1px solid var(--border); gap: 10px; }
+    .stepper { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+    .stp { position: relative; display: flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; color: var(--muted);
+           padding: 6px 10px; border-radius: 9px; background: var(--bg); transition: background .3s ease, color .3s ease; }
+    .stp i { font-style: normal; width: 20px; height: 20px; border-radius: 50%; display: grid; place-items: center; font-size: 11px;
+             background: var(--surface-2); color: var(--muted); flex: none; }
+    .stp.done { color: #9fb3d1; }
+    .stp.done i { background: var(--green); color: #04210f; }
+    .stp.now { background: var(--primary); color: #fff; }
+    .stp.now i { background: #fff; color: var(--primary); }
+    .bottom { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 20px; }
+    .caption { font-size: 23px; font-weight: 650; line-height: 1.25; }
+    .caption small { display: block; font-size: 14px; color: var(--muted); font-weight: 500; margin-top: 4px; }
+    .controls { display: flex; gap: 8px; align-items: center; }
+    .controls .btn { font-size: 15px; padding: 11px 16px; }
+    .keys { font-size: 11px; color: var(--muted); text-align: right; margin-top: 4px; }
+    kbd { font: 600 11px system-ui; background: var(--surface-2); border: 1px solid var(--border); border-bottom-width: 2px; border-radius: 4px; padding: 1px 5px; }
+
+    /* ---------- intro & summary overlays ---------- */
+    .overlay { position: absolute; inset: 0; z-index: 20; display: grid; place-items: center; background: rgba(15,27,45,.45); backdrop-filter: blur(4px); }
+    .overlay[hidden] { display: none; }
+    .card-lg { background: var(--surface); border: 1px solid var(--border); border-radius: 22px; padding: 38px 44px; max-width: 900px;
+               box-shadow: 0 24px 70px rgba(0,0,0,.6); }
+    .card-lg h2 { font-size: 40px; margin: 0 0 10px; line-height: 1.1; }
+    .card-lg .lead { font-size: 19px; color: var(--muted); line-height: 1.5; margin: 0 0 24px; }
+    .flow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 26px; }
+    .flow div { background: var(--surface-2); border-radius: 14px; padding: 14px; font-size: 13px; color: var(--muted); border-top: 3px solid var(--c); }
+    .flow b { display: block; font-size: 15px; color: var(--text); margin: 6px 0 2px; }
+    .flow span { font-size: 24px; }
+    .card-lg .actions { display: flex; gap: 12px; align-items: center; }
+    .card-lg .btn.big { width: auto; font-size: 18px; padding: 14px 24px; }
+    .stats3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 18px 0 20px; }
+    .stats3 div { background: var(--surface-2); border-radius: 16px; padding: 18px; text-align: center; }
+    .stats3 b { display: block; font-size: 42px; font-variant-numeric: tabular-nums; }
+    .stats3 span { font-size: 13px; color: var(--muted); }
+    .stats3 .saved b { color: var(--green); }
+
+    @media (max-width: 1700px) {
+      main { grid-template-columns: 320px minmax(0, 1fr) auto; }
+      .phone { --w: 250px; } .phone iframe { transform: scale(.59); } .phone-panel { width: 250px; }
+      .caption { font-size: 20px; } .stp { font-size: 11px; padding: 5px 7px; }
+    }
+  </style>
+</head>
+<body>
+<header>
+  <span class="live">LIVE</span>
+  <h1>🚑 Green Corridor · clearing the way for ambulances in Bengaluru</h1>
+  <div class="kpis" id="kpis" hidden>
+    <div class="kpi" id="k-amb"></div>
+    <div class="kpi" id="k-signals"></div>
+    <div class="kpi" id="k-eta"></div>
+    <div class="kpi good" id="k-saved"></div>
+  </div>
+  <span id="clock"></span>
+</header>
+
+<main id="main">
+  <div class="col">
+    <section class="panel" id="p-ctrl" style="--c: var(--role-ctrl); flex: 1">
+      <div class="role"><span class="dot"></span>Traffic control room<span class="badge-now" data-now>NOW</span></div>
+      <div class="frame"><iframe id="police" src="/police?embed=1" title="Traffic control room"></iframe></div>
+    </section>
+    <section class="panel feed" id="p-feed" style="--c: var(--muted)">
+      <div class="role"><span class="dot"></span>What's happening</div>
+      <div class="frame" id="feed"><div class="empty" style="padding:8px 0">Every step is logged here as it happens.</div></div>
+    </section>
+  </div>
+
+  <section class="panel" id="p-map" style="--c: var(--role-map)">
+    <div class="role"><span class="dot"></span>The city, live<span class="badge-now" data-now>NOW</span></div>
+    <div class="frame"><iframe id="org" src="/dispatch?hour=19&embed=1" title="Hospital & ambulance service"></iframe></div>
+  </section>
+
+  <div class="phones">
+    <section class="panel phone-panel" id="p-driver" style="--c: var(--role-driver)">
+      <div class="role"><span class="dot"></span>Ambulance driver<span class="badge-now" data-now>NOW</span></div>
+      <div class="phone"><iframe id="driver" title="Ambulance screen"></iframe>
+        <div class="idle" id="driver-idle"><div><span>🚑</span>Waiting for a call</div></div></div>
+      <div class="hint">Turn-by-turn, and which signals are green</div>
+    </section>
+    <section class="panel phone-panel" id="p-junction" style="--c: var(--role-officer)">
+      <div class="role"><span class="dot"></span>Junction officer<span class="badge-now" data-now>NOW</span></div>
+      <div class="phone"><iframe id="junction" title="Junction screen"></iframe>
+        <div class="idle" id="junction-idle"><div><span>🚦</span>Quiet junction.<br>No ambulance heading here.</div></div></div>
+      <div class="hint">Alerted with direction · taps "I will clear the road"</div>
+    </section>
+  </div>
+
+  <!-- intro: the hook, before anything moves -->
+  <div class="overlay" id="intro">
+    <div class="card-lg">
+      <h2>Every minute an ambulance waits<br>at a red light matters.</h2>
+      <p class="lead">In Bengaluru, clearing a road for an ambulance still depends on phone calls and officers
+        who may not hear in time. Green Corridor tells everyone on the route, in advance, and turns the
+        signals green just before the ambulance arrives.</p>
+      <div class="flow">
+        <div style="--c: var(--role-map)"><span>🚨</span><b>Accident reported</b>The fastest ambulance is sent</div>
+        <div style="--c: var(--role-ctrl)"><span>🚓</span><b>Control room</b>Clears the route in one tap</div>
+        <div style="--c: var(--role-officer)"><span>🚦</span><b>Junction officer</b>Alerted with direction, taps Clearing</div>
+        <div style="--c: var(--role-driver)"><span>🏥</span><b>Scene → hospital</b>Green signals, both legs</div>
+      </div>
+      <div class="actions">
+        <button class="btn primary big" id="go-auto">▶ Play the story</button>
+        <button class="btn big" id="go-manual">Step through it myself</button>
+        <span class="muted">or press <kbd>Space</kbd></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- summary: the impact -->
+  <div class="overlay" id="summary" hidden><div class="card-lg" id="summary-box"></div></div>
+</main>
+
+<footer>
+  <div class="stepper" id="stepper"></div>
+  <div class="bottom">
+    <div class="caption" id="caption">Press <kbd>Space</kbd> to begin.</div>
+    <div>
+      <div class="controls">
+        <button class="btn" id="restart" title="Restart (R)">↺</button>
+        <button class="btn" id="auto" title="Toggle auto-play (A)">Auto: on</button>
+        <button class="btn primary" id="next" title="Next (→ or Space)">Next ▶</button>
+      </div>
+      <div class="keys"><kbd>→</kbd> <kbd>Space</kbd> next · <kbd>A</kbd> auto · <kbd>R</kbd> restart · <kbd>F</kbd> full screen</div>
+    </div>
+  </div>
+</footer>
+
+<script src="/static/common.js"></script>
+<script>
+  // Staged at Marathahalli bridge on the Outer Ring Road: a famous rush-hour jam, ~5 km from the
+  // nearest ambulance base, so the trip is long enough to show every step.
+  const SCENE = { at: [12.9569, 77.7011], text: 'A car and a bike collide on Marathahalli bridge' };
+  const FAST = 8, SLOW = 3;        // simulation speed while driving / near the officer's junction
+  const STEPS = ['Accident', 'Dispatch', 'Control room', 'Junction', 'Scene', 'Hospital', 'Impact'];
+  const sleep = (ms) => new Promise(r => setTimeout(r, ms));
+  let run = 0, auto = true, advance = null, incidentId = null, feedSeen = 0, started = false;
+
+  // ---------- chrome: clock, stepper, controls, keyboard ----------
+  setInterval(() => { $('clock').textContent = new Date().toLocaleTimeString('en-IN', { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit' }) + ' IST'; }, 1000);
+  function renderStepper(n) {
+    $('stepper').innerHTML = STEPS.map((name, i) => `<div class="stp ${i + 1 < n ? 'done' : i + 1 === n ? 'now' : ''}">
+      <i>${i + 1 < n ? '✓' : i + 1}</i>${name}</div>`).join('');
+  }
+  renderStepper(0);
+  const setAuto = (on) => { auto = on; $('auto').textContent = `Auto: ${on ? 'on' : 'off'}`; };
+  $('auto').addEventListener('click', () => setAuto(!auto));
+  $('next').addEventListener('click', () => started ? advance?.() : begin(auto));
+  $('restart').addEventListener('click', () => begin(auto));
+  $('go-auto').addEventListener('click', () => begin(true));
+  $('go-manual').addEventListener('click', () => begin(false));
+  // Presenter clickers send → / PageDown; keyboards have Space too.
+  document.addEventListener('keydown', (e) => {
+    if (e.target.closest('button, input, select, textarea')) return;  // let focused controls handle their own keys
+    if (['ArrowRight', 'PageDown', ' ', 'Enter'].includes(e.key)) { e.preventDefault(); started ? advance?.() : begin(auto); }
+    else if (e.key === 'r' || e.key === 'R') begin(auto);
+    else if (e.key === 'a' || e.key === 'A') setAuto(!auto);
+    else if (e.key === 'f' || e.key === 'F') document.fullscreenElement ? document.exitFullscreen() : document.documentElement.requestFullscreen();
+  });
+
+  // ---------- spotlight ----------
+  // focus('ctrl', 'driver') brightens those panels and dims the rest; tap('ctrl') adds a pulse ("tap here").
+  function focus(...roles) {
+    const ids = { ctrl: 'p-ctrl', map: 'p-map', driver: 'p-driver', officer: 'p-junction' };
+    $('main').classList.toggle('focusing', roles.length > 0);
+    for (const [role, id] of Object.entries(ids)) {
+      $(id).classList.toggle('on', roles.includes(role));
+      $(id).classList.remove('tap');
+    }
+  }
+  function tap(role, on = true) {
+    const id = { ctrl: 'p-ctrl', officer: 'p-junction' }[role];
+    $(id).classList.toggle('tap', on);
+    $(id).querySelector('[data-now]').textContent = on && !auto ? 'TAP HERE' : 'NOW';
+  }
+
+  // ---------- story helpers ----------
+  // Waits for a condition. "Next" always moves on; Auto moves on once it holds; onDone moves on
+  // as soon as it holds even with Auto off (used when the presenter taps a button in a panel).
+  function waitUntil(check, { minMs = 0, maxMs = 180000, onDone = false } = {}) {
+    const myRun = run;
+    return new Promise(async (resolve) => {
+      let skipped = false;
+      advance = () => { skipped = true; };
+      const t0 = Date.now();
+      while (myRun === run) {
+        const done = await check().catch(() => false);
+        const elapsed = Date.now() - t0;
+        if (skipped || ((auto || onDone) && done && elapsed >= minMs) || elapsed > maxMs) break;
+        await sleep(400);
+      }
+      advance = null;
+      resolve(myRun === run);
+    });
+  }
+  const pause = (ms) => waitUntil(async () => true, { minMs: ms });
+
+  function say(n, text, sub = '') {
+    renderStepper(n);
+    $('caption').innerHTML = escapeHtml(text) + (sub ? `<small>${escapeHtml(sub)}</small>` : '');
+  }
+
+  let lastState = null;
+  async function current() {
+    lastState = await api('/api/state');
+    return lastState.incidents.find(i => i.id === incidentId);
+  }
+
+  // A junction the ambulance reaches in 1–6 minutes, where the road changes and ideally it turns.
+  function pickJunction(leg) {
+    const ahead = leg.signals.filter(s => s.state !== 'passed' && s.eta_s > 45);
+    const named = ahead.filter(s => s.from_road && s.to_road && s.eta_s < 400);
+    const changesRoad = named.filter(s => s.from_road !== s.to_road);
+    return changesRoad.find(s => s.turn !== 'straight') || changesRoad[0] || named.find(s => s.turn !== 'straight') || named[0] || ahead[0] || null;
+  }
+
+  function showPhone(id, src) { $(id).src = src; $(id + '-idle').hidden = true; }
+
+  // ---------- live metrics & feed ----------
+  async function tickLive() {
+    if (!incidentId) return;
+    const inc = await current().catch(() => null);
+    const leg = inc?.current_leg;
+    if (inc && leg) {
+      $('kpis').hidden = false;
+      $('k-amb').innerHTML = `🚑 <b>${escapeHtml(inc.ambulance.callsign)}</b> · ${PHASE[inc.phase] || ''}`;
+      $('k-signals').innerHTML = `🚦 <b>${leg.clearance.cleared}/${leg.clearance.total}</b> signals cleared`;
+      $('k-eta').innerHTML = `⏱ ETA <b>${fmt(leg.eta_s)}</b>`;
+      if (inc.status === 'active') {
+        const saves = Math.max(0, leg.plan.normal_s - leg.plan.corridor_s);
+        $('k-saved').innerHTML = `✅ saves <b>~${Math.round(saves / 60)} min</b> on this leg`;
+      } else {  // finished: the same total as the summary card
+        const actual = inc.legs.reduce((t, l) => t + l.elapsed_s, 0);
+        const normal = inc.legs.reduce((t, l) => t + l.plan.normal_s, 0);
+        $('k-saved').innerHTML = `✅ saved <b>${fmt(Math.max(0, normal - actual))}</b> in total`;
+      }
+    }
+    const events = await api(`/api/incidents/${incidentId}/events`).catch(() => []);
+    if (events.length !== feedSeen) {
+      const icon = (e) => ({ reported: '🚨', dispatched: '🚑', to_scene_planned: '🗺️', to_hospital_planned: '🗺️', clearance_approved: '🚓',
+        clearance_partial: '🚓', clearance_declined: '⛔', clearance_expired: '⌛', junction_clearing: '🚦', junction_cant: '❌',
+        at_scene: '📍', patient_on_board: '🧑‍⚕️', at_hospital: '🏥', handover: '✅', hospital_set: '🏥' })[e.event] || '•';
+      $('feed').innerHTML = events.slice().reverse().map(e => `<div class="ev"><span class="t">${istTime(e.ts_utc).slice(0, 5)}</span>
+        <span>${icon(e)} <b>${escapeHtml(e.actor)}</b> · ${escapeHtml(e.event.replace(/_/g, ' '))}${e.detail ? ': ' + escapeHtml(e.detail) : ''}</span></div>`).join('');
+      feedSeen = events.length;
+    }
+  }
+  setInterval(tickLive, 1000);
+
+  // ---------- the story ----------
+  function begin(autoPlay) {
+    setAuto(autoPlay);
+    $('intro').hidden = true;
+    started = true;
+    story();
+  }
+
+  async function story() {
+    const myRun = ++run;
+    const alive = () => myRun === run;
+    $('summary').hidden = true;
+    feedSeen = 0; $('feed').innerHTML = '';
+    $('kpis').hidden = true;
+    $('driver-idle').hidden = false; $('junction-idle').hidden = false;
+    $('driver').removeAttribute('src'); $('junction').removeAttribute('src');
+    focus();
+
+    // 0. clean slate: same fleet positions every run, so the demo is repeatable
+    await api('/api/fleet/reset', {});
+    await api('/api/sim', { speed: FAST });
+
+    // 1. accident
+    focus('map');
+    say(1, `7 pm rush hour. ${SCENE.text}.`, 'The hospital or ambulance operator marks the accident on the map.');
+    const inc = await api('/api/incidents', { scene: SCENE.at, description: SCENE.text, hour: 19 });
+    incidentId = inc.id;
+    const leg1 = inc.current_leg;
+    showPhone('driver', `/driver?amb=${inc.ambulance.id}&embed=1`);
+    $('org').contentWindow.postMessage({ focusIncident: inc.id }, location.origin);
+    if (!await pause(5000) || !alive()) return;
+
+    // 2. dispatch
+    focus('map', 'driver');
+    say(2, `${inc.ambulance.callsign} is sent: the ambulance that can get there fastest in this traffic.`,
+        `${fmtKm(leg1.distance_m)} to the scene, across ${leg1.signals.length} traffic signals. It leaves at once; nobody waits for approvals.`);
+    if (!await pause(6000) || !alive()) return;
+
+    // 3. control room: the presenter taps "Clear all junctions" (Auto does it after 6 s)
+    focus('ctrl'); tap('ctrl');
+    say(3, 'The traffic control room sees the request and clears the whole route in one tap.',
+        auto ? 'They could also clear only some junctions, or say "not possible". Requests expire after 60 seconds.'
+             : 'Tap "Yes, clear the road" in the control room.');
+    await waitUntil(async () => (await current())?.current_leg?.clearance.status !== 'pending', { maxMs: auto ? 6000 : 600000, onDone: true });
+    tap('ctrl', false);
+    if (!alive()) return;
+    if ((await current())?.current_leg?.clearance.status === 'pending') {
+      await api(`/api/legs/${leg1.id}/clearance`, { decision: 'approved', officer: 'Control room' });
+    }
+    const j1 = pickJunction((await current()).current_leg);
+    if (j1) showPhone('junction', `/junction?signal=${j1.id}&embed=1`);
+    focus('ctrl', 'driver');
+    if (!await pause(4000) || !alive()) return;
+
+    // 4. junction officer
+    if (j1) {
+      const where = junctionName(j1);
+      const move = j1.to_road && j1.to_road !== j1.from_road
+        ? (j1.turn === 'straight' ? `straight on to ${j1.to_road}` : `turning ${j1.turn} into ${j1.to_road}`) : 'going straight';
+      focus('officer', 'driver');
+      say(4, `The officer at ${where} is alerted: ambulance from ${j1.from_road || 'the next road'}, ${move}.`,
+          auto ? 'They tap "I will clear the road", and the driver instantly sees the signal ahead turn green.'
+               : 'Tap "I will clear the road" on the officer\'s phone when it lights up.');
+      await waitUntil(async () => {  // slow down as the ambulance nears the junction, for the audience
+        const s = (await current())?.current_leg?.signals.find(x => x.id === j1.id);
+        if (s && s.eta_s < 90) await api('/api/sim', { speed: SLOW });
+        return !s || s.eta_s < 70;
+      }, { onDone: true });
+      if (!alive()) return;
+      tap('officer');
+      const answered = async () => (await current())?.current_leg?.signals.find(x => x.id === j1.id)?.answer;
+      await waitUntil(async () => !!(await answered()), { maxMs: auto ? 4000 : 600000, onDone: true });
+      tap('officer', false);
+      if (!alive()) return;
+      if (!(await answered())) {
+        await api(`/api/legs/${leg1.id}/signals/${j1.id}/answer`, { answer: 'clearing', officer: 'PC Ramesh (junction)' }).catch(() => {});
+      }
+      await waitUntil(async () => (await current())?.current_leg?.signals.find(x => x.id === j1.id)?.state === 'passed', { minMs: 4000, onDone: true });
+      if (!alive()) return;
+      await api('/api/sim', { speed: FAST });
+    }
+
+    // 5. to the scene
+    focus('map', 'driver');
+    say(5, 'Signals turn green just before the ambulance reaches them, and back to normal once it passes.',
+        'Cross traffic is held for seconds, not minutes. The ambulance reaches the scene.');
+    await waitUntil(async () => ['at_scene', 'to_hospital', 'at_hospital', 'done'].includes((await current())?.phase), { minMs: 3000, onDone: true });
+    if (!alive()) return;
+
+    // 6. hospital leg
+    focus('ctrl', 'driver'); tap('ctrl');
+    say(6, 'Patient on board. The emergency hospital it can reach fastest is chosen, and a second corridor is requested.',
+        auto ? 'Specialist clinics (eye, dental…) are skipped automatically. The control room clears this leg too.'
+             : 'Tap "Yes, clear the road" in the control room again for the trip to hospital.');
+    await api(`/api/incidents/${incidentId}/patient-on-board`, {}).catch(() => {});
+    const leg2 = (await current())?.current_leg;
+    if (leg2 && leg2.kind === 'to_hospital') {
+      await waitUntil(async () => (await current())?.current_leg?.clearance.status !== 'pending', { maxMs: auto ? 4000 : 600000, onDone: true });
+      if (!alive()) return;
+      if ((await current())?.current_leg?.clearance.status === 'pending') {
+        await api(`/api/legs/${leg2.id}/clearance`, { decision: 'approved', officer: 'Control room' }).catch(() => {});
+      }
+      const j2 = pickJunction(leg2);
+      if (j2) showPhone('junction', `/junction?signal=${j2.id}&embed=1`);
+    }
+    tap('ctrl', false);
+    focus('map', 'driver');
+    await waitUntil(async () => ['at_hospital', 'done'].includes((await current())?.phase), { minMs: 4000, onDone: true });
+    if (!alive()) return;
+
+    // 7. impact
+    await api(`/api/incidents/${incidentId}/handover`, {}).catch(() => {});
+    await api('/api/sim', { speed: 10 });
+    focus();
+    const done = await api(`/api/incidents/${incidentId}`);
+    const actual = done.legs.reduce((t, l) => t + l.elapsed_s, 0);
+    const normal = done.legs.reduce((t, l) => t + l.plan.normal_s, 0);
+    const signals = done.legs.reduce((t, l) => t + l.signals.length, 0);
+    say(7, `Scene and hospital in ${fmt(actual)}, instead of about ${fmt(normal)} in normal traffic.`,
+        'These numbers come from our traffic simulation. Measuring real trips is what the pilot is for.');
+    $('summary-box').innerHTML = `
+      <h2>🚑 Accident to hospital in ${fmt(actual)}</h2>
+      <p class="lead" style="margin-bottom:0">${escapeHtml(SCENE.text)}, 7 pm rush hour. ${escapeHtml(done.ambulance.callsign)} reached the scene
+        and took the patient to hospital through ${signals} cleared signals.</p>
+      <div class="stats3">
+        <div><b>${fmt(actual)}</b><span>with a green corridor</span></div>
+        <div><b>${fmt(normal)}</b><span>in normal traffic (estimate)</span></div>
+        <div class="saved"><b>${fmt(Math.max(0, normal - actual))}</b><span>saved</span></div>
+      </div>
+      <p class="muted" style="margin:0 0 22px">Simulated on Bengaluru's real roads, hospitals and signal locations.
+        Next: a pilot with one hospital and one traffic police division, measuring real trips.</p>
+      <div class="actions"><button class="btn primary big" onclick="document.getElementById('summary').hidden = true">Close</button>
+        <button class="btn big" onclick="begin(auto)">↺ Run it again</button></div>`;
+    $('summary').hidden = false;
+    started = false;
+  }
+</script>
+</body>
+</html>

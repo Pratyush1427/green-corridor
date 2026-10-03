@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Green Corridor</title>
+  <link rel="stylesheet" href="/static/common.css">
+  <style>
+    main { max-width: 1040px; margin: 0 auto; padding: 36px 20px 60px; }
+    .hero { text-align: center; margin-bottom: 30px; }
+    .hero .logo { width: 72px; height: 72px; border-radius: 20px; background: var(--green-strong); display: inline-grid; place-items: center;
+                  font-size: 40px; margin-bottom: 14px; box-shadow: var(--shadow); }
+    .hero h1 { font-size: 34px; margin-bottom: 8px; }
+    .hero p { font-size: 19px; color: var(--muted); max-width: 640px; margin: 0 auto; }
+    .ask { text-align: center; font-size: 22px; font-weight: 800; margin: 8px 0 18px; }
+    .tiles { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .tile { display: flex; gap: 18px; align-items: center; padding: 22px; border-radius: 18px; background: var(--surface);
+            border: 2px solid var(--border); text-decoration: none; color: var(--text); box-shadow: var(--shadow);
+            transition: transform .15s ease, border-color .15s ease; min-height: 128px; }
+    .tile:hover, .tile:focus-visible { border-color: var(--c); transform: translateY(-2px); }
+    .tile .ic { width: 76px; height: 76px; border-radius: 18px; display: grid; place-items: center; font-size: 40px; flex: none;
+                background: color-mix(in srgb, var(--c) 14%, white); }
+    .tile b { display: block; font-size: 22px; margin-bottom: 4px; }
+    .tile span { color: var(--muted); font-size: 16px; }
+    .tile .go { margin-left: auto; font-size: 28px; color: var(--c); flex: none; }
+    .how { margin-top: 34px; }
+    .how h2 { text-align: center; margin-bottom: 16px; }
+    .flow { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+    .flow div { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px; text-align: center; }
+    .flow .n { width: 36px; height: 36px; border-radius: 50%; background: var(--primary); color: #fff; font-weight: 800;
+               display: grid; place-items: center; margin: 0 auto 10px; line-height: 1; }
+    .flow b { display: block; margin-bottom: 4px; }
+    .flow span { color: var(--muted); font-size: 15px; }
+    footer { text-align: center; margin-top: 30px; color: var(--muted); font-size: 15px; }
+    @media (max-width: 760px) { .tiles, .flow { grid-template-columns: 1fr; } .hero h1 { font-size: 28px; } }
+  </style>
+</head>
+<body>
+<main>
+  <div class="hero">
+    <div class="logo">🚑</div>
+    <h1>Green Corridor</h1>
+    <p>Helps ambulances get through traffic: the police clear the signals on the ambulance's road before it arrives.</p>
+  </div>
+
+  <div class="ask">Who are you?</div>
+  <div class="tiles">
+    <a class="tile" href="/driver" style="--c: var(--green-strong)">
+      <div class="ic">🚑</div><div><b>Ambulance driver</b><span>See your road, and which signals will be green for you.</span></div><div class="go">›</div></a>
+    <a class="tile" href="/junction" style="--c: var(--amber-strong)">
+      <div class="ic">🚦</div><div><b>Police at a signal</b><span>Get an alert when an ambulance is coming to your signal.</span></div><div class="go">›</div></a>
+    <a class="tile" href="/police" style="--c: var(--primary)">
+      <div class="ic">🚓</div><div><b>Traffic control room</b><span>Say yes or no to clearing the road for each ambulance.</span></div><div class="go">›</div></a>
+    <a class="tile" href="/dispatch" style="--c: var(--red-strong)">
+      <div class="ic">🏥</div><div><b>Hospital or ambulance service</b><span>Report an accident and send the nearest ambulance.</span></div><div class="go">›</div></a>
+  </div>
+
+  <section class="how">
+    <h2>How it works</h2>
+    <div class="flow">
+      <div><div class="n">1</div><b>Accident reported</b><span>The hospital sends the ambulance that can get there fastest.</span></div>
+      <div><div class="n">2</div><b>Police are told</b><span>The control room and the police at each signal get the route.</span></div>
+      <div><div class="n">3</div><b>Signals turn green</b><span>Just before the ambulance reaches them, then back to normal.</span></div>
+      <div><div class="n">4</div><b>To the hospital</b><span>The same again, from the accident to the hospital.</span></div>
+    </div>
+  </section>
+
+  <footer>Showing it to an audience? Open the <a href="/pitch">presenter view</a> · This is a simulation: ambulances and traffic are not real.</footer>
+</main>
+</body>
+</html>

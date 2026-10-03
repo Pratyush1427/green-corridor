@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Green Corridor · Hospital & Ambulance Service</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <link rel="stylesheet" href="/static/common.css">
+  <style>
+    html, body { height: 100%; }
+    body { display: grid; grid-template-rows: 64px 1fr; overflow: hidden; }
+    .layout { display: grid; grid-template-columns: 430px 1fr; min-height: 0; }
+    aside { background: var(--surface); border-right: 1px solid var(--border); display: flex; flex-direction: column; min-height: 0; }
+    .mapwrap { position: relative; min-height: 0; }
+    #map { position: absolute; inset: 0; }
+
+    /* tabs */
+    .tabs { display: grid; grid-template-columns: repeat(3, 1fr); border-bottom: 1px solid var(--border); flex: none; }
+    .tabs button { min-height: 58px; border: none; background: none; font-family: inherit; font-weight: 700; font-size: 16px; color: var(--muted); cursor: pointer;
+                   border-bottom: 3px solid transparent; display: flex; align-items: center; justify-content: center; gap: 6px; }
+    .tabs button.on { color: var(--primary); border-bottom-color: var(--primary); }
+    .tabs .count { background: var(--red-strong); color: #fff; border-radius: 10px; font-size: 12px; padding: 1px 7px; }
+    .panel { flex: 1; overflow-y: auto; padding: 18px; display: flex; flex-direction: column; gap: 16px; }
+    .section-title { font-size: 14px; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin: 4px 0 -4px; }
+
+    /* report flow */
+    .report-card { border: 2px solid var(--primary); }
+    .report-card .step { font-size: 14px; font-weight: 800; color: var(--primary); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 6px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chips button { min-height: 46px; padding: 0 14px; border-radius: 23px; border: 2px solid var(--border); background: var(--surface);
+                    font-family: inherit; font-weight: 600; font-size: 15px; color: var(--text); cursor: pointer; }
+    .chips button.on { border-color: var(--primary); background: #eaf2ff; color: var(--primary-dark); }
+    .sendline { display: flex; gap: 14px; align-items: center; background: var(--surface-2); border-radius: 12px; padding: 12px 14px; }
+    .sendline .big { font-size: 26px; }
+    .sendline b { display: block; font-size: 18px; }
+
+    /* trip cards */
+    .trip { padding: 14px 16px; }
+    .trip-top { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+    .trip-top .ic { font-size: 26px; }
+    .trip-top b { font-size: 17px; display: block; }
+    .trip-top .grow span { color: var(--muted); font-size: 14px; }
+    .trip .bar { height: 8px; background: var(--surface-3); border-radius: 4px; overflow: hidden; margin: 10px 0 6px; }
+    .trip .bar div { height: 100%; background: var(--corridor); transition: width .9s linear; }
+    .trip .meta { display: flex; justify-content: space-between; font-size: 14px; color: var(--muted); }
+    .trip .acts { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
+    .eta-big { font-size: 22px; font-weight: 800; color: var(--text); }
+
+    /* fleet */
+    .amb-row { display: flex; align-items: center; gap: 12px; padding: 12px 14px; border: 1px solid var(--border); border-radius: 12px; background: var(--surface); }
+    .amb-row b { font-size: 17px; }
+    .amb-row .grow span { display: block; font-size: 14px; color: var(--muted); }
+
+    /* traffic */
+    .seg { display: grid; grid-template-columns: 1fr 1fr; border: 2px solid var(--border); border-radius: 12px; overflow: hidden; }
+    .seg button { min-height: 48px; border: none; background: var(--surface); font-family: inherit; font-weight: 700; font-size: 15px; color: var(--text); cursor: pointer; }
+    .seg button.on { background: var(--primary); color: #fff; }
+    .legend { display: flex; gap: 14px; flex-wrap: wrap; font-size: 14px; }
+    .legend span { display: inline-flex; align-items: center; gap: 6px; }
+    input[type=range] { width: 100%; accent-color: var(--primary); }
+    .chart-wrap { position: relative; height: 200px; }
+
+    /* map overlays */
+    .map-banner { position: absolute; top: 14px; left: 50%; transform: translateX(-50%); z-index: 900; background: var(--primary); color: #fff;
+                  font-weight: 700; font-size: 18px; padding: 12px 20px; border-radius: 12px; box-shadow: var(--shadow-lg); display: flex; gap: 14px; align-items: center; }
+    .map-banner button { background: rgba(255,255,255,.2); border: none; color: #fff; font-family: inherit; font-weight: 700; font-size: 15px; padding: 8px 12px; border-radius: 8px; cursor: pointer; }
+    .picking #map, .picking .leaflet-interactive { cursor: crosshair !important; }
+    .jn { border-radius: 50%; border: 2px solid #fff; box-shadow: 0 0 10px 2px var(--c); background: var(--c); }
+    .hosp { width: 18px; height: 18px; border-radius: 5px; background: #fff; border: 2px solid var(--red-strong); color: var(--red-strong);
+            display: grid; place-items: center; font: 900 12px/1 system-ui; }
+    .pin { font-size: 34px; filter: drop-shadow(0 3px 4px rgba(0,0,0,.35)); }
+    @media (max-width: 900px) {
+      body { grid-template-rows: 64px auto; overflow: auto; }
+      .layout { grid-template-columns: 1fr !important; grid-template-rows: 55vh auto; }
+      .mapwrap { order: -1; } aside { border-right: none; }
+    }
+  </style>
+</head>
+<body>
+<div id="topbar"></div>
+<div class="layout">
+  <aside id="aside">
+    <div class="tabs" role="tablist">
+      <button class="on" data-tab="emergencies">🚨 Emergencies <span class="count" id="tab-count" hidden></span></button>
+      <button data-tab="fleet">🚑 Ambulances</button>
+      <button data-tab="traffic">📈 Traffic</button>
+    </div>
+
+    <!-- Emergencies -->
+    <div class="panel" data-pane="emergencies" id="pane-emergencies">
+      <div id="report"></div>
+      <div class="section-title" id="active-title">Ambulances on the way</div>
+      <div class="stack" id="active"></div>
+      <details id="finished-box"><summary class="section-title" style="cursor:pointer">Finished</summary><div class="stack" id="finished" style="margin-top:12px"></div></details>
+      <div class="card flat" style="background:var(--surface-2)">
+        <b>Practice</b>
+        <p class="muted small" style="margin:4px 0 10px">Try it with three made-up accidents in evening traffic. Nothing here is real.</p>
+        <button class="btn small block" id="demo">▶ Start a practice run</button>
+        <div class="row" style="margin-top:10px"><label class="small muted" for="speed">Simulation speed</label>
+          <select id="speed" style="width:auto;min-height:44px;margin-left:auto"><option value="0">Paused</option><option value="1">Real time</option>
+            <option value="5">5× faster</option><option value="10" selected>10× faster</option><option value="30">30× faster</option></select></div>
+      </div>
+    </div>
+
+    <!-- Ambulances -->
+    <div class="panel" data-pane="fleet" hidden>
+      <div class="row"><div class="grow"><h2>Your ambulances</h2><span class="muted small" id="fleet-summary"></span></div>
+        <button class="btn small" id="add-amb">＋ Add</button></div>
+      <div class="stack" id="fleet"></div>
+    </div>
+
+    <!-- Traffic -->
+    <div class="panel" data-pane="traffic" hidden>
+      <div><h2>How busy are the roads?</h2><p class="muted small" style="margin-top:4px">Each circle is a busy junction. Click one to see its usual traffic through the day.</p></div>
+      <div class="seg"><button class="on" data-mode="live">Right now</button><button data-mode="typical">Usual traffic at…</button></div>
+      <div id="typical-box" hidden>
+        <div class="row"><b id="hour-label" style="font-size:20px;min-width:70px">7 pm</b>
+          <select id="weekday" style="width:auto"><option value="">Any day</option><option value="0">Monday</option><option value="1">Tuesday</option>
+            <option value="2">Wednesday</option><option value="3">Thursday</option><option value="4">Friday</option><option value="5">Saturday</option><option value="6">Sunday</option></select>
+          <button class="btn small" id="play" title="Play through the day">▶ Play the day</button></div>
+        <input type="range" id="hour" min="0" max="23" step="1" value="19" aria-label="Hour of the day">
+      </div>
+      <div class="legend"><span><i class="dot ok"></i>Clear</span><span><i class="dot wait"></i>Slow</span><span><i class="dot bad"></i>Jammed</span></div>
+      <div class="row small"><span>🔴 <b id="n-jam">–</b> jammed</span><span>🟠 <b id="n-slow">–</b> slow</span><span>🟢 <b id="n-clear">–</b> clear</span></div>
+      <div class="card flat" id="jdetail" hidden>
+        <h3 id="j-name"></h3>
+        <p class="muted small" id="j-sub" style="margin:4px 0 10px"></p>
+        <div class="chart-wrap"><canvas id="chart"></canvas></div>
+      </div>
+      <p class="muted small" id="data-note"></p>
+    </div>
+  </aside>
+
+  <div class="mapwrap">
+    <div id="map"></div>
+    <div class="map-banner" id="banner" hidden><span id="banner-text"></span><button id="banner-cancel">Cancel</button></div>
+  </div>
+</div>
+
+<script src="/static/common.js"></script>
+<script src="/static/dispatch-view.js"></script>
+</body>
+</html>

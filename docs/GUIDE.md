@@ -4,8 +4,8 @@ Everything beyond the [README](../README.md): setup in detail, collecting real t
 the API, how routing works, and how to refresh the map data.
 
 - [Setup, step by step](#setup-step-by-step)
-- [Using the maps](#using-the-maps)
-- [Simulated ambulances and traffic police clearance](#simulated-ambulances-and-traffic-police-clearance)
+- [Traffic data on the map](#traffic-data-on-the-map)
+- [The four screens](#the-four-screens)
 - [API](#api)
 - [How routing works (and its limits)](#how-routing-works-and-its-limits)
 - [Collecting real traffic data](#collecting-real-traffic-data)
@@ -51,77 +51,99 @@ weekends), so everything works straight away. To start over, delete `traffic.db`
 
 **With Docker** instead: `docker build -t green-corridor . && docker run -p 8000:8000 green-corridor`
 
-## Using the maps
+## Traffic data on the map
 
-- **Live (latest)** colours each monitored junction by its most recent reading.
-- **Typical by hour** colours junctions by their average congestion at the hour on the slider.
-  Press ▶ to watch the whole day play out.
-- Click a junction to see its daily pattern chart and the nearest emergency hospitals.
-- **Traffic signals** appear once you zoom in (they'd clutter the city-wide view).
-- **Congestion** = `1 - current_speed / free_flow_speed`: 0% is a clear road, near 100% is a jam.
+The **Traffic** tab of `/dispatch` shows the 19 monitored junctions: **Right now** uses the latest
+reading, **Usual traffic at…** the average for an hour (▶ plays through the day). Click a junction
+for its usual traffic through the day. Congestion = `1 - current_speed / free_flow_speed`:
+0% is a clear road, near 100% is a jam.
 
 Shortcut links:
 
 | Link | Opens |
 |---|---|
-| `/?demo=1` | Runs the one-click demo |
-| `/?hour=19` | "Typical by hour" at 7pm |
-| `/?hour=9&junction=silk_board&zoom=15` | Silk Board at 9am, zoomed in |
-| `/?hour=19&amb=12.945,77.61&amb=13.02,77.60` | Drops two ambulances into 7pm traffic |
+| `/dispatch?demo=1` | Starts the practice run (three made-up accidents) |
+| `/driver?amb=3` | The ambulance screen for ambulance 3 |
+| `/junction?signal=<id>` | The signal officer screen for one signal |
+| `/driver?amb=3&theme=light` | Force day (or `dark`) colours on the driver screen |
 
-## Simulated ambulances and traffic police clearance
+## The four screens
 
-Open two browser tabs: the **ambulance map** (<http://127.0.0.1:8000>) and the **traffic
-control room** (<http://127.0.0.1:8000/police>). You play both the ambulance crew and the police.
-Or click **▶ Run demo**, and the page plays the police for you.
+Open <http://127.0.0.1:8000> and pick who you are. Everything is simulated on the server, so
+all screens show the same live state, in separate tabs or on phones on the same Wi-Fi
+(`HOST=0.0.0.0 ./run.sh`; there's no login yet, so only on a network you trust).
 
-**On the ambulance map:**
-1. Click **＋ Add ambulance**, then click anywhere on the map. This triggers an emergency:
-   the route is planned and a clearance request goes to the control room.
-2. The ambulance picks the **fastest emergency hospital** (by travel time, not distance).
-   Use its dropdown to send it to a specific hospital instead.
-3. It **sets off immediately in normal traffic**. It never waits for the police's answer.
-4. **Drag** an ambulance to move it; it re-plans and sends a new request. Add as many as you like.
-5. The speed dropdown speeds up the simulation (10× by default).
+The screens are designed for first-time users with little tech experience: plain words, big
+buttons, one clear action at a time, and colours that always mean the same thing:
+**green** = go / cleared, **orange** = waiting, **red** = stop / not cleared, **blue** = the button to press.
+First-time tips appear once and can be closed.
 
-**In the control room**, each request shows the route, its junctions and the time a corridor
-would save. The officer can:
-- **Clear all junctions**: approved signals are held green from 45 seconds before the
-  ambulance reaches them until it passes, and the ambulance drives at corridor speed.
-- **Choose junctions…**: clear only some (e.g. not the one with road works), with a note.
-- **Not possible**: the ambulance continues in normal traffic and stops at red signals.
-- **Revoke clearance** later, if things change.
+### 🏥 Hospital or ambulance service (`/dispatch`)
+- **Emergencies** tab: press **🚨 Report an accident**, tap the place on the map, then check and
+  send. Before sending you see which ambulance will go and how long it will take; you can pick
+  another ambulance or hospital. Below that, every ambulance on the way, with its progress and
+  whether the police cleared its road.
+- **Ambulances** tab: who is free or on a call; **＋ Add** parks a new ambulance on the map.
+- **Traffic** tab: how busy the monitored junctions are right now, or usually at a chosen hour.
+- **Practice** box: three made-up accidents in evening traffic, and the simulation speed.
 
-Requests with no answer within **60 seconds** expire and count as "not possible".
-Ambulances that stop reporting their position for 2 minutes are marked "lost contact".
-Tick **Auto-approve** for hands-free demos. Every trigger, decision and arrival is recorded;
-click **Log** on a request to see it.
+### 🚑 Ambulance driver (`/driver`), on a phone
+- Pick your ambulance once; the phone remembers it.
+- A new emergency fills the screen in red. One tap on **OK** starts the trip and voice guidance.
+- While driving: a green turn banner ("1.0 km · Go straight · Varthur Road"), a chip for the
+  next signal ("Next signal 590 m · Will turn green for you"), and minutes to go at the bottom.
+- At the accident: one big button, **Patient is in the ambulance**. At the hospital:
+  **Patient handed over**.
+- **English, ಕನ್ನಡ, हिन्दी**, for screen text and voice. Night colours after 6 pm.
 
-Route signal colours: amber = waiting for police, dark with green ring = cleared,
-bright green = held green now, red = not cleared, grey = passed.
+### 🚦 Police at a signal (`/junction`), on a phone
+- Three-step setup: your name and language → your signal (📍 find it with the phone's location,
+  or tap it on the map) → turn on the alarm sound and test it.
+- When an ambulance is coming: **AMBULANCE COMING**, a big countdown, where it comes from and
+  where it goes (with an arrow), and two buttons: **✓ I will clear the road** or **✕ Not possible**
+  (then tap a reason). The phone rings, vibrates and speaks.
+
+### 🚓 Traffic control room (`/police`)
+- A banner says whether anyone needs an answer. Each request says "AMB-03 needs a clear road",
+  how far, how many signals, how much faster it would be, and how long is left to answer.
+- **✓ Yes, clear the road**, **Choose signals** (untick the ones you can't clear), or
+  **✕ Not possible** (then tap a reason). Requests expire after 60 seconds.
+- Ambulances on the road show which signals are green and any officer's "not possible".
+- Optional ring for new requests, and a practice mode that says yes automatically.
 
 ## API
 
 Interactive API docs are at <http://127.0.0.1:8000/docs>.
 
-### Emergencies
+### Dispatch
 
-This is the interface a real ambulance app and real signal controllers would use:
+The interface a real ambulance app, junction officers' phones and signal controllers would use:
 
 | Endpoint | Who calls it | What it does |
 |---|---|---|
-| `POST /api/emergencies` | Ambulance app | Trigger: `{"ambulance": "KA-01-1234", "start": [lat, lon], "hospital": [lat, lon] or null}` |
-| `POST /api/emergencies/{id}/location` | Ambulance app | GPS update `{"lat": ..., "lon": ...}`, every few seconds |
-| `POST /api/emergencies/{id}/close` | Ambulance app | `{"status": "arrived"}` or `"cancelled"` |
-| `GET /api/emergencies` | Control room | Active emergencies (`?include_closed=true` for recent ones too) |
-| `POST /api/emergencies/{id}/clearance` | Traffic police | `{"decision": "approved" / "partial" / "declined", "declined_signals": [...], "note": "..."}` |
-| `GET /api/emergencies/{id}/events` | Anyone | Audit log |
+| `GET /api/state` | Every screen | Fleet, active and recent incidents, signals held green (no route geometry) |
+| `POST /api/incidents` | Organisation | Report: `{"scene": [lat, lon], "ambulance_id": null, "hospital": null, "description": "..."}` |
+| `GET /api/incidents/{id}` | Any screen | One incident with the full route of both legs |
+| `POST /api/incidents/{id}/hospital` | Organisation | Choose the hospital before the patient is on board (`{"hospital": [lat, lon]}` or `null`) |
+| `POST /api/incidents/{id}/patient-on-board` | Ambulance | At the scene: start the hospital leg |
+| `POST /api/incidents/{id}/handover` | Ambulance | At the hospital: finish, ambulance available again |
+| `POST /api/incidents/{id}/cancel` | Organisation | Cancel an incident |
+| `GET /api/incidents/{id}/events` | Anyone | Audit log |
+| `POST /api/ambulances` | Organisation | Add an ambulance: `{"lat": ..., "lon": ..., "callsign": "AMB-09"}` |
+| `POST /api/ambulances/{id}/location` | Ambulance app | Real GPS `{"lat": ..., "lon": ...}`; stops simulating that ambulance |
+| `POST /api/legs/{id}/clearance` | Control room | `{"decision": "approved" / "partial" / "declined", "declined_signals": [...], "note": "..."}` |
+| `POST /api/legs/{id}/signals/{signal_id}/answer` | Junction officer | `{"answer": "clearing" / "cant", "reason": "Gridlock"}` |
+| `GET /api/signals/upcoming` | Junction screen | Junctions ambulances are heading for, soonest first |
+| `GET /api/signals/{signal_id}/incoming` | Junction screen | Ambulances coming to one junction, with direction and ETA |
 | `GET /api/signals/holds` | Anyone | Every signal held green right now |
 | `GET /api/signals/{signal_id}/command` | Signal controller | `"hold_green"` or `"normal"` |
+| `POST /api/sim` | Organisation | Simulation speed `{"speed": 10}` (0 pauses) |
+| `POST /api/demo` | Organisation | Start the three-accident demo |
+| `POST /api/fleet/reset` | Presenter | Cancel active incidents and send every ambulance back to its base |
 
-⚠️ **There is no login yet.** Anyone who can reach the server can trigger emergencies or
-approve them. Before any real use, triggering must be limited to verified ambulances and
-decisions to traffic police accounts.
+⚠️ **There is no login yet.** Anyone who can reach the server can report incidents, answer
+clearance requests or move ambulances. Before any real use, only verified ambulances may
+report and only traffic police accounts may answer.
 
 ### Traffic and routing
 
@@ -211,7 +233,7 @@ included. The public download server is often busy, so the scripts retry a few t
 | Data | Refresh with | Notes |
 |---|---|---|
 | Hospitals (`static/hospitals.json`) | `python fetch_hospitals.py` | 1,097 hospitals; 111 tagged `emergency=yes`. Many real emergency hospitals aren't tagged yet: fix that on OpenStreetMap, or set `"emergency": true` in the file |
-| Traffic signals (`static/signals.json`) | `python fetch_signals.py` | 1,384 signal points merged into 611 junctions (points within 40 m). Locations are real; the red/amber/green cycle is simulated (90 s: 40 green, 4 amber, 46 red), set in `static/index.html` |
+| Traffic signals (`static/signals.json`) | `python fetch_signals.py` | 1,384 signal points merged into 611 junctions (points within 40 m). Locations are real. Each route's signals are shown on every screen; a signal is held green only for a cleared ambulance |
 | Roads (`data/roads.json.gz`) | `python fetch_roads.py` | Main roads only, 16.5k junctions, 1 MB. Large download |
 
 ## Project files
@@ -220,13 +242,17 @@ included. The public download server is often busy, so the scripts retry a few t
 |---|---|
 | `app.py` | The web server: JSON API, the ambulance map and the control room |
 | `routing.py` | Traffic-aware ambulance routing, with and without a green corridor |
-| `emergencies.py` | Emergencies, traffic-police clearance, signal commands and the audit log |
+| `dispatch.py` | Fleet, incidents and their two legs, police and junction answers, signal commands, the simulation loop and audit log |
 | `collector.py` | Fetches traffic data from TomTom (or generates demo data) |
 | `db.py` | SQLite tables and queries for traffic readings |
 | `config.py` | The monitored junctions and settings |
 | `osm.py` | Shared helper for downloading OpenStreetMap data |
 | `fetch_hospitals.py`, `fetch_signals.py`, `fetch_roads.py` | Refresh the map data |
-| `static/index.html` | The ambulance map (Leaflet + Chart.js, loaded from a CDN) |
-| `static/ambulances.js` | The simulated ambulances and the one-click demo |
+| `static/home.html` | Start page: "Who are you?" |
+| `static/dispatch.html`, `static/dispatch-view.js` | Hospital & ambulance service (`/dispatch`): report accidents, ambulances, traffic |
+| `static/driver.html` | The ambulance screen (`/driver`) |
+| `static/junction.html` | The junction officer screen (`/junction`) |
+| `static/common.js`, `static/common.css` | Helpers and styles shared by the screens |
+| `static/pitch.html` | The presenter view (`/pitch`): all screens and a narrated story |
 | `static/police.html` | The traffic control room (`/police`) |
 | `run.sh`, `Dockerfile` | One-command start, locally or in a container |

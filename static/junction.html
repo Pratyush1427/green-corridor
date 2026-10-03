@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#ffffff">
+  <title>Green Corridor · Signal Officer</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+  <link rel="stylesheet" href="/static/common.css">
+  <style>
+    /* ---------- setup (first time): a simple page ---------- */
+    body.setup { max-width: 640px; margin: 0 auto; background: var(--bg); }
+    .setup-top { display: flex; align-items: center; gap: 10px; padding: 10px 14px; background: var(--surface); border-bottom: 1px solid var(--border); }
+    .setup-top h1 { font-size: 18px; flex: 1; }
+    #setup { padding: 16px; display: flex; flex-direction: column; gap: 14px; }
+    #setup h2 { font-size: 26px; margin-bottom: 6px; }
+    #pickmap { height: 40vh; min-height: 220px; border-radius: 16px; border: 1px solid var(--border); }
+    .calm { text-align: center; padding: 20px 10px; }
+    .calm .big { width: 88px; height: 88px; border-radius: 50%; background: var(--green-bg); display: grid; place-items: center; margin: 0 auto 12px; font-size: 44px; }
+
+    /* ---------- watching: map-first, like a phone map app ---------- */
+    body.watch { height: 100vh; overflow: hidden; }
+    body.watch #map { position: fixed; inset: 0; }
+    .leaflet-bottom { bottom: var(--panel-h, 200px); }
+    .leaflet-control-attribution { font-size: 9px; }
+    .topcard { position: fixed; top: max(10px, env(safe-area-inset-top)); left: 10px; right: 10px; z-index: 1100; max-width: 620px; margin: 0 auto;
+               display: flex; align-items: center; gap: 12px; background: var(--surface); border-radius: 16px; padding: 10px 10px 10px 14px; box-shadow: var(--shadow-lg); }
+    .topcard .sig { font-size: 26px; }
+    .topcard .name { flex: 1; min-width: 0; }
+    .topcard .name small { display: block; color: var(--muted); font-size: 13px; font-weight: 600; }
+    .topcard .name b { display: block; font-size: 17px; line-height: 1.25; }
+    .iconbtn { width: 48px; height: 48px; border-radius: 12px; border: 2px solid var(--border); background: var(--surface); font-size: 22px; cursor: pointer; flex: none; }
+    .alarm { position: fixed; top: calc(max(10px, env(safe-area-inset-top)) + 84px); left: 50%; transform: translateX(-50%); z-index: 1100;
+             background: var(--red-strong); color: #fff; border: none; border-radius: 22px; padding: 10px 16px; font-family: inherit;
+             font-weight: 700; font-size: 15px; box-shadow: var(--shadow-lg); cursor: pointer; white-space: nowrap; }
+
+    .panel { position: fixed; left: 0; right: 0; bottom: 0; z-index: 1200; max-width: 640px; margin: 0 auto; background: var(--surface);
+             border-radius: 22px 22px 0 0; box-shadow: 0 -6px 24px rgba(15,27,45,.22); overflow: hidden;
+             padding-bottom: env(safe-area-inset-bottom); }
+    .phead { display: flex; align-items: center; gap: 12px; padding: 14px 18px; color: #fff; }
+    .phead .t { flex: 1; font-weight: 900; font-size: 20px; letter-spacing: .02em; line-height: 1.2; }
+    .phead .cd { font-size: 40px; font-weight: 900; font-variant-numeric: tabular-nums; line-height: 1; }
+    .phead .cd small { display: block; font-size: 12px; font-weight: 700; opacity: .9; text-align: right; }
+    .phead.ok { background: var(--green-strong); } .phead.coming { background: var(--amber-strong); color: #2a1800; }
+    .phead.close { background: var(--red-strong); animation: blink 1s ease-in-out infinite; }
+    @keyframes blink { 50% { filter: brightness(1.18); } }
+    @media (prefers-reduced-motion: reduce) { .phead.close { animation: none; } }
+    .pbody { padding: 14px 18px 18px; display: flex; flex-direction: column; gap: 12px; }
+    .route { display: flex; align-items: center; gap: 14px; }
+    .route .arrow { width: 64px; height: 64px; border-radius: 16px; background: #eaf2ff; color: var(--primary); display: grid; place-items: center; font-size: 38px; font-weight: 700; flex: none; }
+    .route .words { font-size: 18px; line-height: 1.35; }
+    .route .words b { font-size: 19px; }
+    .route .words .turnw { display: inline-block; margin: 2px 0; padding: 1px 8px; border-radius: 6px; background: #eaf2ff; color: var(--primary-dark); font-weight: 800; font-size: 15px; }
+    .actions { display: grid; grid-template-columns: 2fr 1fr; gap: 10px; }
+    .actions .btn { min-height: 64px; font-size: 18px; white-space: normal; line-height: 1.2; }
+    .reasons { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .reasons button { min-height: 56px; border-radius: 14px; border: 2px solid var(--red-strong); background: var(--surface); color: var(--red);
+                      font-family: inherit; font-weight: 700; font-size: 16px; cursor: pointer; }
+    .tabs { display: flex; gap: 8px; overflow-x: auto; padding: 10px 18px 0; }
+    .tabs button { flex: none; min-height: 40px; padding: 0 12px; border-radius: 20px; border: 2px solid var(--border); background: var(--surface); font-family: inherit; font-weight: 700; font-size: 14px; cursor: pointer; }
+    .tabs button.on { border-color: var(--primary); background: #eaf2ff; color: var(--primary-dark); }
+    .jpin { width: 30px; height: 30px; border-radius: 50%; background: var(--primary); border: 5px solid #fff; display: grid; place-items: center;
+            box-shadow: 0 0 0 7px rgba(23,103,216,.28), 0 2px 8px rgba(0,0,0,.4); font-size: 12px; }
+
+    /* settings */
+    .overlay { position: fixed; inset: 0; z-index: 2000; background: rgba(15,27,45,.45); display: flex; align-items: flex-end; justify-content: center; }
+    .overlay .box { background: var(--surface); width: 100%; max-width: 640px; border-radius: 22px 22px 0 0; padding: 18px 18px calc(18px + env(safe-area-inset-bottom));
+                    display: flex; flex-direction: column; gap: 14px; }
+  </style>
+</head>
+<body>
+<script src="/static/common.js"></script>
+<script>
+  const signalId = Number(params.get('signal')) || null;
+  let officer = remember.get('gc-officer') || '';
+  document.body.className = signalId ? 'watch' : 'setup';
+  document.body.insertAdjacentHTML('beforeend', signalId
+    ? `<div id="map"></div><div class="topcard" id="topcard"></div><button class="alarm" id="alarm" hidden></button>
+       <div class="panel" id="panel"></div><div class="overlay" id="settings" hidden></div>`
+    : `<div class="setup-top"><span style="font-size:24px">🚦</span><h1 id="title"></h1><div class="lang" id="lang"></div></div><main id="setup"></main>`);
+
+  // ---------- alarm sound ----------
+  let audio = null;
+  const soundOn = () => !!audio && audio.state === 'running';
+  function enableSound() { audio = audio || new AudioContext(); audio.resume(); beep(1); }
+  function beep(times = 3) {
+    if (!soundOn()) return;
+    for (let i = 0; i < times; i++) [880, 660].forEach((f, j) => {  // two-tone, like a siren
+      const o = audio.createOscillator(), g = audio.createGain();
+      o.frequency.value = f; o.connect(g); g.connect(audio.destination);
+      const tt = audio.currentTime + i * 0.6 + j * 0.25;
+      g.gain.setValueAtTime(0.3, tt); g.gain.exponentialRampToValueAtTime(0.001, tt + 0.22);
+      o.start(tt); o.stop(tt + 0.24);
+    });
+  }
+
+  // ========== SETUP: language & name → your signal → sound ==========
+  let step = 1;
+  function setup() {
+    $('title').textContent = t('officer_title');
+    const steps = `<div class="wizard-steps">${[1, 2, 3].map(n => `<span class="${n <= step ? 'on' : ''}"></span>`).join('')}</div>`;
+    if (step === 1) {
+      const saved = remember.get('gc-signal');
+      $('setup').innerHTML = `<div class="setup">${steps}
+        <h2>${t('your_name')}</h2>
+        <input type="text" id="name" value="${escapeHtml(officer)}" placeholder="e.g. PC Ramesh" autocomplete="name" style="margin:8px 0 16px">
+        <button class="btn primary huge" id="next1">${t('next')} ➜</button>
+        ${saved ? `<button class="btn block" id="continue" style="margin-top:12px">↩ ${escapeHtml(remember.get('gc-signal-name') || 'My last signal')}</button>` : ''}
+        <p class="muted small" style="margin-top:14px">Choose your language above · ಮೇಲೆ ಭಾಷೆ ಆಯ್ಕೆಮಾಡಿ · ऊपर भाषा चुनें</p></div>`;
+      $('next1').addEventListener('click', () => { officer = $('name').value.trim() || 'Signal officer'; remember.set('gc-officer', officer); step = 2; setup(); });
+      $('continue')?.addEventListener('click', () => { location.href = `/junction?signal=${saved}`; });
+      return;
+    }
+    if (step === 2) {
+      $('setup').innerHTML = `<div class="setup">${steps}<h2>${t('choose_signal')}</h2>
+        <button class="btn primary huge" id="locate" style="margin:10px 0">📍 ${t('use_location')}</button>
+        <div id="near"></div>
+        <p class="muted" style="margin:8px 0">${t('or_pick')}</p></div>
+        <div id="pickmap"></div><div id="coming"></div>`;
+      pickMap();
+      $('locate').addEventListener('click', locate);
+      return;
+    }
+    $('setup').innerHTML = `<div class="setup">${steps}<div class="calm"><div class="big">🔔</div><h2>${t('sound_title')}</h2><p class="muted">${t('sound_sub')}</p></div>
+      <button class="btn go huge" id="sound">🔊 ${t('sound_btn')}</button></div>`;
+    $('sound').addEventListener('click', () => { enableSound(); setTimeout(() => { location.href = `/junction?signal=${chosen.id}`; }, 1600); });
+  }
+
+  let signals = [], chosen = null;
+  async function pickMap() {
+    const map = L.map('pickmap', { maxZoom: 19 }).setView([12.975, 77.6], 12);
+    addBaseMap(map);
+    const [upcoming, all] = await Promise.all([api('/api/signals/upcoming'), fetch('/static/signals.json').then(r => r.json())]);
+    signals = all;
+    for (const s of all) L.circleMarker([s.lat, s.lon], { radius: 5, weight: 1.5, color: '#fff', fillColor: '#475569', fillOpacity: 1 }).on('click', () => choose(s)).addTo(map);
+    for (const s of upcoming) L.circleMarker([s.lat, s.lon], { radius: 10, weight: 3, color: '#fff', fillColor: css('--amber-strong'), fillOpacity: 1 })
+      .bindTooltip(escapeHtml(junctionName(s))).on('click', () => choose(s)).addTo(map);
+    if (upcoming.length) map.fitBounds(L.latLngBounds(upcoming.map(s => [s.lat, s.lon])).pad(0.4));
+    $('coming').innerHTML = upcoming.length ? `<h3 style="margin:14px 0 10px">${t('ambulance_coming_list')}</h3>` + upcoming.slice(0, 6).map(s =>
+      `<button class="choice" data-id="${s.id}"><span class="icon">🚦</span><span class="grow"><b class="ellipsis">${escapeHtml(junctionName(s))}</b>
+       <span class="muted">🚑 ${escapeHtml(s.ambulance)} · ${fmtMin(s.eta_s)} ${t('minutes')}</span></span><span>›</span></button>`).join('') : '';
+    $('coming').querySelectorAll('[data-id]').forEach(b => b.addEventListener('click', () => choose(upcoming.find(s => s.id === Number(b.dataset.id)))));
+  }
+  function locate() {
+    if (!navigator.geolocation) { toast('This phone cannot share its location. Tap your signal on the map.', 'bad'); return; }
+    $('locate').textContent = '📍 …';
+    navigator.geolocation.getCurrentPosition((pos) => {
+      const p = [pos.coords.latitude, pos.coords.longitude];
+      const near = signals.map(s => ({ ...s, d: L.latLng(p).distanceTo([s.lat, s.lon]) })).sort((a, b) => a.d - b.d).slice(0, 4);
+      $('locate').textContent = '📍 ' + t('use_location');
+      if (!near.length || near[0].d > 30000) { toast('You seem to be outside Bengaluru. Tap your signal on the map instead.', 'bad'); return; }
+      $('near').innerHTML = near.map(s => `<button class="choice" data-id="${s.id}"><span class="icon">🚦</span><span class="grow"><b class="ellipsis">${escapeHtml(junctionName(s))}</b>
+        <span class="muted">${fmtDist(s.d)}</span></span><span>›</span></button>`).join('');
+      $('near').querySelectorAll('[data-id]').forEach(b => b.addEventListener('click', () => choose(near.find(s => s.id === Number(b.dataset.id)))));
+    }, () => { $('locate').textContent = '📍 ' + t('use_location'); toast('Location not allowed. Tap your signal on the map instead.', 'bad'); }, { timeout: 10000 });
+  }
+  function choose(s) {
+    chosen = s;
+    remember.set('gc-signal', String(s.id));
+    remember.set('gc-signal-name', junctionName(s));
+    step = 3; setup();
+  }
+
+
+  // ========== WATCH: one panel at the bottom that says what is happening ==========
+  let view = null, state = null, selected = null, panelKey = '', map = null, why = false, editing = null;
+  const layers = new Map();
+  const alerted = new Set();
+  const turnWords = (turn) => turn === 'left' ? t('turns_left') : turn === 'right' ? t('turns_right') : t('goes_straight');
+  const sigName = () => view.signal.name || (view.signal.roads.length ? view.signal.roads.slice(0, 2).join(' / ') : `Signal #${view.signal.id}`);
+
+  function initWatch() {
+    map = L.map('map', { zoomControl: false, maxZoom: 19 });
+    addBaseMap(map);
+    map.on('dragstart', () => { follow = false; });
+    $('alarm').addEventListener('click', () => { enableSound(); drawTop(); });
+  }
+  let follow = true;
+
+  function drawTop() {
+    $('topcard').innerHTML = `<span class="sig">🚦</span><div class="name"><small>${t('officer_title')}${officer ? ' · ' + escapeHtml(officer) : ''}</small><b>${escapeHtml(sigName())}</b></div>
+      ${EMBED ? '' : '<button class="iconbtn" id="gear" aria-label="Settings">⚙️</button>'}`;
+    $('gear')?.addEventListener('click', openSettings);
+    $('alarm').hidden = EMBED || soundOn();
+    $('alarm').textContent = '🔕 ' + t('alarm_off');
+  }
+
+  function openSettings() {
+    const box = $('settings');
+    box.innerHTML = `<div class="box"><div class="row"><h2 class="grow">⚙️ ${t('settings')}</h2><button class="btn small" id="close">${t('close')}</button></div>
+      <div class="lang" id="lang"></div>
+      <div><label class="field" for="nm">${t('your_name')}</label><input type="text" id="nm" value="${escapeHtml(officer)}"></div>
+      <div id="voicebox"></div>
+      <a class="btn block" href="/junction">🚦 ${t('change')}: ${t('choose_signal')}</a></div>`;
+    box.hidden = false;
+    langSwitch($('lang'), () => { panelKey = ''; drawTop(); openSettings(); render(); });
+    voicePicker($('voicebox'));
+    $('nm').addEventListener('change', (e) => { officer = e.target.value.trim() || 'Signal officer'; remember.set('gc-officer', officer); drawTop(); });
+    $('close').addEventListener('click', () => { box.hidden = true; });
+    box.addEventListener('click', (e) => { if (e.target === box) box.hidden = true; }, { once: true });
+  }
+
+  function render() {
+    const found = view.coming.find(x => x.leg_id === selected);
+    const c = found && editing === found.leg_id ? { ...found, answer: null } : found;
+    const key = c ? `${c.leg_id}|${c.answer}|${c.eta_s < 60}|${why}|${LANG}|${view.coming.length}` : `calm|${LANG}`;
+    if (key === panelKey) {  // only the countdown changes: buttons stay put under the officer's thumb
+      if (c && $('cd')) $('cd').textContent = fmt(c.eta_s);
+      return;
+    }
+    panelKey = key;
+    const panel = $('panel');
+    if (!c) {
+      panel.innerHTML = `<div class="phead ok"><span style="font-size:28px">✓</span><div class="t">${t('all_clear')}</div></div>
+        <div class="pbody"><div style="font-size:18px;font-weight:700">${t('calm_title')}</div><div class="muted">${t('calm_sub')}</div></div>`;
+    } else {
+      const state = c.answer === 'clearing' ? 'ok' : c.eta_s < 60 ? 'close' : 'coming';
+      const tabs = view.coming.length > 1 ? `<div class="tabs">${view.coming.map(x =>
+        `<button data-leg="${x.leg_id}" class="${x.leg_id === selected ? 'on' : ''}">🚑 ${escapeHtml(x.ambulance)} · ${fmt(x.eta_s)}</button>`).join('')}</div>` : '';
+      let bottom;
+      if (c.answer === 'clearing') bottom = `<div class="pill ok" style="font-size:16px;padding:10px 14px;white-space:normal">✓ ${t('you_clearing')}</div>
+          <button class="linkbtn" id="redo">${t('change_answer')}</button>`;
+      else if (c.answer === 'cant') bottom = `<div class="pill bad" style="font-size:16px;padding:10px 14px;white-space:normal">✕ ${t('you_cant')}</div>
+          <button class="linkbtn" id="redo">${t('change_answer')}</button>`;
+      else if (why) bottom = `<div style="font-weight:800;font-size:17px">${t('why_cant')}</div><div class="reasons">
+          ${[['r_jam', 'Traffic jam'], ['r_vip', 'VIP movement'], ['r_blocked', 'Road blocked'], ['r_staff', 'Not enough staff']].map(([k, en]) => `<button data-r="${en}">${t(k)}</button>`).join('')}</div>
+          <button class="btn small" id="back">← ${t('back')}</button>`;
+      else bottom = `<div class="actions"><button class="btn go" id="yes">✓ ${t('btn_clearing')}</button><button class="btn stop" id="no">✕ ${t('btn_cant')}</button></div>`;
+      panel.innerHTML = `${tabs}<div class="phead ${state}"><span style="font-size:28px">🚑</span>
+          <div class="t">${c.answer === 'clearing' ? '✓ ' + t('btn_clearing') : t('ambulance_coming')}<br><span style="font-weight:600;font-size:14px;letter-spacing:0">${escapeHtml(c.ambulance)} · ${c.kind === 'to_scene' ? t('go_accident') : t('btn_patient_in')}</span></div>
+          <div class="cd"><small>${t('arrives_in')}</small><span id="cd">${fmt(c.eta_s)}</span></div></div>
+        <div class="pbody">
+          <div class="route"><div class="arrow">${TURN_ARROW[c.turn] || '↑'}</div>
+            <div class="words">${t('word_from')} <b>${escapeHtml(c.from_road || '—')}</b><br><span class="turnw">${turnWords(c.turn)}</span> ${t('word_to')} <b>${escapeHtml(c.to_road || '—')}</b></div></div>
+          ${bottom}
+        </div>`;
+      $('yes')?.addEventListener('click', () => answer(c, 'clearing'));
+      $('no')?.addEventListener('click', () => { why = true; render(); });
+      $('back')?.addEventListener('click', () => { why = false; render(); });
+      $('redo')?.addEventListener('click', () => { editing = c.leg_id; why = false; render(); });
+      panel.querySelectorAll('[data-r]').forEach(b => b.addEventListener('click', () => answer(c, 'cant', b.dataset.r)));
+      panel.querySelectorAll('[data-leg]').forEach(b => b.addEventListener('click', () => { selected = Number(b.dataset.leg); why = false; follow = true; render(); fit(true); }));
+    }
+    document.documentElement.style.setProperty('--panel-h', panel.getBoundingClientRect().height + 'px');
+    fit(true);
+  }
+
+  async function answer(c, ans, reason) {
+    try {
+      await api(`/api/legs/${c.leg_id}/signals/${signalId}/answer`, { answer: ans, reason: reason || null, officer: officer || 'Signal officer' });
+      why = false; editing = null; panelKey = ''; tick();
+    } catch (e) { toast(e.message, 'bad'); }
+  }
+
+  // Map: your signal, the ambulance coming, and the road between them, kept above the panel.
+  let pin = null;
+  function fit(force = false) {
+    if (!map || (!follow && !force)) return;
+    const panelH = $('panel').getBoundingClientRect().height;
+    const c = view.coming.find(x => x.leg_id === selected);
+    const inc = c && state.incidents.find(i => i.id === c.incident_id);
+    const pts = [[view.signal.lat, view.signal.lon]];
+    if (inc) pts.push([inc.ambulance.lat, inc.ambulance.lon]);
+    const opts = { paddingTopLeft: [40, $('alarm').hidden ? 110 : 160], paddingBottomRight: [40, panelH + 30], maxZoom: 17, animate: true };
+    if (pts.length === 1) map.fitBounds(L.latLngBounds([pts[0], pts[0]]).pad(0.002), { ...opts, maxZoom: 17 });
+    else map.fitBounds(L.latLngBounds(pts), opts);
+  }
+
+  async function drawAmbulances() {
+    if (!pin) pin = L.marker([view.signal.lat, view.signal.lon], { zIndexOffset: 2000,
+      icon: L.divIcon({ className: '', iconSize: [30, 30], html: '<div class="jpin"></div>' }) }).addTo(map);
+    const legIds = new Set(view.coming.map(c => c.leg_id));
+    for (const c of view.coming) {
+      const inc = state.incidents.find(i => i.id === c.incident_id);
+      if (!inc) continue;
+      const p = [inc.ambulance.lat, inc.ambulance.lon];
+      let lay = layers.get(c.leg_id);
+      if (!lay) {
+        lay = { group: L.layerGroup().addTo(map), idx: 0 };
+        layers.set(c.leg_id, lay);
+        const geo = await legGeometry(c.incident_id, c.leg_id);
+        lay.coords = geo.coords;
+        lay.jIdx = nearestIndex(geo.coords, [view.signal.lat, view.signal.lon]);
+        lay.casing = L.polyline([], { color: '#fff', weight: 12, opacity: .95 }).addTo(lay.group);
+        lay.line = L.polyline([], { color: '#1a73e8', weight: 7 }).addTo(lay.group);
+        lay.amb = L.marker(p, { icon: navIcon(0, c.ambulance), zIndexOffset: 3000 }).addTo(lay.group);
+      }
+      if (!lay.coords) continue;
+      lay.idx = nearestSegment(lay.coords, p, lay.idx);
+      glide(lay.amb, p);
+      lay.amb.setIcon(navIcon(routeHeading(lay.coords, lay.idx, p), c.ambulance));
+      const rest = [p, ...lay.coords.slice(lay.idx + 1, Math.max(lay.idx + 1, lay.jIdx + 1))];
+      lay.casing.setLatLngs(rest); lay.line.setLatLngs(rest);
+      lay.group.eachLayer(l => l.setStyle?.({ opacity: c.leg_id === selected ? 1 : .35 }));
+    }
+    for (const [id, lay] of layers) if (!legIds.has(id)) { lay.group.remove(); layers.delete(id); }
+  }
+
+  function alertOfficer(c) {
+    if (alerted.has(c.leg_id) || c.answer) return;
+    alerted.add(c.leg_id);
+    beep(3);
+    navigator.vibrate?.([500, 200, 500, 200, 500]);
+    const secs = Math.max(10, Math.round(c.eta_s / 10) * 10);
+    const turn = { left: 'It turns left', right: 'It turns right' }[c.turn] || 'It goes straight';
+    if (!EMBED && soundOn()) setTimeout(() => speak(`Ambulance coming${c.from_road ? ' from ' + c.from_road : ''}. ${turn}${c.to_road ? ' to ' + c.to_road : ''}. It reaches you in ${secs} seconds.`), 1800);
+  }
+
+  let fitTick = 0;
+  async function tick() {
+    try { [view, state] = await Promise.all([api(`/api/signals/${signalId}/incoming`), api('/api/state')]); }
+    catch (e) { $('panel').innerHTML = `<div class="pbody"><p>${escapeHtml(e.message)}</p><a class="btn primary block" href="/junction">🚦 ${t('change')}</a></div>`; return; }
+    if (!map) { initWatch(); drawTop(); }
+    if (!view.coming.some(c => c.leg_id === selected)) { selected = view.coming[0]?.leg_id ?? null; why = false; }
+    await drawAmbulances();
+    render();
+    if ((fitTick = (fitTick + 1) % 4) === 0) fit();
+    for (const c of view.coming) if (c.alert) alertOfficer(c);
+  }
+
+  if (!signalId) { langSwitch($('lang'), setup); setup(); }
+  else { tick(); setInterval(tick, 1000); }
+</script>
+</body>
+</html>

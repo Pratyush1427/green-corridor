@@ -11,9 +11,18 @@ fi
 source venv/bin/activate
 pip install --quiet --disable-pip-version-check -r requirements.txt
 
+PORT="${PORT:-8000}"
+HOST="${HOST:-127.0.0.1}"   # HOST=0.0.0.0 lets phones on the same Wi-Fi connect (no login yet: trusted networks only)
+ADDR="127.0.0.1"
+if [ "$HOST" = "0.0.0.0" ]; then
+  ADDR="$(ipconfig getifaddr en0 2>/dev/null || hostname -I 2>/dev/null | awk '{print $1}')"
+fi
+
 echo ""
-echo "  Ambulance map:        http://127.0.0.1:${PORT:-8000}"
-echo "  Traffic control room: http://127.0.0.1:${PORT:-8000}/police"
+echo "  Organisation:  http://${ADDR}:${PORT}"
+echo "  Ambulance:     http://${ADDR}:${PORT}/driver"
+echo "  Junction:      http://${ADDR}:${PORT}/junction"
+echo "  Control room:  http://${ADDR}:${PORT}/police"
 echo "  Press Ctrl+C to stop."
 echo ""
-exec uvicorn app:app --port "${PORT:-8000}"
+exec uvicorn app:app --host "$HOST" --port "$PORT"

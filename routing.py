@@ -13,6 +13,7 @@ import gzip
 import heapq
 import json
 import math
+import re
 from collections import defaultdict
 from functools import lru_cache
 from pathlib import Path
@@ -39,6 +40,13 @@ MAX_SNAP_M = 3000               # drop points further than this from a main road
 
 GRID = 0.01  # degrees (~1 km) per spatial index cell
 
+# OpenStreetMap tags some specialist clinics as having an emergency department. An accident victim
+# needs a general hospital, so these are skipped when the hospital is chosen automatically.
+SPECIALIST = re.compile(
+    r"\b(eye|dental|dentist|diagnostics?|skin|derma|fertility|ivf|maternity|nursing home|ent|physio|"
+    r"ayurved\w*|homeopath\w*|lab|laboratory|scan|imaging|dialysis|cosmetic|hair|women\W?s?|"
+    r"children\W?s?|child|kinder|p(a)?ediatric\w*|clinic|ophthalm\w*|oncolog\w*|cancer)\b", re.I)
+
 
 class RouteError(Exception):
     pass
@@ -55,6 +63,52 @@ def _nearby_cells(lat: float, lon: float, rings: int = 1):
             yield ci + di, cj + dj
 
 
+def _bearing(a: List[float], b: List[float]) -> float:
+    """Compass bearing from a to b in degrees (0 = north, 90 = east)."""
+    lat1, lat2 = math.radians(a[0]), math.radians(b[0])
+    dlon = math.radians(b[1] - a[1])
+    x = math.sin(dlon) * math.cos(lat2)
+    y = math.cos(lat1) * math.sin(lat2) - math.sin(lat1) * math.cos(lat2) * math.cos(dlon)
+    return (math.degrees(math.atan2(x, y)) + 360) % 360
+
+
+def _turn(bearing_from: float, bearing_to: float) -> str:
+    delta = (bearing_to - bearing_from + 540) % 360 - 180  # -180..180, positive = clockwise
+    if abs(delta) < 35:
+        return "straight"
+    if abs(delta) > 150:
+        return "u-turn"
+    return "right" if delta > 0 else "left"
+
+
+def _approach(pieces: list, along_m: float) -> dict:
+    """Road the ambulance arrives on, road it leaves on, and its turn, at a point on the route."""
+    idx = next((i for i, p in enumerate(pieces) if p["end"] >= along_m), len(pieces) - 1)
+    # A signal usually sits at a junction, i.e. at the end of one edge and the start of the next.
+    if idx + 1 < len(pieces) and pieces[idx]["end"] - along_m < 20:
+        before, after = pieces[idx], pieces[idx + 1]
+    else:
+        before = after = pieces[idx]
+    from_name = next((p["name"] for p in reversed(pieces[:pieces.index(before) + 1]) if p["name"]), None)
+    to_name = next((p["name"] for p in pieces[pieces.index(after):] if p["name"]), None)
+    return {"from_road": from_name, "to_road": to_name,
+            "turn": _turn(before["bearing_out"], after["bearing_in"]) if before is not after else "straight"}
+
+
+def _turns(pieces: list) -> List[dict]:
+    """Turn-by-turn instructions: where the route changes road or direction noticeably."""
+    turns = []
+    for prev, nxt in zip(pieces, pieces[1:]):
+        turn = _turn(prev["bearing_out"], nxt["bearing_in"])
+        new_road = nxt["name"] and nxt["name"] != prev["name"]
+        if turn in ("left", "right", "u-turn") or new_road:
+            if turns and nxt["start"] - turns[-1]["along_m"] < 40:  # merge tiny zig-zags
+                continue
+            turns.append({"along_m": round(nxt["start"]), "turn": turn,
+                          "onto": nxt["name"] or next((p["name"] for p in pieces[pieces.index(nxt):] if p["name"]), None)})
+    return turns
+
+
 class RoadGraph:
     def __init__(self) -> None:
         if not ROADS_PATH.exists():
@@ -63,6 +117,7 @@ class RoadGraph:
             raw = json.load(f)
         self.nodes: List[List[float]] = raw["nodes"]
         self.edges: List[list] = raw["edges"]
+        self.names: List[str] = raw.get("names", [])
 
         # out[u] = [(v, edge_index, forward?)]
         self.out: Dict[int, List[Tuple[int, int, bool]]] = defaultdict(list)
@@ -91,8 +146,9 @@ class RoadGraph:
 
         hospitals = json.loads(HOSPITALS_PATH.read_text()) if HOSPITALS_PATH.exists() else []
         self.er_hospitals = [h for h in hospitals if h["emergency"]]
-        self.hospital_vertex = {}
-        for h in self.er_hospitals:
+        self.general_hospitals = [h for h in self.er_hospitals if not SPECIALIST.search(h["name"])]
+        self.hospital_vertex = {}  # candidates for "fastest emergency hospital"
+        for h in self.general_hospitals:
             v, _ = self.snap(h["lat"], h["lon"])
             self.hospital_vertex.setdefault(v, h)
 
@@ -202,15 +258,20 @@ class RoadGraph:
     # ---------- route details ----------
 
     def edge_shape(self, e: int, forward: bool) -> List[List[float]]:
-        u, v, _, _, _, flat = self.edges[e]
+        u, v, flat = self.edges[e][0], self.edges[e][1], self.edges[e][5]
         pts = [self.nodes[u]] + [flat[k:k + 2] for k in range(0, len(flat), 2)] + [self.nodes[v]]
         return pts if forward else pts[::-1]
 
+    def road_name(self, e: int) -> Optional[str]:
+        idx = self.edges[e][6] if len(self.edges[e]) > 6 else -1
+        return self.names[idx] if idx >= 0 else None
+
     def describe(self, path: List[Tuple[int, bool]], edge_time: List[float]) -> dict:
-        """Coordinates, cumulative time at each coordinate, and the signals along the path."""
+        """Coordinates, cumulative time at each coordinate, signals and turns along the path."""
         coords: List[List[float]] = []
         times: List[float] = []
         along: List[float] = []
+        pieces = []  # one per edge: where it starts/ends along the route, its road name and bearings
         t = dist = 0.0
         for e, fwd in path:
             pts = self.edge_shape(e, fwd)
@@ -218,12 +279,18 @@ class RoadGraph:
             total = sum(seg_lengths) or 1.0
             if not coords:
                 coords.append(pts[0]); times.append(t); along.append(dist)
+            start = dist
             for p, seg in zip(pts[1:], seg_lengths):
                 t += edge_time[e] * seg / total
                 dist += seg
                 coords.append(p); times.append(round(t, 1)); along.append(dist)
-        return {"coords": coords, "times": times, "along": along,
-                "distance_m": round(dist), "travel_s": t, "signals": self.signals_on(coords, along)}
+            pieces.append({"start": start, "end": dist, "name": self.road_name(e),
+                           "bearing_in": _bearing(pts[0], pts[1]), "bearing_out": _bearing(pts[-2], pts[-1])})
+        signals = self.signals_on(coords, along)
+        for sig in signals:
+            sig.update(_approach(pieces, sig["along_m"]))
+        return {"coords": coords, "times": times, "along": along, "distance_m": round(dist),
+                "travel_s": t, "signals": signals, "turns": _turns(pieces)}
 
     def signals_on(self, coords: List[List[float]], along: List[float]) -> List[dict]:
         found: Dict[int, dict] = {}
@@ -264,8 +331,11 @@ def time_at(route: dict, along_m: float) -> float:
 
 
 def plan_route(start_lat: float, start_lon: float, hour: int,
-               hospital: Optional[Tuple[float, float]] = None) -> dict:
-    """Route an ambulance to a hospital (or the fastest emergency hospital if none given)."""
+               hospital: Optional[Tuple[float, float]] = None,
+               destination: Optional[Tuple[float, float]] = None,
+               destination_name: str = "Destination") -> dict:
+    """Route an ambulance to a point (e.g. an accident scene), a given hospital, or, if neither
+    is given, the emergency hospital it can reach fastest."""
     g = graph()
     start, snap_m = g.snap(start_lat, start_lon)
     if snap_m > MAX_SNAP_M:
@@ -278,7 +348,10 @@ def plan_route(start_lat: float, start_lon: float, hour: int,
     corridor_cost = [g.edge_seconds(i, c, True) for i, c in enumerate(congestion)]
     normal_cost = [g.edge_seconds(i, c, False) for i, c in enumerate(congestion)]
 
-    if hospital is None:
+    if destination is not None:
+        dv, _ = g.snap(*destination)
+        targets = {dv}
+    elif hospital is None:
         if not g.hospital_vertex:
             raise RouteError("No emergency hospitals loaded. Run: python fetch_hospitals.py")
         targets = set(g.hospital_vertex) - {start} or set(g.hospital_vertex)
@@ -288,7 +361,7 @@ def plan_route(start_lat: float, start_lon: float, hour: int,
 
     end, corridor_path = g.shortest(start, targets, corridor_cost, corridor=True)
     if not corridor_path:
-        raise RouteError("The ambulance is already at that hospital.")
+        raise RouteError("The ambulance is already there.")
     corridor = g.describe(corridor_path, corridor_cost)
     for s in corridor["signals"]:
         s["eta_s"] = round(time_at(corridor, s["along_m"]), 1)
@@ -300,16 +373,21 @@ def plan_route(start_lat: float, start_lon: float, hour: int,
     normal = g.describe(normal_path, normal_cost)
     normal_eta = normal["travel_s"] + EXPECTED_RED_WAIT_S * len(normal["signals"])
 
-    if hospital is None:
+    if destination is not None:
+        dest = {"name": destination_name, "lat": destination[0], "lon": destination[1], "phone": None}
+    elif hospital is None:
         dest = g.hospital_vertex[end]
     else:
         dest = {"name": "Selected destination", "lat": hospital[0], "lon": hospital[1], "phone": None}
         dest = next((h for h in g.er_hospitals if (h["lat"], h["lon"]) == tuple(hospital)), dest)
+    dest = {k: dest.get(k) for k in ("name", "lat", "lon", "phone")}
 
     return {
         "hour": hour,
         "start": g.nodes[start],
-        "hospital": {k: dest.get(k) for k in ("name", "lat", "lon", "phone")},
+        "destination": dest,
+        "hospital": dest,  # kept for older clients
+        "turns": corridor["turns"],
         "coords": corridor["coords"],
         "times": corridor["times"],
         "times_normal": same_path_normal["times"],

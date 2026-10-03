@@ -10,8 +10,10 @@ Ambulances dropped on a side street start from the nearest main-road junction.
 
 Output format (compact, for routing.py):
     nodes: [[lat, lon], ...]          junctions and dead ends (the routing graph's vertices)
-    edges: [[u, v, oneway, speed_kmh, length_m, [lat, lon, lat, lon, ...]], ...]
-           u, v index into nodes; the flat list is the road shape between them (excluding u, v)
+    edges: [[u, v, oneway, speed_kmh, length_m, [lat, lon, lat, lon, ...], name], ...]
+           u, v index into nodes; the flat list is the road shape between them (excluding u, v);
+           name indexes into names (-1 = unnamed)
+    names: ["Hosur Road", ...]
 """
 import argparse
 import gzip
@@ -73,6 +75,17 @@ def build_graph(elements: list) -> dict:
 
     index = {}
     nodes = []
+    names = []
+    name_index = {}
+
+    def name_id(tags: dict) -> int:
+        name = tags.get("name:en") or tags.get("name") or tags.get("ref")
+        if not name:
+            return -1
+        if name not in name_index:
+            name_index[name] = len(names)
+            names.append(name)
+        return name_index[name]
 
     def vertex(osm_id: int) -> int:
         if osm_id not in index:
@@ -89,6 +102,7 @@ def build_graph(elements: list) -> dict:
         if direction == "reverse":
             ids.reverse()
         speed = speed_kmh(tags)
+        road_name = name_id(tags)
         start = 0
         for i in range(1, len(ids)):
             if ids[i] not in is_vertex and i != len(ids) - 1:
@@ -98,10 +112,10 @@ def build_graph(elements: list) -> dict:
             if length > 0:
                 shape = [round(x, 6) for n in segment[1:-1] for x in coords[n]]
                 edges.append([vertex(segment[0]), vertex(segment[-1]), int(direction is not None),
-                              speed, round(length, 1), shape])
+                              speed, round(length, 1), shape, road_name])
             start = i
 
-    return {"nodes": nodes, "edges": edges}
+    return {"nodes": nodes, "edges": edges, "names": names}
 
 
 def main() -> None:

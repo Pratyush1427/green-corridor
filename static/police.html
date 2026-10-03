@@ -3,294 +3,303 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Traffic Control Room</title>
+  <title>Green Corridor · Traffic Control Room</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+  <link rel="stylesheet" href="/static/common.css">
   <style>
-    :root {
-      --bg: #0b1a33; --panel: #0f2342; --panel-2: #14305a; --text: #e6eefb; --muted: #8fa6c9;
-      --border: #1f3d6b; --accent: #4ea8ff; --corridor: #22d3ee;
-      --green: #22c55e; --amber: #f59e0b; --red: #ef4444; --grey: #64748b;
-    }
-    * { box-sizing: border-box; }
-    html, body { margin: 0; height: 100%; font-family: system-ui, -apple-system, sans-serif;
-                 background: var(--bg); color: var(--text); }
-    .layout { display: grid; grid-template-columns: 1fr 440px; height: 100vh; }
-    #map { height: 100%; background: var(--bg); }
-    .blue-tiles { filter: sepia(1) hue-rotate(180deg) saturate(2.6) brightness(0.95) contrast(1.05); }
-    .leaflet-container { font-family: inherit; }
-    .leaflet-control-attribution { background: rgba(11, 26, 51, 0.8) !important; color: var(--muted); }
-    .leaflet-control-attribution a { color: var(--accent); }
-    .leaflet-tooltip { background: var(--panel); color: var(--text); border: 1px solid var(--border); }
+    html, body { height: 100%; }
+    body { display: grid; grid-template-rows: 64px 1fr; overflow: hidden; }
+    body.embed { grid-template-rows: 1fr; }
+    .layout { display: grid; grid-template-columns: 460px 1fr; min-height: 0; }
+    body.embed .layout { grid-template-columns: 1fr; }
+    aside { background: var(--bg); border-right: 1px solid var(--border); overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 14px; min-height: 0; }
+    .mapwrap { position: relative; min-height: 0; }
+    #map { position: absolute; inset: 0; }
+    body.embed .mapwrap { display: none; }
+    body.embed .layout { grid-template-columns: 1fr !important; grid-template-rows: 1fr !important; height: 100vh; }
+    body.embed aside { padding: 10px; gap: 10px; }
+    body.embed .req { gap: 9px; padding: 12px; }
+    body.embed .req [data-f=sigs] { order: 9; }
+    body.embed .req [data-f=why] { order: 8; }
 
-    aside { background: var(--panel); border-left: 1px solid var(--border); padding: 20px;
-            overflow-y: auto; display: flex; flex-direction: column; gap: 16px; }
-    h1 { font-size: 18px; margin: 0; }
-    h3 { font-size: 12px; margin: 0 0 8px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
-    a { color: var(--accent); }
-    .muted { color: var(--muted); font-size: 13px; }
-    .row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-    input[type=text] { font: inherit; font-size: 13px; padding: 6px 8px; border: 1px solid var(--border);
-                       border-radius: 6px; background: var(--bg); color: var(--text); }
-    .empty { color: var(--muted); font-size: 13px; font-style: italic; }
+    .status-banner { border-radius: 14px; padding: 14px 16px; font-weight: 800; font-size: 18px; display: flex; gap: 10px; align-items: center; }
+    .status-banner.wait { background: var(--amber-bg); color: var(--amber); border: 2px solid var(--amber-strong); }
+    .status-banner.ok { background: var(--green-bg); color: var(--green); }
+    .section-title { font-size: 14px; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin: 4px 0 -4px; }
 
-    .card { background: var(--panel-2); border: 1px solid var(--border); border-radius: 10px; padding: 12px;
-            font-size: 13px; margin-bottom: 10px; cursor: pointer; }
-    #pending .card { border-color: var(--amber); }
-    .card.new { animation: flash 1.2s ease-out 3; }
-    @keyframes flash { 0% { box-shadow: 0 0 0 3px var(--amber); } 100% { box-shadow: 0 0 0 0 transparent; } }
-    @media (prefers-reduced-motion: reduce) { .card.new { animation: none; border-color: var(--amber); } }
-    .card-head { display: flex; align-items: center; gap: 8px; }
-    .card-head b { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 14px; }
-    .tag { display: inline-grid; place-items: center; min-width: 30px; height: 20px; border-radius: 10px; padding: 0 6px;
-           background: var(--corridor); color: #03202b; font-weight: 700; font-size: 11px; }
-    .badge { font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 10px; white-space: nowrap; }
-    .badge.pending { background: var(--amber); color: #2a1800; }
-    .badge.approved, .badge.partial { background: var(--green); color: #04210f; }
-    .badge.declined, .badge.expired { background: var(--red); color: #2b0404; }
-    .badge.closed { background: var(--grey); color: #fff; }
-    .meta { margin: 6px 0; color: var(--muted); }
-    .actions { display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap; }
-    .actions button, .junctions button { font: inherit; font-size: 13px; font-weight: 600; padding: 7px 12px;
-                                         border-radius: 7px; cursor: pointer; border: 1px solid var(--border); }
-    .btn-approve { background: var(--green); border-color: var(--green) !important; color: #04210f; }
-    .btn-decline { background: transparent; color: var(--red); border-color: var(--red) !important; }
-    .btn-plain { background: var(--panel); color: var(--text); }
-    .junctions { margin-top: 8px; border-top: 1px solid var(--border); padding-top: 8px; }
-    .junctions label { display: flex; gap: 8px; align-items: center; padding: 3px 0; cursor: pointer; }
-    .junctions input[type=text] { width: 100%; margin: 6px 0; }
-    .expires { color: var(--amber); font-weight: 600; }
-    .log { margin: 8px 0 0; padding: 8px; background: var(--bg); border-radius: 6px; font-size: 12px; }
-    .log div { margin: 2px 0; }
-
-    .amb { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: #fff;
-           border: 3px solid var(--corridor); font-size: 15px; position: relative; }
-    .amb span { position: absolute; top: -9px; right: -12px; background: var(--corridor); color: #03202b;
-                font: 700 10px/1 system-ui, sans-serif; padding: 2px 4px; border-radius: 6px; white-space: nowrap; }
-
-    @media (max-width: 900px) {
-      .layout { grid-template-columns: 1fr; grid-template-rows: 50vh auto; height: auto; }
-      #map { height: 50vh; }
-      aside { border-left: none; border-top: 1px solid var(--border); padding: 16px; }
-    }
+    .req { padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+    .req.ask { border: 2px solid var(--amber-strong); box-shadow: 0 0 0 4px var(--amber-bg); }
+    .req-title { display: flex; gap: 12px; align-items: flex-start; }
+    .req-title .ic { font-size: 30px; line-height: 1; }
+    .req-title b { font-size: 19px; display: block; }
+    .req-title span { color: var(--muted); font-size: 15px; }
+    .facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .facts div { background: var(--surface-2); border-radius: 10px; padding: 8px 10px; text-align: center; }
+    .facts b { display: block; font-size: 19px; }
+    .facts span { font-size: 13px; color: var(--muted); }
+    .facts .gain { background: var(--green-bg); color: var(--green); }
+    .facts .gain span { color: var(--green); }
+    .timer { font-size: 14px; color: var(--amber); font-weight: 700; }
+    .timer .bar { height: 8px; border-radius: 4px; background: var(--amber-bg); overflow: hidden; margin-top: 6px; }
+    .timer .bar div { height: 100%; background: var(--amber-strong); transition: width 1s linear; }
+    .sigs { display: flex; flex-direction: column; gap: 2px; }
+    .sig { display: flex; align-items: center; gap: 10px; font-size: 15px; padding: 5px 0; }
+    .sig .name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .sig .what { color: var(--muted); font-size: 14px; white-space: nowrap; }
+    .sig input { width: 22px; height: 22px; accent-color: var(--green-strong); }
+    .two { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chips button { min-height: 46px; padding: 0 14px; border-radius: 23px; border: 2px solid var(--red-strong); background: var(--surface);
+                    font-family: inherit; font-weight: 600; font-size: 15px; color: var(--red); cursor: pointer; }
+    .progress { height: 8px; background: var(--surface-3); border-radius: 4px; overflow: hidden; }
+    .progress div { height: 100%; background: var(--corridor); transition: width .9s linear; }
+    .answers { background: var(--surface-2); border-radius: 10px; padding: 8px 12px; font-size: 14px; }
+    .settings { font-size: 14px; color: var(--muted); display: flex; flex-direction: column; gap: 8px; }
+    .settings label { display: flex; gap: 8px; align-items: center; }
+    @media (max-width: 900px) { body { overflow: auto; grid-template-rows: 64px auto; } .layout { grid-template-columns: 1fr !important; grid-template-rows: 45vh auto; }
+      .mapwrap { order: -1; } }
   </style>
 </head>
 <body>
+<div id="topbar"></div>
 <div class="layout">
-  <div id="map"></div>
-  <aside>
-    <div>
-      <h1>🚓 Traffic Control Room</h1>
-      <div class="muted">Ambulance green-corridor requests · <a href="/">open the ambulance map</a></div>
+  <aside id="aside">
+    <div id="tips"></div>
+    <div class="status-banner ok" id="banner">✓ No ambulance is waiting for you</div>
+    <div class="section-title" id="t-ask" hidden>Needs your answer</div>
+    <div class="stack" id="ask"></div>
+    <div class="section-title" id="t-road" hidden>Ambulances on the road</div>
+    <div class="stack" id="road"></div>
+    <details id="done-box" hidden><summary class="section-title" style="cursor:pointer">Finished</summary><div class="stack" id="done" style="margin-top:12px"></div></details>
+    <div class="settings" id="settings">
+      <label><input type="checkbox" id="sound"> 🔔 Ring when a new ambulance asks</label>
+      <label><input type="checkbox" id="auto"> Practice mode: say yes to every request automatically</label>
     </div>
-    <div class="row">
-      <label class="muted" for="officer">Officer</label>
-      <input type="text" id="officer" value="Control room" maxlength="60" style="flex:1">
-    </div>
-    <label class="row muted"><input type="checkbox" id="auto"> Auto-approve new requests (for demos)</label>
-
-    <section><h3>Waiting for decision <span id="n-pending"></span></h3><div id="pending"></div></section>
-    <section><h3>Active corridors <span id="n-active"></span></h3><div id="active"></div></section>
-    <section><h3>Recent</h3><div id="recent"></div></section>
   </aside>
+  <div class="mapwrap"><div id="map"></div></div>
 </div>
 
+<script src="/static/common.js"></script>
 <script>
-  const $ = (id) => document.getElementById(id);
-  const css = (name) => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
-  const escapeHtml = (s) => String(s).replace(/[&<>"']/g, (ch) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
-  const fmt = (s) => { s = Math.max(0, Math.round(s)); return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`; };
-  const istTime = (ts) => new Date(ts.replace(' ', 'T') + 'Z')
-    .toLocaleTimeString('en-IN', { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', second: '2-digit' });
-  const post = (url, body) => fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+  if (EMBED) { document.body.classList.add('embed'); $('settings').remove(); }
+  let officer = remember.get('gc-control-officer') || 'Control room';
+  topbar($('topbar'), 'Traffic control room', `<label class="small muted" for="officer">Your name</label>
+    <input type="text" id="officer" style="width:200px;min-height:44px" value="${escapeHtml(officer)}">`);
+  $('officer')?.addEventListener('change', (e) => { officer = e.target.value || 'Control room'; remember.set('gc-control-officer', officer); });
+  tip($('tips'), 'police-start', 'When an ambulance asks for a clear road, it appears here in <b>orange</b>. Press <b>Yes, clear the road</b> to turn its signals green as it arrives. If you do not answer in 60 seconds, the ambulance drives in normal traffic.');
 
-  try { $('officer').value = localStorage.getItem('officer') || $('officer').value; } catch (e) {}
-  $('officer').addEventListener('change', () => { try { localStorage.setItem('officer', $('officer').value); } catch (e) {} });
+  const map = L.map('map', { maxZoom: 19 }).setView([12.975, 77.62], 12);
+  addBaseMap(map);
+  if (!EMBED) makeResizableSidebar(document.querySelector('.layout'), $('aside'), map, 'gc-side-police', { side: 'left', min: 380, max: 680 });
 
-  // ---------- map ----------
-  const map = L.map('map', { preferCanvas: true, maxZoom: 16 }).setView([12.975, 77.63], 12);
-  const ESRI = 'https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/';
-  L.tileLayer(ESRI + 'World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
-    maxZoom: 16, className: 'blue-tiles',
-    attribution: 'Tiles &copy; Esri &mdash; Esri, HERE, Garmin, &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-  }).addTo(map);
-  L.tileLayer(ESRI + 'World_Dark_Gray_Reference/MapServer/tile/{z}/{y}/{x}', { maxZoom: 16, className: 'blue-tiles' }).addTo(map);
+  let state = null, fitted = false;
+  const cards = new Map();       // leg id -> card
+  const layers = new Map();      // leg id -> map layers
+  const ambMarkers = new Map();
+  const seen = new Set(), autoDone = new Set();
 
-  const layers = new Map();  // emergency id -> layer group on the map
-  const cards = new Map();   // emergency id -> card element
-  const seen = new Set();
-  const autoDone = new Set();
-  let fitted = false;
-
-  const signalName = (s, i) => s.name ? escapeHtml(s.name) : `Junction ${i + 1}`;
-
-  function drawEmergency(e) {
-    if (layers.has(e.id)) layers.get(e.id).remove();
-    if (e.status !== 'active') { layers.delete(e.id); return; }
-    const g = L.layerGroup().addTo(map);
-    const c = e.clearance.status;
-    const color = c === 'pending' ? css('--amber') : ['approved', 'partial'].includes(c) ? css('--corridor') : css('--red');
-    L.polyline(e.route.coords, { color, weight: 5, opacity: 0.9, dashArray: ['declined', 'expired'].includes(c) ? '6 6' : null })
-      .addTo(g);
-    e.route.signals.forEach((s, i) => {
-      const passed = s.along_m <= e.position.along_m;
-      const held = e.held_signals.includes(s.id);
-      const cleared = e.clearance.cleared_signals.includes(s.id);
-      const fill = passed ? css('--grey') : held ? css('--green') : cleared ? '#050b16' : c === 'pending' ? css('--amber') : css('--red');
-      L.circleMarker([s.lat, s.lon], {
-        radius: held ? 8 : 6, weight: 2, color: cleared && !held ? css('--green') : '#fff', fillColor: fill, fillOpacity: 1,
-        opacity: passed ? 0.4 : 1,
-      }).bindTooltip(`${signalName(s, i)} · ${(s.along_m / 1000).toFixed(1)} km along<br>` +
-        (passed ? 'Passed' : held ? 'Held green now' : cleared ? 'Cleared' : c === 'pending' ? 'Awaiting decision' : 'Not cleared')).addTo(g);
+  // ---------- sound for new requests ----------
+  let audio = null;
+  $('sound')?.addEventListener('change', (e) => { if (e.target.checked) { audio = audio || new AudioContext(); ring(1); } });
+  function ring(times = 2) {
+    if (!audio || !$('sound')?.checked) return;
+    for (let i = 0; i < times; i++) [740, 980].forEach((f, j) => {
+      const o = audio.createOscillator(), g = audio.createGain();
+      o.frequency.value = f; o.connect(g); g.connect(audio.destination);
+      const tt = audio.currentTime + i * 0.5 + j * 0.2;
+      g.gain.setValueAtTime(0.2, tt); g.gain.exponentialRampToValueAtTime(0.001, tt + 0.18);
+      o.start(tt); o.stop(tt + 0.2);
     });
-    L.marker([e.hospital.lat, e.hospital.lon], {
-      icon: L.divIcon({ className: '', iconSize: [14, 14], html: '<div style="width:14px;height:14px;border-radius:4px;background:#c084fc;border:2px solid #fff"></div>' }),
-    }).bindTooltip(escapeHtml(e.hospital.name)).addTo(g);
-    L.marker([e.position.lat, e.position.lon], {
-      icon: L.divIcon({ className: '', iconSize: [28, 28], html: `<div class="amb">🚑<span>${escapeHtml(e.ambulance)}</span></div>` }),
-      zIndexOffset: 1000,
-    }).bindTooltip(`${escapeHtml(e.ambulance)} → ${escapeHtml(e.hospital.name)}`).addTo(g);
-    layers.set(e.id, g);
+  }
+
+  async function decide(leg, decision, declined = [], note = null) {
+    try {
+      await api(`/api/legs/${leg.id}/clearance`, { decision, declined_signals: declined, note, officer });
+      toast(decision === 'declined' ? 'The driver has been told the road could not be cleared.' : '✓ Done. Signals will turn green as the ambulance arrives.', decision === 'declined' ? '' : 'good');
+      refresh();
+    } catch (e) { toast(e.message, 'bad'); }
   }
 
   // ---------- cards ----------
-  const BADGE = {
-    pending: 'Waiting', approved: 'Cleared', partial: 'Partly cleared', declined: 'Not possible', expired: 'No response',
-  };
+  const where = (inc, leg) => leg.kind === 'to_scene' ? `Going to an accident${inc.description ? ': ' + inc.description : ''}` : `Taking a patient to ${leg.destination.name}`;
 
-  function createCard(e) {
+  function askCard(inc, leg) {
     const el = document.createElement('div');
-    el.className = 'card';
+    el.className = 'card req ask';
+    el.dataset.mode = 'ask';
     el.innerHTML = `
-      <div class="card-head"><span class="tag">${escapeHtml(e.ambulance)}</span>
-        <b>→ ${escapeHtml(e.hospital.name)}</b><span class="badge" data-f="badge"></span></div>
-      <div class="meta" data-f="meta"></div>
-      <div data-f="status"></div>
-      <div class="actions" data-f="actions"></div>
-      <div class="junctions" data-f="junctions" hidden>
-        ${e.route.signals.map((s, i) => `<label><input type="checkbox" value="${s.id}" checked>
-          ${signalName(s, i)} <span class="muted">· ${(s.along_m / 1000).toFixed(1)} km along</span></label>`).join('')
-          || '<div class="empty">No signals on this route</div>'}
-        <input type="text" data-f="note" placeholder="Note to the crew (optional), e.g. road works at KR Market" maxlength="300">
-        <div class="actions"><button class="btn-approve" data-act="partial">Clear selected junctions</button></div>
-      </div>
-      <div class="log" data-f="log" hidden></div>`;
-    el.addEventListener('click', (ev) => {
-      if (ev.target.closest('button, input, label')) return;
-      map.fitBounds(L.latLngBounds(e.route.coords).pad(0.3));
+      <div class="req-title"><span class="ic">🚑</span><div><b>${escapeHtml(inc.ambulance.callsign)} needs a clear road</b><span>${escapeHtml(where(inc, leg))}</span></div></div>
+      <div class="facts" data-f="facts"></div>
+      <div class="timer" data-f="timer"></div>
+      <div class="sigs" data-f="sigs"></div>
+      <button class="btn go huge" data-act="yes">✓ Yes, clear the road</button>
+      <div class="two"><button class="btn" data-act="choose">Choose signals</button><button class="btn stop" data-act="no">✕ Not possible</button></div>
+      <div data-f="why" hidden><p style="margin:0 0 8px"><b>Why not?</b> Tap one:</p>
+        <div class="chips">${['VIP movement', 'Road works', 'Traffic jam', 'Not enough staff'].map(r => `<button data-r="${r}">${r}</button>`).join('')}</div></div>`;
+    const n = leg.signals.length;
+    el.querySelector('[data-act=yes]').textContent = `✓ Yes, clear the road (${n} signal${n === 1 ? '' : 's'})`;
+    el.querySelector('[data-act=yes]').addEventListener('click', () => {
+      if (el.dataset.mode === 'choose') {  // clear only the ticked signals
+        const declined = [...el.querySelectorAll('[data-f=sigs] input:not(:checked)')].map(i => Number(i.value));
+        decide(leg, declined.length ? 'partial' : 'approved', declined);
+      } else decide(leg, 'approved');
     });
-    el.querySelector('[data-act=partial]').addEventListener('click', () => {
-      const declined = [...el.querySelectorAll('.junctions input[type=checkbox]:not(:checked)')].map(i => Number(i.value));
-      decide(e.id, 'partial', declined, el.querySelector('[data-f=note]').value);
+    el.querySelector('[data-act=choose]').addEventListener('click', () => {
+      el.dataset.mode = el.dataset.mode === 'choose' ? 'ask' : 'choose';
+      el.querySelector('[data-act=choose]').textContent = el.dataset.mode === 'choose' ? 'Clear all instead' : 'Choose signals';
+      el.querySelector('[data-act=yes]').textContent = el.dataset.mode === 'choose' ? '✓ Clear the ticked signals' : `✓ Yes, clear the road (${n} signal${n === 1 ? '' : 's'})`;
+      el.dataset.drawn = '';
+      updateAsk(el, inc, leg);
     });
+    el.querySelector('[data-act=no]').addEventListener('click', () => { el.querySelector('[data-f=why]').hidden = false; });
+    el.querySelectorAll('[data-r]').forEach(b => b.addEventListener('click', () => decide(leg, 'declined', [], b.dataset.r)));
+    el.addEventListener('mouseenter', () => focusLeg(leg.id));
     return el;
   }
 
-  function actionButtons(el, e) {
-    const box = el.querySelector('[data-f=actions]');
-    const want = e.status !== 'active' ? 'closed' : e.clearance.status === 'pending' ? 'pending'
-      : ['approved', 'partial'].includes(e.clearance.status) ? 'active' : 'none';
-    if (box.dataset.state === want) return;
-    box.dataset.state = want;
-    const note = () => el.querySelector('[data-f=note]').value;
-    const buttons = {
-      pending: [['btn-approve', 'Clear all junctions', () => decide(e.id, 'approved', [], note())],
-                ['btn-decline', 'Not possible', () => decide(e.id, 'declined', [], note())],
-                ['btn-plain', 'Choose junctions…', () => { const j = el.querySelector('[data-f=junctions]'); j.hidden = !j.hidden; }]],
-      active: [['btn-decline', 'Revoke clearance', () => decide(e.id, 'declined', [], 'Clearance revoked')]],
-      none: [], closed: [],
-    }[want];
-    box.innerHTML = '';
-    for (const [cls, text, fn] of buttons.concat([['btn-plain', 'Log', () => toggleLog(el, e.id)]])) {
-      const b = document.createElement('button');
-      b.className = cls; b.textContent = text; b.addEventListener('click', fn);
-      box.appendChild(b);
+  function updateAsk(el, inc, leg) {
+    const f = (n) => el.querySelector(`[data-f=${n}]`);
+    const saves = Math.max(0, leg.plan.normal_s - leg.plan.corridor_s);
+    f('facts').innerHTML = `<div><b>${fmtKm(leg.distance_m)}</b><span>to drive</span></div><div><b>${leg.signals.length}</b><span>signals</span></div>
+      <div class="gain"><b>~${fmtMin(saves)} min</b><span>faster if cleared</span></div>`;
+    const left = leg.clearance.expires_in_s ?? 0;
+    f('timer').innerHTML = `⏱ Please answer within ${left} seconds. The ambulance is already moving.<div class="bar"><div style="width:${100 * left / 60}%"></div></div>`;
+    if (el.dataset.drawn !== '1') {  // signal list: drawn once, so tick boxes keep their state
+      el.dataset.drawn = '1';
+      const choose = el.dataset.mode === 'choose';
+      const list = leg.signals.slice(0, choose ? 99 : 4);
+      f('sigs').innerHTML = (choose ? '<p class="small muted" style="margin:0 0 4px">Untick the signals you cannot clear:</p>' : '<p class="small muted" style="margin:0 0 4px">Signals on its road:</p>') +
+        list.map(s => `<label class="sig">${choose ? `<input type="checkbox" value="${s.id}" checked>` : '<span class="dot wait"></span>'}
+          <span class="name">${escapeHtml(junctionName(s))}</span><span class="what">in ${fmtMin(s.eta_s)} min</span></label>`).join('') +
+        (!choose && leg.signals.length > 4 ? `<p class="small muted" style="margin:4px 0 0">and ${leg.signals.length - 4} more</p>` : '');
     }
-    if (want !== 'pending') el.querySelector('[data-f=junctions]').hidden = true;
   }
 
-  function updateCard(el, e) {
-    const c = e.clearance, r = e.route;
-    const badge = el.querySelector('[data-f=badge]');
-    const closed = e.status !== 'active';
-    badge.className = 'badge ' + (closed ? 'closed' : c.status);
-    badge.textContent = closed ? { arrived: 'Arrived', cancelled: 'Cancelled', abandoned: 'Lost contact' }[e.status] : BADGE[c.status];
-    el.querySelector('[data-f=meta]').textContent =
-      `Requested ${istTime(e.created_utc)} · ${(r.distance_m / 1000).toFixed(1)} km · ${r.signals.length} junctions · ` +
-      `ETA ${fmt(r.eta_s)} cleared vs ${fmt(r.normal.eta_s)} normal`;
-    let status = '';
-    if (!closed && c.status === 'pending') {
-      status = `<span class="expires">Auto-expires in ${c.expires_in_s}s</span> <span class="muted">(ambulance is already moving)</span>`;
-    } else if (!closed && ['approved', 'partial'].includes(c.status)) {
-      const passed = r.signals.filter(s => s.along_m <= e.position.along_m).length;
-      status = `Cleared ${c.cleared_signals.length}/${r.signals.length} junctions · ${e.held_signals.length} held green now · ` +
-               `${passed} passed · ${((r.distance_m - e.position.along_m) / 1000).toFixed(1)} km to go`;
-    } else if (c.status === 'declined' || c.status === 'expired') {
-      status = c.status === 'expired' ? 'No decision in time; ambulance continued in normal traffic.' : 'Declined: ambulance continues in normal traffic.';
+  function roadCard(inc, leg) {
+    const el = document.createElement('div');
+    el.className = 'card req';
+    el.innerHTML = `
+      <div class="req-title"><span class="ic">🚑</span><div class="grow"><b>${escapeHtml(inc.ambulance.callsign)} · arrives in <span data-f="eta" style="display:inline;font-size:inherit;color:inherit"></span></b>
+        <span>${escapeHtml(where(inc, leg))}</span></div></div>
+      <span class="pill" data-f="pill" style="align-self:flex-start"></span>
+      <div class="progress"><div data-f="bar"></div></div>
+      <div class="sigs" data-f="sigs"></div>
+      <div class="answers" data-f="answers" hidden></div>
+      <div class="row" data-f="acts"></div>`;
+    el.addEventListener('mouseenter', () => focusLeg(leg.id));
+    return el;
+  }
+
+  function updateRoad(el, inc, leg) {
+    const f = (n) => el.querySelector(`[data-f=${n}]`);
+    const pol = POLICE[leg.clearance.status];
+    f('eta').textContent = `${fmtMin(leg.eta_s)} min`;
+    f('pill').className = 'pill ' + pol.kind;
+    f('pill').textContent = `${pol.kind === 'ok' ? '✓' : '✕'} ${pol.text}${leg.clearance.note ? ' · ' + leg.clearance.note : ''}`;
+    f('bar').style.width = (100 * leg.progress).toFixed(1) + '%';
+    const ahead = leg.signals.filter(s => s.state !== 'passed').slice(0, 4);
+    f('sigs').innerHTML = ahead.map(s => `<div class="sig"><span class="dot ${SIGNAL[s.state].kind}"></span><span class="name">${escapeHtml(junctionName(s))}</span>
+      <span class="what">${SIGNAL[s.state].text}${s.answered_by ? ' · ' + escapeHtml(s.answered_by) : ''} · ${fmtMin(s.eta_s)} min</span></div>`).join('') ||
+      '<p class="small muted" style="margin:0">All signals passed.</p>';
+    const cant = leg.signals.filter(s => s.answer === 'cant');
+    f('answers').hidden = !cant.length;
+    f('answers').innerHTML = cant.map(s => `✕ <b>${escapeHtml(s.answered_by || 'Officer')}</b> at ${escapeHtml(junctionName(s))} can't clear${s.reason ? ': ' + escapeHtml(s.reason) : ''}`).join('<br>');
+    const on = pol.kind === 'ok';
+    const want = on ? 'on' : 'off';
+    if (f('acts').dataset.state !== want) {
+      f('acts').dataset.state = want;
+      f('acts').innerHTML = on ? `<button class="btn small stop">Stop clearing</button>` : `<button class="btn small go">Clear it now</button>`;
+      f('acts').querySelector('button').addEventListener('click', () => on
+        ? (confirm('Stop clearing the road for this ambulance?') && decide(leg, 'declined', [], 'Clearing stopped'))
+        : decide(leg, 'approved', [], 'Cleared later'));
     }
-    if (c.note) status += `<div class="muted">Note: ${escapeHtml(c.note)}</div>`;
-    el.querySelector('[data-f=status]').innerHTML = status;
-    actionButtons(el, e);
   }
 
-  async function toggleLog(el, id) {
-    const log = el.querySelector('[data-f=log]');
-    if (!log.hidden) { log.hidden = true; return; }
-    const events = await (await fetch(`/api/emergencies/${id}/events`)).json();
-    log.innerHTML = events.map(ev => `<div><span class="muted">${istTime(ev.ts_utc)}</span> <b>${escapeHtml(ev.actor)}</b>: ` +
-      `${escapeHtml(ev.event.replace(/_/g, ' '))}${ev.detail ? ' · ' + escapeHtml(ev.detail) : ''}</div>`).join('');
-    log.hidden = false;
+  // ---------- map ----------
+  function focusLeg(id) {
+    const lay = layers.get(id);
+    if (lay?.line && !EMBED) map.fitBounds(lay.line.getBounds().pad(0.25));
   }
 
-  async function decide(id, decision, declined, note) {
-    const resp = await post(`/api/emergencies/${id}/clearance`, {
-      decision, declined_signals: declined, officer: $('officer').value || 'traffic police', note: note || null,
-    });
-    if (!resp.ok) alert((await resp.json()).detail || 'Could not save the decision');
-    refresh();
+  function drawMap() {
+    const legs = new Set();
+    const active = state.incidents.filter(i => i.status === 'active');
+    for (const inc of active) {
+      const leg = inc.current_leg, a = inc.ambulance;
+      let m = ambMarkers.get(a.id);
+      if (!m) { m = L.marker([a.lat, a.lon], { icon: ambIcon(a.callsign), zIndexOffset: 3000 }).addTo(map); ambMarkers.set(a.id, m); }
+      else glide(m, [a.lat, a.lon]);
+      if (!leg || leg.done) continue;
+      legs.add(leg.id);
+      let lay = layers.get(leg.id);
+      if (!lay) {
+        lay = { group: L.layerGroup().addTo(map), signals: [] };
+        layers.set(leg.id, lay);
+        L.marker([inc.scene.lat, inc.scene.lon], { icon: sceneIcon() }).addTo(lay.group);
+        legGeometry(inc.id, leg.id).then(geo => {
+          L.polyline(geo.coords, { color: '#fff', weight: 10, opacity: .9, interactive: false }).addTo(lay.group);
+          lay.line = L.polyline(geo.coords, { weight: 6, interactive: false }).addTo(lay.group);
+          lay.signals = leg.signals.map(s => L.circleMarker([s.lat, s.lon], { radius: 7, weight: 3, color: '#fff', fillOpacity: 1 })
+            .bindTooltip(`🚦 ${escapeHtml(junctionName(s))}`).addTo(lay.group));
+          if (!fitted) { fitted = true; setTimeout(fitAll, 600); }
+        });
+      }
+      lay.line?.setStyle(routeStyle(leg.clearance.status));
+      leg.signals.forEach((s, i) => lay.signals[i]?.setStyle({ fillColor: signalColor(s.state), radius: s.state === 'held' ? 9 : 7,
+        opacity: s.state === 'passed' ? .4 : 1, fillOpacity: s.state === 'passed' ? .4 : 1 }));
+    }
+    for (const [id, lay] of layers) if (!legs.has(id)) { lay.group.remove(); layers.delete(id); }
+    const ambIds = new Set(active.map(i => i.ambulance.id));
+    for (const [id, m] of ambMarkers) if (!ambIds.has(id)) { m.remove(); ambMarkers.delete(id); }
+  }
+  function fitAll() {
+    const pts = [...layers.values()].flatMap(l => l.line ? l.line.getLatLngs() : []);
+    if (pts.length) map.fitBounds(L.latLngBounds(pts).pad(0.15));
   }
 
   // ---------- polling ----------
   async function refresh() {
-    let list;
-    try { list = await (await fetch('/api/emergencies?include_closed=true&limit=30')).json(); } catch (e) { return; }
-    const buckets = { pending: [], active: [], recent: [] };
-    for (const e of list) {
-      const bucket = e.status !== 'active' ? 'recent' : e.clearance.status === 'pending' ? 'pending' : 'active';
-      buckets[bucket].push(e);
-      if (!cards.has(e.id)) {
-        const el = createCard(e);
-        if (!seen.has(e.id) && bucket === 'pending' && seen.size) el.classList.add('new');
-        cards.set(e.id, el);
-      }
-      seen.add(e.id);
-      updateCard(cards.get(e.id), e);
-      drawEmergency(e);
-      if (bucket === 'pending' && $('auto').checked && !autoDone.has(e.id)) {
-        autoDone.add(e.id);
-        setTimeout(() => decide(e.id, 'approved', [], 'Auto-approved (demo)'), 1500);
+    try { state = await api('/api/state'); } catch (e) { return; }
+    const ask = [], road = [];
+    for (const inc of state.incidents.filter(i => i.status === 'active')) {
+      const leg = inc.current_leg;
+      if (!leg || leg.done) continue;
+      (leg.clearance.status === 'pending' ? ask : road).push([inc, leg]);
+      if (leg.clearance.status === 'pending' && $('auto')?.checked && !autoDone.has(leg.id)) {
+        autoDone.add(leg.id);
+        setTimeout(() => decide(leg, 'approved', [], 'Practice mode: automatic yes'), 1500);
       }
     }
-    for (const [name, items] of Object.entries(buckets)) {
-      const box = $(name);
-      items.forEach(e => box.appendChild(cards.get(e.id)));  // moves cards between sections
-      [...box.children].forEach(ch => { if (![...items.map(e => cards.get(e.id))].includes(ch)) ch.remove(); });
-      if (!items.length) box.innerHTML = `<div class="empty">${{ pending: 'No requests waiting', active: 'No active corridors', recent: 'Nothing yet' }[name]}</div>`;
-    }
-    $('n-pending').textContent = buckets.pending.length ? `(${buckets.pending.length})` : '';
-    $('n-active').textContent = buckets.active.length ? `(${buckets.active.length})` : '';
-    document.title = (buckets.pending.length ? `(${buckets.pending.length}) ` : '') + 'Traffic Control Room';
-    // On first load, zoom to the active routes.
-    if (!fitted && layers.size) {
-      fitted = true;
-      const pts = list.filter(e => e.status === 'active').flatMap(e => e.route.coords);
-      map.fitBounds(L.latLngBounds(pts).pad(0.2));
-    }
-    const ids = new Set(list.map(e => e.id));
-    for (const [id, g] of layers) if (!ids.has(id)) { g.remove(); layers.delete(id); }
+    const place = (box, items, make, update, prefix) => {
+      const keep = [];
+      for (const [inc, leg] of items) {
+        const key = prefix + leg.id;
+        if (!cards.has(key)) {
+          cards.set(key, make(inc, leg));
+          if (prefix === 'ask-' && !seen.has(key)) { seen.add(key); ring(2); }
+        }
+        update(cards.get(key), inc, leg);
+        box.appendChild(cards.get(key));
+        keep.push(cards.get(key));
+      }
+      [...box.children].forEach(ch => { if (!keep.includes(ch)) ch.remove(); });
+    };
+    place($('ask'), ask, askCard, updateAsk, 'ask-');
+    place($('road'), road, roadCard, updateRoad, 'road-');
+    $('t-ask').hidden = !ask.length; $('t-road').hidden = !road.length;
+    $('banner').className = 'status-banner ' + (ask.length ? 'wait' : 'ok');
+    $('banner').textContent = ask.length ? `🚨 ${ask.length} ambulance${ask.length > 1 ? 's need' : ' needs'} your answer` :
+      road.length ? `✓ All answered · ${road.length} ambulance${road.length > 1 ? 's' : ''} on the road` : '✓ No ambulance is waiting for you';
+    document.title = (ask.length ? `(${ask.length}) ` : '') + 'Green Corridor · Traffic Control Room';
+    const done = state.incidents.filter(i => i.status !== 'active').slice(0, 5);
+    $('done-box').hidden = !done.length || EMBED;
+    $('done').innerHTML = done.map(inc => `<div class="card flat" style="padding:12px 14px"><b>${escapeHtml(inc.ambulance.callsign)}</b>
+      <span class="muted"> · ${inc.status === 'closed' ? 'patient reached hospital' : 'cancelled'} · ${escapeHtml(inc.description || '')}</span></div>`).join('');
+    if (!EMBED) drawMap();
   }
   refresh();
-  setInterval(refresh, 1500);
+  setInterval(refresh, 1000);
 </script>
 </body>
 </html>

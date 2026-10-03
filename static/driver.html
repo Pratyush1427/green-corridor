@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Green Corridor · Ambulance</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+  <link rel="stylesheet" href="/static/common.css">
+  <style>
+    html, body { height: 100%; overflow: hidden; }
+    #map { position: fixed; inset: 0; }
+    .leaflet-control-attribution { font-size: 9px; }
+    .leaflet-bottom { bottom: var(--sheet-h, 190px); }
+
+    /* top: what to do next, then the next signal */
+    .top { position: fixed; top: 0; left: 0; right: 0; z-index: 1100; padding: max(10px, env(safe-area-inset-top)) 10px 0;
+           display: flex; flex-direction: column; gap: 8px; max-width: 640px; margin: 0 auto; pointer-events: none; }
+    .turn { pointer-events: auto; display: flex; align-items: center; gap: 14px; padding: 14px 16px; border-radius: 18px;
+            background: #0f7a3d; color: #fff; box-shadow: var(--shadow-lg); }
+    .turn .arrow { font-size: 46px; line-height: 1; width: 52px; text-align: center; font-weight: 700; }
+    .turn .dist { font-size: 30px; font-weight: 900; line-height: 1.05; }
+    .turn .what { font-size: 19px; font-weight: 700; }
+    .turn .road { font-size: 16px; opacity: .92; }
+    .turn.scene { background: #b91c1c; } .turn.idle { background: var(--surface); color: var(--text); }
+    .chip { pointer-events: auto; align-self: flex-start; display: flex; align-items: center; gap: 10px; padding: 11px 16px;
+            border-radius: 26px; font-weight: 800; font-size: 17px; box-shadow: var(--shadow-lg); }
+    .chip.ok { background: var(--green-strong); color: #fff; }
+    .chip.wait { background: var(--amber-strong); color: #2a1800; }
+    .chip.bad { background: var(--red-strong); color: #fff; }
+    .chip.stop { background: #fff; color: var(--red-strong); }
+
+    /* bottom sheet: head (always visible) */
+    .sum { display: flex; align-items: center; gap: 12px; }
+    .sum .mins { font-size: 34px; font-weight: 900; color: var(--green); line-height: 1; white-space: nowrap; }
+    .sum .rest { color: var(--muted); font-size: 16px; line-height: 1.3; }
+    .sum .rest b { display: block; color: var(--text); font-size: 17px; }
+    .head-pill { margin-top: 10px; display: flex; }
+    .head-pill .pill { font-size: 15px; padding: 6px 12px; white-space: normal; }
+    /* bottom sheet: details */
+    .sig-row { display: flex; align-items: center; gap: 12px; padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 16px; }
+    .sig-row:last-child { border-bottom: none; }
+    .sig-row .name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .sig-row .state { font-size: 13px; font-weight: 700; white-space: nowrap; }
+    .body-title { font-size: 13px; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin: 14px 0 2px; }
+    .settings { display: flex; flex-direction: column; gap: 4px; padding: 12px 0 4px; }
+
+    /* new emergency */
+    .newcall { position: fixed; inset: 0; z-index: 2000; background: #b91c1c; color: #fff; display: flex; flex-direction: column;
+               align-items: center; justify-content: center; gap: 18px; padding: 28px; text-align: center; }
+    .newcall .siren { font-size: 84px; animation: flash .8s steps(2) infinite; }
+    @keyframes flash { 50% { opacity: .35; } }
+    @media (prefers-reduced-motion: reduce) { .newcall .siren { animation: none; } }
+    .newcall h1 { font-size: 34px; } .newcall p { font-size: 20px; margin: 0; opacity: .95; }
+    .newcall .btn { background: #fff; color: #b91c1c; border-color: #fff; max-width: 420px; }
+
+    /* picker */
+    .picker { position: fixed; inset: 0; z-index: 1500; background: var(--bg); overflow-y: auto; padding: 20px; }
+    .picker .inner { max-width: 560px; margin: 0 auto; display: flex; flex-direction: column; gap: 14px; }
+  </style>
+</head>
+<body>
+<div id="map"></div>
+<div class="top" id="top"></div>
+<div class="fabs" id="fabs">
+  <button class="pillbtn" id="recenter" hidden>◎ <span id="recenter-text">Centre</span></button>
+  <button class="pillbtn" id="voice"><span id="voice-icon">🔇</span><span id="voice-text"></span></button>
+</div>
+<div class="sheet" id="sheet">
+  <div class="sheet-grab" role="button" aria-label="Tap or drag up for more"><div class="sheet-handle"></div><div id="head"></div></div>
+  <div class="sheet-body" id="body"></div>
+</div>
+<div class="newcall" id="newcall" hidden></div>
+<div class="picker" id="picker" hidden></div>
+
+<script src="/static/common.js"></script>
+<script>
+  const ambId = Number(params.get('amb')) || null;
+  // Dark at night (easier on the eyes while driving), light by day. ?theme=light|dark overrides.
+  const hourIST = istHourNow();
+  const night = params.get('theme') ? params.get('theme') === 'dark' : (hourIST >= 18 || hourIST < 6);
+  if (night) document.body.classList.add('theme-dark');
+
+  const sheet = makeSheet($('sheet'), { start: 'peek', onChange: () => { if (follow && last) centre(last, false); } });
+  const map = L.map('map', { zoomControl: false, maxZoom: 19 }).setView([12.975, 77.6], 13);
+  addBaseMap(map, { night });
+
+  // ---------- follow the ambulance, like phone navigation ----------
+  let follow = true, last = null;
+  map.on('dragstart', () => { follow = false; $('recenter').hidden = false; });
+  $('recenter').addEventListener('click', () => { follow = true; $('recenter').hidden = true; if (last) centre(last); });
+  // Keep the ambulance in the lower third of the map area that the sheet doesn't cover.
+  function centre(p, animate = true) {
+    const size = map.getSize(), visible = size.y - sheet.height();
+    const want = visible * 0.62;                 // where the arrow should sit, from the top
+    const offsetY = want - size.y / 2;           // relative to the map's centre
+    const target = map.unproject(map.project(p, map.getZoom()).subtract([0, offsetY]), map.getZoom());
+    map.panTo(target, { animate, duration: 0.9 });
+  }
+
+  // ---------- voice ----------
+  let voiceOn = false;
+  const said = new Set();
+  function say(key, byLang) { if (!voiceOn || EMBED || said.has(key)) return; said.add(key); speak(byLang); }
+  function setVoice(on) {
+    voiceOn = on;
+    $('voice-icon').textContent = on ? '🔊' : '🔇';
+    $('voice-text').textContent = on ? t('voice_on') : t('voice_off');
+    $('voice').classList.toggle('on', on);
+  }
+  $('voice').addEventListener('click', () => { setVoice(!voiceOn); if (voiceOn) speak({ en: 'Voice on', kn: 'ಧ್ವನಿ ಆನ್', hi: 'आवाज़ चालू' }); });
+  setVoice(false);
+
+  // ---------- choose your ambulance ----------
+  async function showPicker() {
+    $('picker').hidden = false;
+    $('fabs').hidden = true;
+    const s = await api('/api/state');
+    const lastAmb = remember.get('gc-amb');
+    $('picker').innerHTML = `<div class="inner">
+      <div class="row"><span class="logo" style="width:44px;height:44px;border-radius:12px;background:var(--green-strong);display:grid;place-items:center;font-size:24px">🚑</span>
+        <b style="font-size:20px" class="grow">Green Corridor</b><div class="lang" id="lang"></div></div>
+      <h1>${t('choose_ambulance')}</h1>
+      ${s.fleet.map(a => `<a class="choice" href="/driver?amb=${a.id}" ${String(a.id) === lastAmb ? 'style="border-color:var(--primary)"' : ''}>
+        <span class="icon">🚑</span><span class="grow"><b>${escapeHtml(a.callsign)}</b><span class="muted">${escapeHtml(a.base || '')}</span></span>
+        <span class="pill ${a.status === 'available' ? 'ok' : 'wait'}">${a.status === 'available' ? t('free') : t('on_call')}</span></a>`).join('')}
+      <p class="muted small">In real use, your phone would be linked to your ambulance when you log in.</p></div>`;
+    langSwitch($('lang'), showPicker);
+  }
+
+  // ---------- route on the map ----------
+  let marker = null, legId = null, geo = null, ahead = null, behind = null, casing = null, sceneM = null, destM = null, sigM = [], seg = 0;
+  function clearRoute() { [ahead, behind, casing, sceneM, destM, ...sigM].forEach(l => l?.remove()); sigM = []; geo = null; legId = null; }
+  async function showLeg(inc, leg) {
+    if (legId === leg.id) return;
+    clearRoute();
+    legId = leg.id; seg = 0;
+    geo = await legGeometry(inc.id, leg.id);
+    casing = L.polyline(geo.coords, { color: night ? '#06324a' : '#ffffff', weight: 14, opacity: .95, interactive: false }).addTo(map);
+    behind = L.polyline([], { color: '#94a3b8', weight: 9, opacity: .9, interactive: false }).addTo(map);
+    ahead = L.polyline(geo.coords, { color: '#1a73e8', weight: 9, opacity: 1, interactive: false }).addTo(map);
+    sceneM = L.marker([inc.scene.lat, inc.scene.lon], { icon: sceneIcon() }).addTo(map);
+    if (leg.kind === 'to_hospital') destM = L.marker([leg.destination.lat, leg.destination.lon], { icon: destIcon() }).addTo(map);
+    sigM = leg.signals.map(s => L.circleMarker([s.lat, s.lon], { radius: 8, weight: 3, color: '#fff', fillOpacity: 1 }).addTo(map));
+    follow = true; $('recenter').hidden = true;
+    map.setZoom(17);
+  }
+  function moveMarker(a, idle) {
+    const p = [a.lat, a.lon];
+    let heading = 0;
+    if (geo) {
+      seg = nearestSegment(geo.coords, p, seg);
+      behind.setLatLngs([...geo.coords.slice(0, seg + 1), p]);
+      ahead.setLatLngs([p, ...geo.coords.slice(seg + 1)]);
+      heading = routeHeading(geo.coords, seg, p);
+    }
+    last = p;
+    if (!marker) marker = L.marker(p, { icon: navIcon(heading, a.callsign), zIndexOffset: 3000 }).addTo(map);
+    else { glide(marker, p); marker.setIcon(navIcon(heading, a.callsign)); }
+    if (follow) centre(p);
+  }
+
+  // ---------- top: next turn, next signal ----------
+  const turnText = (turn) => ({ left: t('turn_left'), right: t('turn_right'), 'u-turn': t('u_turn') }[turn] || t('go_straight'));
+  function renderTop(inc, leg) {
+    if (!inc) { $('top').innerHTML = ''; return; }
+    if (inc.phase === 'at_scene' || inc.phase === 'at_hospital') {
+      const scene = inc.phase === 'at_scene';
+      $('top').innerHTML = `<div class="turn ${scene ? 'scene' : ''}"><div class="arrow">${scene ? '📍' : '🏥'}</div>
+        <div><div class="what" style="font-size:22px">${scene ? t('at_accident') : t('at_hospital')}</div>
+        <div class="road">${escapeHtml(scene ? inc.description || '' : leg.destination.name)}</div></div></div>`;
+      return;
+    }
+    const turn = leg.next_turn;
+    const next = leg.signals.find(s => s.state !== 'passed');
+    const banner = turn && turn.in_m < 1500
+      ? `<div class="turn"><div class="arrow">${TURN_ARROW[turn.turn] || '↑'}</div><div><div class="dist">${fmtDist(turn.in_m)}</div>
+          <div class="what">${turnText(turn.turn)}</div><div class="road">${escapeHtml(turn.onto || '')}</div></div></div>`
+      : `<div class="turn"><div class="arrow">↑</div><div><div class="dist">${fmtDist(leg.left_m)}</div>
+          <div class="what">${t('go_straight')}</div><div class="road">${escapeHtml(next?.from_road || '')}</div></div></div>`;
+    let chip = '';
+    if (leg.stopped) chip = `<div class="chip stop">🛑 ${t('stopped_red')}</div>`;
+    else if (next) {
+      const d = fmtDist(next.along_m - leg.along_m);
+      const k = SIGNAL[next.state].kind;
+      const text = next.state === 'held' ? t('green_for_you') : next.state === 'cleared' ? t('will_be_green') : k === 'wait' ? t('waiting_police') : t('not_cleared');
+      chip = `<div class="chip ${k}">🚦 ${t('next_signal')} ${d} · ${text}</div>`;
+    }
+    $('top').innerHTML = banner + chip;
+  }
+
+  // ---------- bottom sheet ----------
+  // head = the summary that is always visible; body = details when pulled up. Each is redrawn only
+  // when what it shows changes, so taps on buttons inside never get lost.
+  let headKey = '', bodyKey = '';
+  const arrival = (s) => new Date(Date.now() + s * 1000).toLocaleTimeString('en-IN', { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit' });
+  const setHead = (key, html, after) => { if (headKey === key) return; headKey = key; $('head').innerHTML = html; after?.(); };
+  const setBody = (key, html, after) => { if (bodyKey === key) return; bodyKey = key; $('body').innerHTML = html; after?.(); };
+  const settingsHtml = (a) => `<div class="body-title">⚙️ ${t('settings')}</div><div class="settings">
+      <div class="row"><div class="lang" id="lang"></div><span class="grow"></span>
+        <a href="/driver" class="linkbtn">🚑 ${escapeHtml(a.callsign)} · ${t('change')}</a></div><div id="voicebox"></div></div>`;
+  const wireSettings = () => {
+    langSwitch($('lang'), () => { headKey = bodyKey = ''; setVoice(voiceOn); tick(); });
+    voicePicker($('voicebox'));
+  };
+
+  function renderSheet(a, inc, leg) {
+    if (!inc) {
+      setHead('idle' + LANG, `<div class="sum"><span style="font-size:34px">🅿️</span><span class="rest"><b>${t('waiting_call')}</b>${escapeHtml(a.callsign)} · ${escapeHtml(a.base || '')}</span></div>
+        <div class="sheet-more">${t('settings')}</div>`);
+      setBody('idle' + LANG, `<p class="muted" style="margin:12px 0 0">${t('waiting_call_sub')}</p>${settingsHtml(a)}`, wireSettings);
+      return;
+    }
+    if (inc.phase === 'at_scene' || inc.phase === 'at_hospital') {
+      const scene = inc.phase === 'at_scene';
+      setHead(`${inc.id}-${inc.phase}-${LANG}`, `<button class="btn go huge" id="act" style="min-height:92px;flex-direction:column;gap:4px">
+          <span>✅ ${scene ? t('btn_patient_in') : t('btn_handed_over')}</span>
+          <span style="font-size:15px;font-weight:600;opacity:.92;white-space:normal">${scene ? t('btn_patient_in_sub') : t('btn_handed_over_sub')}</span></button>`, () => {
+        $('act').addEventListener('click', async (e) => {
+          e.currentTarget.disabled = true;
+          await api(`/api/incidents/${inc.id}/${scene ? 'patient-on-board' : 'handover'}`, {}).catch(err => toast(err.message, 'bad'));
+          tick();
+        });
+        sheet.peek();
+      });
+      setBody(`${inc.id}-${inc.phase}-${LANG}`, settingsHtml(a), wireSettings);
+      return;
+    }
+    const pol = leg.clearance.status, kind = POLICE[pol].kind;
+    const polText = pol === 'pending' ? t('police_waiting') : kind === 'ok' ? t('police_cleared') : t('police_no');
+    const goal = leg.kind === 'to_scene' ? '🚨 ' + t('go_accident') : '🏥 ' + escapeHtml(leg.destination.name);
+    setHead(['drive', leg.id, fmtMin(leg.eta_s), Math.round(leg.left_m / 100), pol, LANG].join('|'),
+      `<div class="sum"><span class="mins">${fmtMin(leg.eta_s)} ${t('minutes')}</span>
+         <span class="rest"><b class="ellipsis">${goal}</b>${fmtKm(leg.left_m)} · ${arrival(leg.eta_s)}</span></div>
+       <div class="head-pill"><span class="pill ${kind}">🚓 ${polText}</span></div>
+       <div class="sheet-more">${t('signals_ahead')}</div>`);
+    const upcoming = leg.signals.filter(s => s.state !== 'passed');
+    setBody(['drive', leg.id, Math.round(leg.left_m / 100), LANG, leg.signals.map(x => x.state).join('')].join('|'),
+      `<div class="body-title">🚦 ${t('signals_ahead')}</div>
+       ${upcoming.length ? upcoming.map(s => `<div class="sig-row"><span class="dot ${SIGNAL[s.state].kind}"></span><span class="name">${escapeHtml(junctionName(s))}</span>
+         <span class="state" style="color:${signalColor(s.state)}">${SIGNAL[s.state].text}</span><span class="muted small">${fmtDist(s.along_m - leg.along_m)}</span></div>`).join('')
+         : `<p class="muted">${t('no_more_signals')}</p>`}
+       <div id="tipbox" style="margin-top:10px"></div>${settingsHtml(a)}`, () => {
+      tip($('tipbox'), 'driver-colours', '🟢 green = police cleared that signal for you · 🟠 orange = waiting for police · 🔴 red = not cleared, go carefully');
+      wireSettings();
+    });
+  }
+
+  // ---------- new emergency: impossible to miss ----------
+  const announced = new Set(remember.get('gc-announced')?.split(',') || []);
+  function newCall(inc, leg) {
+    if (EMBED || announced.has(String(leg.id))) return;
+    announced.add(String(leg.id)); remember.set('gc-announced', [...announced].slice(-20).join(','));
+    const toScene = leg.kind === 'to_scene';
+    $('newcall').innerHTML = `<div class="siren">🚨</div><h1>${toScene ? t('go_accident') : t('go_hospital')}</h1>
+      <p>${escapeHtml(toScene ? inc.description || '' : leg.destination.name)} · ${fmtKm(leg.distance_m)}</p>
+      <button class="btn huge" id="startcall">▶ OK · ${t('voice_on')}</button>`;
+    $('newcall').hidden = false;
+    $('startcall').addEventListener('click', () => {  // this tap also allows sound in the browser
+      $('newcall').hidden = true; setVoice(true);
+      speak(toScene ? { en: `New emergency. Go to the accident, ${(leg.distance_m / 1000).toFixed(1)} kilometres.`, kn: 'ಹೊಸ ತುರ್ತು ಕರೆ. ಅಪಘಾತದ ಸ್ಥಳಕ್ಕೆ ಹೋಗಿ.', hi: 'नई इमरजेंसी। दुर्घटना स्थल पर जाएँ।' }
+                    : { en: `Take the patient to ${leg.destination.name}.`, kn: `ರೋಗಿಯನ್ನು ${leg.destination.name} ಗೆ ಕರೆದೊಯ್ಯಿರಿ.`, hi: `मरीज़ को ${leg.destination.name} ले जाएँ।` });
+    });
+  }
+
+  // ---------- voice guidance ----------
+  function guide(inc, leg) {
+    if (!inc) return;
+    if (inc.phase === 'at_scene') { say(`${inc.id}-scene`, { en: 'You have arrived at the accident.', kn: 'ನೀವು ಅಪಘಾತದ ಸ್ಥಳ ತಲುಪಿದ್ದೀರಿ.', hi: 'आप दुर्घटना स्थल पर पहुँच गए।' }); return; }
+    if (inc.phase === 'at_hospital') { say(`${inc.id}-hosp`, { en: 'You have arrived at the hospital.', kn: 'ನೀವು ಆಸ್ಪತ್ರೆ ತಲುಪಿದ್ದೀರಿ.', hi: 'आप अस्पताल पहुँच गए।' }); return; }
+    const pol = POLICE[leg.clearance.status].kind;
+    if (pol === 'ok') say(`${leg.id}-cleared`, { en: 'Police have cleared your road.', kn: 'ಪೊಲೀಸರು ನಿಮ್ಮ ರಸ್ತೆ ತೆರವುಗೊಳಿಸಿದ್ದಾರೆ.', hi: 'पुलिस ने आपका रास्ता खुलवा दिया है।' });
+    if (pol === 'bad') say(`${leg.id}-notcleared`, { en: 'Police could not clear your road. Drive carefully.', kn: 'ಪೊಲೀಸರು ರಸ್ತೆ ತೆರವುಗೊಳಿಸಲಾಗಲಿಲ್ಲ. ಎಚ್ಚರಿಕೆಯಿಂದ ಓಡಿಸಿ.', hi: 'पुलिस रास्ता नहीं खुलवा सकी। सावधानी से चलाएँ।' });
+    const next = leg.signals.find(s => s.state !== 'passed');
+    if (next && next.along_m - leg.along_m < 400) {
+      if (SIGNAL[next.state].kind === 'ok') say(`${leg.id}-${next.id}`, { en: 'The signal ahead is green for you.', kn: 'ಮುಂದಿನ ಸಿಗ್ನಲ್ ನಿಮಗೆ ಹಸಿರು.', hi: 'आगे का सिग्नल आपके लिए हरा है।' });
+      else if (SIGNAL[next.state].kind === 'bad') say(`${leg.id}-${next.id}`, { en: 'The signal ahead is not cleared. Go carefully.', kn: 'ಮುಂದಿನ ಸಿಗ್ನಲ್ ತೆರವು ಆಗಿಲ್ಲ. ಎಚ್ಚರಿಕೆಯಿಂದ ಹೋಗಿ.', hi: 'आगे का सिग्नल खुला नहीं है। सावधानी से चलें।' });
+    }
+    const turn = leg.next_turn;
+    if (turn && turn.in_m < 250 && turn.turn !== 'straight') {
+      const m = Math.max(50, Math.round(turn.in_m / 50) * 50);
+      say(`${leg.id}-t${turn.along_m}`, { en: `In ${m} metres, ${turnText(turn.turn).toLowerCase()}${turn.onto ? ' onto ' + turn.onto : ''}.`,
+        kn: `${m} ಮೀಟರ್ ನಂತರ ${WORDS['turn_' + turn.turn]?.kn || ''}.`, hi: `${m} मीटर बाद ${WORDS['turn_' + turn.turn]?.hi || ''}।` });
+    }
+  }
+
+  // ---------- main loop ----------
+  async function tick() {
+    let s;
+    try { s = await api('/api/state'); } catch (e) { return; }
+    const a = s.fleet.find(x => x.id === ambId);
+    if (!a) { remember.set('gc-amb', ''); location.href = '/driver'; return; }
+    const inc = a.incident_id ? s.incidents.find(i => i.id === a.incident_id) : null;
+    const leg = inc?.current_leg;
+    const driving = inc && (inc.phase === 'to_scene' || inc.phase === 'to_hospital') && leg && !leg.done;
+    if (driving) { await showLeg(inc, leg); newCall(inc, leg); }
+    else if (!inc) clearRoute();
+    if (driving) {
+      leg.signals.forEach((sg, i) => sigM[i]?.setStyle({ fillColor: signalColor(sg.state), radius: sg.state === 'held' ? 10 : 8,
+        opacity: sg.state === 'passed' ? .35 : 1, fillOpacity: sg.state === 'passed' ? .35 : 1 }));
+      ahead?.setStyle({ color: POLICE[leg.clearance.status].kind === 'bad' ? '#dc2626' : POLICE[leg.clearance.status].kind === 'wait' ? '#f59e0b' : '#1a73e8' });
+    }
+    moveMarker(a, !inc);
+    if (!inc && map.getZoom() < 15) map.setZoom(16);
+    renderTop(inc, leg);
+    renderSheet(a, inc, leg);
+    guide(inc, leg);
+  }
+
+  if (!ambId) showPicker();
+  else { remember.set('gc-amb', String(ambId)); tick(); setInterval(tick, 1000); }
+</script>
+</body>
+</html>

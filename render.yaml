@@ -1,0 +1,9 @@
+# Render blueprint: deploys this repo as one always-running web service from the Dockerfile.
+# render.com → New → Blueprint → pick this repo.
+services:
+  - type: web
+    name: green-corridor
+    runtime: docker
+    plan: free            # sleeps after ~15 min without visits; the first visit then takes ~1 minute
+    healthCheckPath: /api/state
+    autoDeploy: true      # redeploys on every push to main
