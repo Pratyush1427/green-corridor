@@ -1,8 +1,9 @@
 # 🚑 Green Corridor
 
-**Clearing the way for ambulances in Bengaluru traffic.** An ambulance crew triggers an
-emergency, the system finds the fastest route to hospital, traffic police approve it, and the
-signals on the route turn green just before the ambulance reaches them.
+**Every minute counts in the golden hour.** After a serious accident, the first hour decides
+how many patients survive, and in Bengaluru much of it can be lost at red lights. Green Corridor
+sends the fastest ambulance, gets traffic police to clear its route, and turns every signal green
+just before it arrives: first to the patient, then to the hospital.
 
 A working simulation on Bengaluru's real road network, with its real hospitals and signal locations.
 
